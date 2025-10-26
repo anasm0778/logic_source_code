@@ -104,9 +104,10 @@ export const data = [
   {
     heading: "15. Additional Driver/s:",
     text: [
-      "Additional driver can only be accepted following submission of his/her relevant driving licenses and passport copies, and subject to LOGIC RENT A CAR rules of "qualified driver" in accordance with UAE federal traffic law. The same will incurred extra cost of Dhs.25/day/driver with a maximum amount of Dhs.150/driver/ Rental Contract (daily, weekly, monthly), with a maximum of 3 additional drivers allowed to be added.",
+      "Additional driver can only be accepted following submission of his/her relevant driving licenses and passport copies, and subject to LOGIC RENT A CAR rules of 'qualified driver' in accordance with UAE federal traffic law. The same will incur an extra cost of Dhs.25/day/driver with a maximum amount of Dhs.150/driver/Rental Contract (daily, weekly, monthly), with a maximum of 3 additional drivers allowed to be added.",
     ],
   },
+
   {
     heading: "16. Value Added Tax (VAT):",
     text: [
