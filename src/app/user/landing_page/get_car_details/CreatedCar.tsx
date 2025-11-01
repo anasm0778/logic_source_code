@@ -687,7 +687,7 @@ const CreatedCar = () => {
     setError("");
     const { brand, model, year, _id } = carDetails;
     // const baseUrl =
-    //   "https://injazrent.ae/user/landing_page/get_car_details?verify=";
+    //   "https://logicrent.ae/user/landing_page/get_car_details?verify=";
     // const url = `${baseUrl}${_id}`;
     // const whatsappMessage = `Hi, \nI’m ${userfullName} contacting you through Injazrent.ae. \nI’d like to rent the INJAZ Car. \nFull Name :- ${userfullName}. \nPhone No :- ${userphoneNumber}. \nEmail :-${userEmail}. \nCity :- ${userCity}. \nStart Date :- ${userStartDate}. \nCar Delivery Time :- ${userCarDeliveryTime}. \nCar :- ${brand} ${model} ${year}. \nBooking ${bookingMonth
     //   .replace(/\d+/, "")
@@ -704,7 +704,7 @@ const CreatedCar = () => {
       setLoading(true); // Start loading
 
       const response: any = axios.post(
-        "https://api.injazrent.ae/user/createInquiry",
+        "https://logicrent.ae/api/user/createInquiry",
         {
           carName: brand + " " + model + " " + year,
           startDate: userStartDate,
@@ -758,7 +758,7 @@ const CreatedCar = () => {
     setError("");
     const { brand, model, year, _id } = carDetails;
     // const baseUrl =
-    //   "https://injazrent.ae/user/landing_page/get_car_details?verify=";
+    //   "https://logicrent.ae/user/landing_page/get_car_details?verify=";
     // const url = `${baseUrl}${_id}`;
     // const whatsappMessage = `Hi, \nI’m ${userfullName} contacting you through Injazrent.ae. \nI’d like to rent the INJAZ Car. \nFull Name :- ${userfullName}. \nPhone No :- ${userphoneNumber}. \nEmail :-${userEmail}. \nCity :- ${userCity}. \nStart Date :- ${userStartDate}. \nCar Delivery Time :- ${userCarDeliveryTime}. \nCar :- ${brand} ${model} ${year}. \nBooking ${bookingDaysWeeks
     //   .replace(/\d+/, "")
@@ -777,7 +777,7 @@ const CreatedCar = () => {
       setLoading(true); // Start loading
 
       const response: any = axios.post(
-        "https://api.injazrent.ae/user/createInquiry",
+        "https://logicrent.ae/api/user/createInquiry",
         {
           carName: brand + " " + model + " " + year,
           startDate: userStartDate,

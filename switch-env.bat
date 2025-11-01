@@ -24,9 +24,9 @@ if %errorlevel% equ 0 (
     goto :menu
 )
 
-findstr /C:"https://api.injazrent.ae" src\utils\helper.js >nul
+findstr /C:"https://logicrent.ae/api" src\utils\helper.js >nul
 if %errorlevel% equ 0 (
-    echo 📍 Current: PRODUCTION (api.injazrent.ae)
+    echo 📍 Current: PRODUCTION (api.logicrent.ae)
     goto :menu
 )
 
@@ -36,7 +36,7 @@ echo 📍 Current: AUTO-DETECT (based on hostname)
 echo.
 echo Choose environment:
 echo 1) Local Development (localhost:4000)
-echo 2) Production (api.injazrent.ae)
+echo 2) Production (api.logicrent.ae)
 echo 3) Auto-detect (recommended)
 echo 4) Show current status
 echo 5) Exit
@@ -61,7 +61,7 @@ goto :end
 
 :production
 echo 🔄 Switching to PRODUCTION...
-powershell -Command "(Get-Content 'src\utils\helper.js') -replace 'export const serverUrl = .*', 'export const serverUrl = \"https://api.injazrent.ae\";' | Set-Content 'src\utils\helper.js'"
+powershell -Command "(Get-Content 'src\utils\helper.js') -replace 'export const serverUrl = .*', 'export const serverUrl = \"https://logicrent.ae/api\";' | Set-Content 'src\utils\helper.js'"
 echo ✅ Switched to PRODUCTION
 goto :end
 
@@ -83,16 +83,16 @@ echo     return process.env.NEXT_PUBLIC_API_URL; >> src\utils\helper.js
 echo   } >> src\utils\helper.js
 echo. >> src\utils\helper.js
 echo   // Default to production for server-side rendering >> src\utils\helper.js
-echo   return 'https://api.injazrent.ae'; >> src\utils\helper.js
+echo   return 'https://logicrent.ae/api'; >> src\utils\helper.js
 echo }; >> src\utils\helper.js
 echo. >> src\utils\helper.js
 echo export const serverUrl = getServerUrl(); >> src\utils\helper.js
 echo. >> src\utils\helper.js
 echo // For easy switching during development, you can manually override: >> src\utils\helper.js
 echo // export const serverUrl = "http://localhost:4000";  // Local development >> src\utils\helper.js
-echo // export const serverUrl = "https://api.injazrent.ae"; // Production >> src\utils\helper.js
+echo // export const serverUrl = "https://logicrent.ae/api"; // Production >> src\utils\helper.js
 echo ✅ Switched to AUTO-DETECT
-echo 📝 Will use localhost:4000 for local development and api.injazrent.ae for production
+echo 📝 Will use localhost:4000 for local development and api.logicrent.ae for production
 goto :end
 
 :status

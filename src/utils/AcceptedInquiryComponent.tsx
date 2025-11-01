@@ -10,7 +10,7 @@ const AcceptedInquiryComponent = () => {
     const fetchInquiries = async () => {
       try {
         const response = await axios.get(
-          "https://api.logicrent.ae/user/getInquirys"
+          "https://logicrent.ae/api/user/getInquirys"
         );
         setInquiries(response.data.data);
         setNewEnquiryCount(

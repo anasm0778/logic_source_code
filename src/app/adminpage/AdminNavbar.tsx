@@ -58,7 +58,7 @@ import ViewCarouselOutlinedIcon from "@mui/icons-material/ViewCarouselOutlined";
 import TtyIcon from "@mui/icons-material/Tty";
 
 const drawerWidth = 240;
-const serverAPI = "https://api.logicrent.ae";
+const serverAPI = "https://logicrent.ae/api";
 const localAPI = "http://localhost:4000";
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })<{

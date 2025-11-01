@@ -20,7 +20,7 @@ function createData(
   return { title, status, createdDate, updatedDate };
 }
 
-const serverAPI='https://api.injazrent.ae'
+const serverAPI='https://logicrent.ae/api'
 const localAPI ='http://localhost:4000'
 
 export default function FeatDataTable() {

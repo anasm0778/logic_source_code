@@ -14,11 +14,11 @@ const getServerUrl = () => {
   }
   
   // Default to production for server-side rendering
-  return 'https://api.logicrent.ae';
+  return 'https://logicrent.ae/api';
 };
 
 export const serverUrl = getServerUrl();
 
 // For easy switching during development, you can manually override:
 // export const serverUrl = "http://localhost:4000";  // Local development
-// export const serverUrl = "https://api.logicrent.ae"; // Production
+// export const serverUrl = "https://logicrent.ae/api"; // Production

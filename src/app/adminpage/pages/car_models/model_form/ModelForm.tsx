@@ -39,7 +39,7 @@ interface IErrors {
   brand: boolean;
   select: boolean;
 }
-const serverAPI='https://api.injazrent.ae'
+const serverAPI='https://logicrent.ae/api'
 const localAPI ='http://localhost:4000'
 
 const ModelForm = () => {

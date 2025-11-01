@@ -21,19 +21,19 @@ npm run dev
 
 ### API Configuration:
 The frontend automatically detects localhost and uses `http://localhost:4000` for API calls.
-For production, it will use `https://api.injazrent.ae`.
+For production, it will use `https://logicrent.ae/api`.
 
 ## Production Deployment
 
 ### Environment Variables:
-- `NEXT_PUBLIC_API_URL=https://api.injazrent.ae`
+- `NEXT_PUBLIC_API_URL=https://logicrent.ae/api`
 - `NEXT_PUBLIC_ENVIRONMENT=production`
 
 ### Manual Override (if needed):
 Edit `src/utils/helper.js` and uncomment the desired line:
 ```javascript
 // export const serverUrl = "http://localhost:4000";  // Local development
-// export const serverUrl = "https://api.injazrent.ae"; // Production
+// export const serverUrl = "https://logicrent.ae/api"; // Production
 ```
 
 ## Testing Car Update Functionality

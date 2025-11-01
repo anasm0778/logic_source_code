@@ -75,7 +75,7 @@ const HatchbackCars: React.FC<HatchbackCars> = ({ data, phoneData }) => {
       _id,
     } = carDetails;
     const baseUrl =
-      "https://injazrent.ae/user/landing_page/get_car_details?verify=";
+      "https://logicrent.ae/user/landing_page/get_car_details?verify=";
     const url = `${baseUrl}${_id}`;
     const whatsappMessage = `Hi, \nI’m contacting you through Injazrent.ae. \nI’d like to rent the discounted ${brand} ${model} ${year} \n${url} \nfor ${discountedPriceDaily} AED ${packageDetails}. \nIs it available?`;
     const whatsappLink = `https://wa.me/${
