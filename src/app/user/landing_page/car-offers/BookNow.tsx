@@ -108,17 +108,154 @@ const BookNow: React.FC<{ details: any }> = (props) => {
     setOpen(false);
   };
 
+  const calculatePriceBreakdown = (packageType: string, carData: any) => {
+    try {
+      if (!carData) return null;
+      
+      const dailyPrice = parseFloat(carData.discountedPriceDaily || carData.actualPriceDaily || 0);
+      const weeklyPrice = parseFloat(carData.discountedPriceWeekly || carData.actualPriceWeekly || 0);
+      const monthlyPrice = parseFloat(carData.discountedPriceMonthly || carData.actualPriceMonthly || 0);
+      
+      const dailyInsurance = parseFloat(carData.cdwDaily || 0);
+      const weeklyInsurance = parseFloat(carData.cdwWeekly || 0);
+      const monthlyInsurance = parseFloat(carData.cdwMonthly || 0);
+      
+      const dailyKm = carData.freeDailyKM || "250";
+      const weeklyKm = carData.freeWeeklyKM || "1750";
+      const monthlyKm = carData.freeMonthlyKM || "7500";
+      
+      let bookingDays = 0;
+      let freeKm = dailyKm;
+      let rentalCharges = 0;
+      let insuranceCharges = 0;
+      
+      if (packageType?.toLowerCase().includes('month')) {
+        const months = parseInt(packageType.match(/\d+/)?.[0] || '1');
+        bookingDays = months * 30;
+        freeKm = monthlyKm;
+        rentalCharges = monthlyPrice * months;
+        insuranceCharges = monthlyInsurance * months;
+      } else if (packageType?.toLowerCase().includes('week')) {
+        const weeks = parseInt(packageType.match(/\d+/)?.[0] || '1');
+        bookingDays = weeks * 7;
+        freeKm = weeklyKm;
+        rentalCharges = weeklyPrice * weeks;
+        insuranceCharges = weeklyInsurance * weeks;
+      } else if (packageType?.toLowerCase().includes('day')) {
+        const days = parseInt(packageType.match(/\d+/)?.[0] || '1');
+        bookingDays = days;
+        freeKm = dailyKm;
+        rentalCharges = dailyPrice * days;
+        insuranceCharges = dailyInsurance * days;
+      }
+      
+      const vatCharges = (rentalCharges + insuranceCharges) * 0.05;
+      const totalAmount = rentalCharges + insuranceCharges + vatCharges;
+      
+      return {
+        bookingDays,
+        freeKm,
+        rentalCharges: rentalCharges.toFixed(2),
+        insuranceCharges: insuranceCharges.toFixed(2),
+        vatCharges: vatCharges.toFixed(2),
+        totalAmount: totalAmount.toFixed(2)
+      };
+    } catch (error) {
+      return null;
+    }
+  };
+
   const onSubmiti = async () => {
     const data: any = getValues();
     try {
       const response = await axios.post(serverUrl + "/user/createInquiry", {
         ...data,
       });
+      console.log("Booking response:", response.data); // Debug log
+      const priceBreakdown = calculatePriceBreakdown(data?.packages, details);
       Swal.fire({
         icon: "success",
-        title: "!! Success !!",
-        text: `Your Booking has been Sent Successfully.Here is your BookingId: ${response?.data?.result?.bookingId} 
-        You will get the confirmation on your email: ${response?.data?.result?.email} and your number: ${response?.data?.result?.phoneNumber}.`,
+        title: "✅ Booking inquiry Successfully Created",
+        html: `
+          <div style="text-align: left; padding: 20px; font-family: 'Segoe UI', Arial, sans-serif;">
+            <p style="font-size: 17px; margin-bottom: 25px; text-align: center; color: #2c3e50; font-weight: 500;">Thank you for choosing <strong style="color: #28a745;">Logic Rent A Car</strong>!</p>
+            
+            <div style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); padding: 25px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 5px solid #28a745;">
+              <h3 style="margin-top: 0; color: #2c3e50; font-size: 19px; margin-bottom: 15px; font-weight: 600;">Inquiry Details:</h3>
+              <div style="background: white; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                <p style="margin: 0; font-size: 18px; color: #28a745; font-weight: bold;">Booking Reference: #${response?.data?.result?.bookingId}</p>
+              </div>
+              
+              <p style="margin: 12px 0; font-size: 15px; color: #495057;"><strong>🚗 Car Type:</strong> <span style="color: #2c3e50;">${response?.data?.result?.carName || (data?.brand + " " + data?.model)}</span></p>
+              
+              <p style="margin: 12px 0; font-size: 15px; color: #495057;"><strong>📅 Pickup Date & Time:</strong> <span style="color: #2c3e50;">${response?.data?.result?.startDate || data?.startDate} - ${response?.data?.result?.pickupTime || data?.pickupTime || "N/A"}</span></p>
+              
+              <p style="margin: 12px 0; font-size: 15px; color: #495057;"><strong>📍 Pickup Location:</strong> <span style="color: #2c3e50;">${response?.data?.result?.pickUpLoc || data?.pickUpLoc || "N/A"}</span></p>
+              
+              <p style="margin: 12px 0; font-size: 15px; color: #495057;"><strong>📅 Drop-off Date & Time:</strong> <span style="color: #2c3e50;">${response?.data?.result?.endDate || data?.endDate} - ${response?.data?.result?.dropTime || data?.dropTime || "N/A"}</span></p>
+              
+              <p style="margin: 12px 0; font-size: 15px; color: #495057;"><strong>📍 Drop-off Location:</strong> <span style="color: #2c3e50;">${response?.data?.result?.dropLocation || data?.dropLocation || "N/A"}</span></p>
+              
+              <hr style="margin: 20px 0; border: none; border-top: 2px solid #dee2e6;" />
+              
+              ${priceBreakdown ? `
+                <div style="background: linear-gradient(135deg, #01437D 0%, #025fa0 100%); padding: 20px; border-radius: 10px; margin: 20px 0; color: white;">
+                  <h4 style="margin: 0 0 15px 0; font-size: 18px; font-weight: 600; text-align: center; border-bottom: 2px solid rgba(255,255,255,0.3); padding-bottom: 10px;">Car Charges & Other Details</h4>
+                  
+                  <table style="width: 100%; border-collapse: collapse;">
+                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.2);">
+                      <td style="padding: 10px 0; font-size: 15px;">Booking Days</td>
+                      <td style="padding: 10px 0; text-align: right; font-weight: 600; font-size: 15px;">${priceBreakdown.bookingDays} Days</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.2);">
+                      <td style="padding: 10px 0; font-size: 15px;">Car Free KM</td>
+                      <td style="padding: 10px 0; text-align: right; font-weight: 600; font-size: 15px;">${priceBreakdown.freeKm}</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.2);">
+                      <td style="padding: 10px 0; font-size: 15px;">Car Rental Charges in D</td>
+                      <td style="padding: 10px 0; text-align: right; font-weight: 600; font-size: 15px;">D ${priceBreakdown.rentalCharges}</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.2);">
+                      <td style="padding: 10px 0; font-size: 15px;">Car Insurance Charges in D</td>
+                      <td style="padding: 10px 0; text-align: right; font-weight: 600; font-size: 15px;">D ${priceBreakdown.insuranceCharges}</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.2);">
+                      <td style="padding: 10px 0; font-size: 15px;">VAT Charges (5%) in D</td>
+                      <td style="padding: 10px 0; text-align: right; font-weight: 600; font-size: 15px;">D ${priceBreakdown.vatCharges}</td>
+                    </tr>
+                    <tr style="border-top: 2px solid rgba(255,255,255,0.4);">
+                      <td style="padding: 15px 0 5px 0; font-size: 17px; font-weight: 700;">Total Amount</td>
+                      <td style="padding: 15px 0 5px 0; text-align: right; font-weight: 700; font-size: 19px; color: #ffd700;">D ${priceBreakdown.totalAmount}</td>
+                    </tr>
+                  </table>
+                </div>
+              ` : ''}
+              
+              <p style="margin: 10px 0; font-size: 15px; color: #495057;"><strong>📧 Email:</strong> <span style="color: #2c3e50;">${response?.data?.result?.email}</span></p>
+              
+              <p style="margin: 10px 0; font-size: 15px; color: #495057;"><strong>📞 Phone Number:</strong> <span style="color: #2c3e50;">${response?.data?.result?.phoneNumber}</span></p>
+            </div>
+            
+            <div style="background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%); border-left: 5px solid #ff9800; padding: 20px; border-radius: 10px; margin-top: 25px; box-shadow: 0 2px 6px rgba(255,152,0,0.2);">
+              <p style="margin: 0 0 12px 0; font-size: 16px; color: #e65100; font-weight: 700; display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 20px;">ℹ️</span> Important Notice
+              </p>
+              <p style="margin: 0 0 8px 0; font-size: 14px; color: #f57c00; line-height: 1.6; font-weight: 600;">
+                📋 This is only a <strong>booking inquiry</strong>, not a confirmed booking.
+              </p>
+              <p style="margin: 0; font-size: 14px; color: #f57c00; line-height: 1.6;">
+                💡 Prices may change based on the rental period and additional services requested.
+              </p>
+            </div>
+            
+            <p style="font-size: 14px; margin-top: 20px; color: #6c757d; text-align: center; font-style: italic; line-height: 1.5;">
+              Our team will review your inquiry and contact you shortly with the final price and confirmation details.
+            </p>
+          </div>
+        `,
+        confirmButtonText: "OK",
+        confirmButtonColor: "#28a745",
+        width: "700px",
       });
       handleClose();
       reset();
@@ -379,38 +516,38 @@ const BookNow: React.FC<{ details: any }> = (props) => {
                             <span style={{ color: "#80808096" }}>Select Package</span>
                           </MenuItem>
                           <MenuItem
-                            value={`DAILY AED ${details?.discountedPriceDaily} / DAY`}
+                            value={`DAILY D ${details?.discountedPriceDaily} / DAY`}
                           >
                             <Box sx={{ display: 'flex', alignItems: 'center', width: '100%' }}>
                               <Typography variant="body1" sx={{ fontWeight: 600 }}>
                                 DAILY
                               </Typography>
                               <Typography variant="body2" sx={{ color: "#01437D", ml: 1 }}>
-                                (AED {details?.discountedPriceDaily} / DAY)
+                                (D {details?.discountedPriceDaily} / DAY)
                               </Typography>
                             </Box>
                           </MenuItem>
                           <MenuItem
-                            value={`WEEKLY AED ${details?.discountedPriceWeekly} / WEEK`}
+                            value={`WEEKLY D ${details?.discountedPriceWeekly} / WEEK`}
                           >
                             <Box sx={{ display: 'flex', alignItems: 'center', width: '100%' }}>
                               <Typography variant="body1" sx={{ fontWeight: 600 }}>
                                 WEEKLY
                               </Typography>
                               <Typography variant="body2" sx={{ color: "#01437D", ml: 1 }}>
-                                (AED {details?.discountedPriceWeekly} / WEEK)
+                                (D {details?.discountedPriceWeekly} / WEEK)
                               </Typography>
                             </Box>
                           </MenuItem>
                           <MenuItem
-                            value={`MONTHLY AED ${details?.discountedPriceMonthly} / MONTH`}
+                            value={`MONTHLY D ${details?.discountedPriceMonthly} / MONTH`}
                           >
                             <Box sx={{ display: 'flex', alignItems: 'center', width: '100%' }}>
                               <Typography variant="body1" sx={{ fontWeight: 600 }}>
                                 MONTHLY
                               </Typography>
                               <Typography variant="body2" sx={{ color: "#01437D", ml: 1 }}>
-                                (AED {details?.discountedPriceMonthly} / MONTH)
+                                (D {details?.discountedPriceMonthly} / MONTH)
                               </Typography>
                             </Box>
                           </MenuItem>
@@ -914,16 +1051,16 @@ const BookNow: React.FC<{ details: any }> = (props) => {
                       </Typography>
                       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
                         <Typography variant="body2">
-                          <strong>Abu Dhabi city delivery:</strong> <span style={{ color: "green", fontWeight: 600 }}>AED 52.50</span>
+                          <strong>Abu Dhabi city delivery:</strong> <span style={{ color: "green", fontWeight: 600 }}>D 52.50</span>
                         </Typography>
                         <Typography variant="body2">
-                          <strong>Abu Dhabi airport delivery:</strong> <span style={{ color: "green", fontWeight: 600 }}>AED 90</span>
+                          <strong>Abu Dhabi airport delivery:</strong> <span style={{ color: "green", fontWeight: 600 }}>D 90</span>
                         </Typography>
                         <Typography variant="body2">
-                          <strong>Dubai city delivery:</strong> <span style={{ color: "green", fontWeight: 600 }}>AED 52.50</span>
+                          <strong>Dubai city delivery:</strong> <span style={{ color: "green", fontWeight: 600 }}>D 52.50</span>
                         </Typography>
                         <Typography variant="body2">
-                          <strong>Dubai airport delivery:</strong> <span style={{ color: "green", fontWeight: 600 }}>AED 90</span>
+                          <strong>Dubai airport delivery:</strong> <span style={{ color: "green", fontWeight: 600 }}>D 90</span>
                         </Typography>
                       </Box>
                     </Paper>

@@ -40,7 +40,7 @@ const TeachersOffer = () => {
     ],
     impNotes: [
       "Faulty accident if the car is repairable from the insurance company the access amount is 1500+ VAT 5%.",
-      "Faulty accident if the cars is not repairable from the insurance company the access amount is AED1500+ vat 5% + depreciation as per insurance policy amount.",
+      "Faulty accident if the cars is not repairable from the insurance company the access amount is D1500+ vat 5% + depreciation as per insurance policy amount.",
       "Contract cancellation before the school year end (early return) In this case the penalty is two months rent will be charged incase if early return before school year end .",
     ],
   };

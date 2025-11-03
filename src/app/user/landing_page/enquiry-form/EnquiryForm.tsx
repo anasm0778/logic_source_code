@@ -109,11 +109,61 @@ function EnquiryForm() {
       const response = await axios.post(serverUrl + "/user/createInquiry", {
         ...data,
       });
+      console.log("Booking response:", response.data); // Debug log
       Swal.fire({
         icon: "success",
-        title: "!! Success !!",
-        text: `Your Booking has been Sent Successfully.Here is your BookingId: ${response?.data?.result?.bookingId} 
-              You will get the confirmation on your email: ${response?.data?.result?.email} and your number: ${response?.data?.result?.phoneNumber}.`,
+        title: "✅ Booking inquiry Successfully Created",
+        html: `
+          <div style="text-align: left; padding: 20px; font-family: 'Segoe UI', Arial, sans-serif;">
+            <p style="font-size: 17px; margin-bottom: 25px; text-align: center; color: #2c3e50; font-weight: 500;">Thank you for choosing <strong style="color: #28a745;">Logic Rent A Car</strong>!</p>
+            
+            <div style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); padding: 25px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 5px solid #28a745;">
+              <h3 style="margin-top: 0; color: #2c3e50; font-size: 19px; margin-bottom: 15px; font-weight: 600;">Inquiry Details:</h3>
+              <div style="background: white; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                <p style="margin: 0; font-size: 18px; color: #28a745; font-weight: bold;">Booking Reference: #${response?.data?.result?.bookingId}</p>
+              </div>
+              
+              <p style="margin: 12px 0; font-size: 15px; color: #495057;"><strong>🚗 Car Type:</strong> <span style="color: #2c3e50;">${response?.data?.result?.carName || (data?.brand + " " + data?.model)}</span></p>
+              
+              <p style="margin: 12px 0; font-size: 15px; color: #495057;"><strong>📅 Pickup Date & Time:</strong> <span style="color: #2c3e50;">${response?.data?.result?.startDate || data?.startDate} - ${response?.data?.result?.pickupTime || data?.pickupTime || "N/A"}</span></p>
+              
+              <p style="margin: 12px 0; font-size: 15px; color: #495057;"><strong>📍 Pickup Location:</strong> <span style="color: #2c3e50;">${response?.data?.result?.pickUpLoc || data?.pickUpLoc || "N/A"}</span></p>
+              
+              <p style="margin: 12px 0; font-size: 15px; color: #495057;"><strong>📅 Drop-off Date & Time:</strong> <span style="color: #2c3e50;">${response?.data?.result?.endDate || data?.endDate} - ${response?.data?.result?.dropTime || data?.dropTime || "N/A"}</span></p>
+              
+              <p style="margin: 12px 0; font-size: 15px; color: #495057;"><strong>📍 Drop-off Location:</strong> <span style="color: #2c3e50;">${response?.data?.result?.dropLocation || data?.dropLocation || "N/A"}</span></p>
+              
+              <div style="background: #fff3cd; padding: 12px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #ffc107;">
+                <p style="margin: 0; font-size: 16px; color: #856404;"><strong>💰 Estimated Rent:</strong> <span style="font-size: 18px; font-weight: bold; color: #d39e00;">Contact for pricing</span></p>
+              </div>
+              
+              <hr style="margin: 20px 0; border: none; border-top: 2px solid #dee2e6;" />
+              
+              <p style="margin: 10px 0; font-size: 15px; color: #495057;"><strong>📧 Email:</strong> <span style="color: #2c3e50;">${response?.data?.result?.email}</span></p>
+              
+              <p style="margin: 10px 0; font-size: 15px; color: #495057;"><strong>📞 Phone Number:</strong> <span style="color: #2c3e50;">${response?.data?.result?.phoneNumber}</span></p>
+            </div>
+            
+            <div style="background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%); border-left: 5px solid #ff9800; padding: 20px; border-radius: 10px; margin-top: 25px; box-shadow: 0 2px 6px rgba(255,152,0,0.2);">
+              <p style="margin: 0 0 12px 0; font-size: 16px; color: #e65100; font-weight: 700; display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 20px;">ℹ️</span> Important Notice
+              </p>
+              <p style="margin: 0 0 8px 0; font-size: 14px; color: #f57c00; line-height: 1.6; font-weight: 600;">
+                📋 This is only a <strong>booking inquiry</strong>, not a confirmed booking.
+              </p>
+              <p style="margin: 0; font-size: 14px; color: #f57c00; line-height: 1.6;">
+                💡 Prices may change based on the rental period and additional services requested.
+              </p>
+            </div>
+            
+            <p style="font-size: 14px; margin-top: 20px; color: #6c757d; text-align: center; font-style: italic; line-height: 1.5;">
+              Our team will review your inquiry and contact you shortly with the final price and confirmation details.
+            </p>
+          </div>
+        `,
+        confirmButtonText: "OK",
+        confirmButtonColor: "#28a745",
+        width: "700px",
       });
       reset();
       selectedBrand;
@@ -748,19 +798,19 @@ function EnquiryForm() {
                   </h5>
                   <h6>
                     Abu Dhabi city delivery additional charges is{" "}
-                    <span style={{ color: "green" }}>AED 52.50</span>
+                    <span style={{ color: "green" }}>D 52.50</span>
                   </h6>
                   <h6>
                     Abu Dhabi airport delivery additional charges is
-                    <span style={{ color: "green" }}> AED 90</span>
+                    <span style={{ color: "green" }}> D 90</span>
                   </h6>
                   <h6>
                     Dubai city delivery additional charges is{" "}
-                    <span style={{ color: "green" }}>AED 52.50</span>
+                    <span style={{ color: "green" }}>D 52.50</span>
                   </h6>
                   <h6>
                     Dubai airport delivery additional charges is{" "}
-                    <span style={{ color: "green" }}>AED 90</span>
+                    <span style={{ color: "green" }}>D 90</span>
                   </h6>
                 </DialogContent>
               </Grid>

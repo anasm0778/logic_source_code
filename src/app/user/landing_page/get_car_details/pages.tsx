@@ -244,7 +244,7 @@ const CreatedCar = () => {
     const baseUrl =
       "https://logicrent.ae/user/landing_page/get_car_details?verify=";
     const url = `${baseUrl}${_id}`;
-    const whatsappMessage = `Hi, \nI'm contacting you through Injazrent.ae. \nI'd like to rent the discounted ${brand} ${model} ${year} \n${url} \nfor ${discountedPriceDaily} AED ${packageDetails}. \nIs it available?`;
+    const whatsappMessage = `Hi, \nI'm contacting you through Injazrent.ae. \nI'd like to rent the discounted ${brand} ${model} ${year} \n${url} \nfor ${discountedPriceDaily} D ${packageDetails}. \nIs it available?`;
     // Remove spaces and special characters from phone number for WhatsApp URL
     const formattedPhoneNumber = phoneData?.phoneNumber?.replace(/\s+/g, '').replace(/[^\d+]/g, '') || '+971509960498';
     const whatsappLink = `https://wa.me/${formattedPhoneNumber}?text=${encodeURIComponent(whatsappMessage)}`;
@@ -263,7 +263,7 @@ const CreatedCar = () => {
     const baseUrl =
       "https://logicrent.ae/user/landing_page/get_car_details?verify=";
     const url = `${baseUrl}${_id}`;
-    const whatsappMessage = `Hi, \nI’m contacting you through Injazrent.ae. \nI’d like to rent ${brand} ${model} ${year} In ${offerType} \n${url}  \nfor ${fourMonthPriceOf2500Km} AED of 2500 KM and ${fourMonthPriceOf5000Km} AED of 5000KM Per 4 Month. \nIs it available?`;
+    const whatsappMessage = `Hi, \nI’m contacting you through Injazrent.ae. \nI’d like to rent ${brand} ${model} ${year} In ${offerType} \n${url}  \nfor ${fourMonthPriceOf2500Km} D of 2500 KM and ${fourMonthPriceOf5000Km} D of 5000KM Per 4 Month. \nIs it available?`;
     const whatsappLink = `https://wa.me/${
       phoneData?.phoneNumber
     }?text=${encodeURIComponent(whatsappMessage)}`;
@@ -282,7 +282,7 @@ const CreatedCar = () => {
     const baseUrl =
       "https://logicrent.ae/user/landing_page/get_car_details?verify=";
     const url = `${baseUrl}${_id}`;
-    const whatsappMessage = `Hi, \nI’m contacting you through Injazrent.ae. \nI’d like to rent ${brand} ${model} ${year} In ${offerType} \n${url}  \nfor ${eightMonthPriceOf2500Km} AED of 2500 KM and ${eightMonthPriceOf5000Km} AED of 5000KM Per 8 Month. \nIs it available?`;
+    const whatsappMessage = `Hi, \nI’m contacting you through Injazrent.ae. \nI’d like to rent ${brand} ${model} ${year} In ${offerType} \n${url}  \nfor ${eightMonthPriceOf2500Km} D of 2500 KM and ${eightMonthPriceOf5000Km} D of 5000KM Per 8 Month. \nIs it available?`;
     const whatsappLink = `https://wa.me/${
       phoneData?.phoneNumber
     }?text=${encodeURIComponent(whatsappMessage)}`;
@@ -301,7 +301,7 @@ const CreatedCar = () => {
     const baseUrl =
       "https://logicrent.ae/user/landing_page/get_car_details?verify=";
     const url = `${baseUrl}${_id}`;
-    const whatsappMessage = `Hi, \nI’m contacting you through Injazrent.ae. \nI’d like to rent ${brand} ${model} ${year} In ${offerType} \n${url}  \nfor ${twelveMonthPriceOf2500Km} AED of 2500 KM and ${twelveMonthPriceOf5000Km} AED of 5000KM Per 12 Month. \nIs it available?`;
+    const whatsappMessage = `Hi, \nI’m contacting you through Injazrent.ae. \nI’d like to rent ${brand} ${model} ${year} In ${offerType} \n${url}  \nfor ${twelveMonthPriceOf2500Km} D of 2500 KM and ${twelveMonthPriceOf5000Km} D of 5000KM Per 12 Month. \nIs it available?`;
     const whatsappLink = `https://wa.me/${
       phoneData?.phoneNumber
     }?text=${encodeURIComponent(whatsappMessage)}`;
@@ -319,7 +319,7 @@ const CreatedCar = () => {
       "https://logicrent.ae/user/landing_page/get_car_details?verify=";
     const url = `${baseUrl}${_id}`;
 
-    const whatsappMessage = `Hi, \nI’m contacting you through Injazrent.ae. \nI’d like to rent ${brand} ${model} ${year} In ${offerType} \n${url} \nfor ${priceOf2500Km} AED of 2500 KM and ${priceOf5000Km} AED of 5000KM Per ${duration} Month${
+    const whatsappMessage = `Hi, \nI’m contacting you through Injazrent.ae. \nI’d like to rent ${brand} ${model} ${year} In ${offerType} \n${url} \nfor ${priceOf2500Km} D of 2500 KM and ${priceOf5000Km} D of 5000KM Per ${duration} Month${
       duration > 1 ? "s" : ""
     }. \nIs it available?`;
 
@@ -395,13 +395,13 @@ const CreatedCar = () => {
     { monthText: "Standard Cover", savingAmount: "No additional cost", price:"0" },
     {
       monthText: "Full Cover",
-      savingAmount: `+ AED ${data?.paiInsuranceMonthly}/Month`,
+      savingAmount: `+ D ${data?.paiInsuranceMonthly}/Month`,
       price:data?.paiInsuranceMonthly
     },
   ];
   const monthlyMilageBox = [
     { monthText: "2500 KM", savingAmount: "No additional cost" },
-    { monthText: "5000 KM", savingAmount: `+ AED 300/Month` },
+    { monthText: "5000 KM", savingAmount: `+ D 300/Month` },
   ];
 
   const selectedMonthPrice = selectedPrice > "" ? selectedPrice : "0";
@@ -597,7 +597,7 @@ const CreatedCar = () => {
                                   marginBottom: "5px",
                                 }}
                               >
-                                AED {data?.actualPriceDaily || "341"}
+                                D {data?.actualPriceDaily || "341"}
                               </Typography>
                               <Typography
                                 sx={{
@@ -607,7 +607,7 @@ const CreatedCar = () => {
                                   marginBottom: "5px",
                                 }}
                               >
-                                AED {data?.discountedPriceDaily ? 
+                                D {data?.discountedPriceDaily ? 
                                   (parseInt(data.discountedPriceDaily) > 10000 ? 
                                     Math.round(parseInt(data.discountedPriceDaily) / 1000) : 
                                     data.discountedPriceDaily) : 
@@ -651,7 +651,7 @@ const CreatedCar = () => {
                                   marginBottom: "5px",
                                 }}
                               >
-                                AED {data?.actualPriceWeekly || "2100"}
+                                D {data?.actualPriceWeekly || "2100"}
                               </Typography>
                               <Typography
                                 sx={{
@@ -661,7 +661,7 @@ const CreatedCar = () => {
                                   marginBottom: "5px",
                                 }}
                               >
-                                AED {data?.discountedPriceWeekly ? 
+                                D {data?.discountedPriceWeekly ? 
                                   (parseInt(data.discountedPriceWeekly) > 10000 ? 
                                     Math.round(parseInt(data.discountedPriceWeekly) / 1000) : 
                                     data.discountedPriceWeekly) : 
@@ -705,7 +705,7 @@ const CreatedCar = () => {
                                   marginBottom: "5px",
                                 }}
                               >
-                                AED {data?.actualPriceMonthly || "5000"}
+                                D {data?.actualPriceMonthly || "5000"}
                               </Typography>
                               <Typography
                                 sx={{
@@ -715,7 +715,7 @@ const CreatedCar = () => {
                                   marginBottom: "5px",
                                 }}
                               >
-                                AED {data?.discountedPriceMonthly ? 
+                                D {data?.discountedPriceMonthly ? 
                                   (parseInt(data.discountedPriceMonthly) > 10000 ? 
                                     Math.round(parseInt(data.discountedPriceMonthly) / 1000) : 
                                     data.discountedPriceMonthly) : 
@@ -894,7 +894,7 @@ const CreatedCar = () => {
                               Security Deposit
                             </Typography>
                             <Typography sx={{ fontSize: "1rem", color: "#666", marginBottom: "15px" }}>
-                              AED {data?.securityDeposit || "1000"} (Refundable upon return)
+                              D {data?.securityDeposit || "1000"} (Refundable upon return)
                             </Typography>
                           </Box>
 
@@ -932,16 +932,16 @@ const CreatedCar = () => {
                               Additional Charges
                             </Typography>
                             <Typography sx={{ fontSize: "1rem", color: "#666", marginBottom: "5px" }}>
-                              Extra Mileage: AED {data?.additionalMileageCharge || "1"} per KM
+                              Extra Mileage: D {data?.additionalMileageCharge || "1"} per KM
                             </Typography>
                             <Typography sx={{ fontSize: "1rem", color: "#666", marginBottom: "5px" }}>
-                              Salik Toll: AED {data?.salikTollCharge || "5"} per toll
+                              Salik Toll: D {data?.salikTollCharge || "5"} per toll
                             </Typography>
                             <Typography sx={{ fontSize: "1rem", color: "#666", marginBottom: "5px" }}>
-                              Delivery Charge: AED {data?.deliveryChargeDaily || "50"} per day
+                              Delivery Charge: D {data?.deliveryChargeDaily || "50"} per day
                             </Typography>
                             <Typography sx={{ fontSize: "1rem", color: "#666", marginBottom: "15px" }}>
-                              Airport Pickup: AED {data?.airportPickupCharge || "100"}
+                              Airport Pickup: D {data?.airportPickupCharge || "100"}
                             </Typography>
                           </Box>
 
@@ -960,7 +960,7 @@ const CreatedCar = () => {
                               Standard Cover: Included (No additional cost)
                             </Typography>
                             <Typography sx={{ fontSize: "1rem", color: "#666", marginBottom: "15px" }}>
-                              Full Cover: AED {data?.cdwDaily || "25"} per day
+                              Full Cover: D {data?.cdwDaily || "25"} per day
                             </Typography>
                           </Box>
 
@@ -1059,7 +1059,7 @@ const CreatedCar = () => {
                           variant="subtitle2"
                           color="initial"
                         >
-                          Save AED {item.savingAmount}
+                          Save D {item.savingAmount}
                         </Typography>
                       </Box>
                     </Grid>
@@ -1269,7 +1269,7 @@ const CreatedCar = () => {
                     color="initial"
                     gutterBottom
                   >
-                    AED {totalCarInsauAmt}
+                    D {totalCarInsauAmt}
                   </Typography>
                 </Box>
               </Box>
@@ -1417,42 +1417,42 @@ const CreatedCar = () => {
                         <span className="dynamicData">
                           {data?.actualPriceDaily}
                         </span>{" "}
-                        AED
+                        D
                       </p>
                       <p>
                         Discounted Price (Daily) :{" "}
                         <span className="dynamicData">
                           {data?.discountedPriceDaily}
                         </span>{" "}
-                        AED
+                        D
                       </p>
                       <p>
                         Actual Price (Weekly) :{" "}
                         <span className="dynamicData">
                           {data?.actualPriceWeekly}
                         </span>{" "}
-                        AED
+                        D
                       </p>
                       <p>
                         Discounted Price (Weekly) :{" "}
                         <span className="dynamicData">
                           {data?.discountedPriceWeekly}
                         </span>{" "}
-                        AED
+                        D
                       </p>
                       <p>
                         Actual Price (Monthly) :{" "}
                         <span className="dynamicData">
                           {data?.actualPriceMonthly}
                         </span>{" "}
-                        AED
+                        D
                       </p>
                       <p>
                         Discounted Price (Monthly) :{" "}
                         <span className="dynamicData">
                           {data?.discountedPriceMonthly}
                         </span>{" "}
-                        AED
+                        D
                       </p>
 
                       <p>
@@ -1460,21 +1460,21 @@ const CreatedCar = () => {
                         <span className="dynamicData">
                           {data?.additionalMileageCharge}
                         </span>{" "}
-                        AED
+                        D
                       </p>
                       <p>
                         Excess Claim Charge :{" "}
                         <span className="dynamicData">
                           {data?.excessClaimCharge}
                         </span>{" "}
-                        AED
+                        D
                       </p>
                       <p>
                         Salik/Toll Charge :{" "}
                         <span className="dynamicData">
                           {data?.salikTollCharge}
                         </span>{" "}
-                        AED
+                        D
                       </p>
                       <p>
                         Airport Pickup Charge :{" "}
@@ -1483,7 +1483,7 @@ const CreatedCar = () => {
                             ? data?.airportPickupCharge
                             : 0o0}
                         </span>{" "}
-                        AED
+                        D
                       </p>
                       <p>
                         Airport Delivery Charge :{" "}
@@ -1492,7 +1492,7 @@ const CreatedCar = () => {
                             ? data?.airportDeliveryCharge
                             : 0o0}
                         </span>{" "}
-                        AED
+                        D
                       </p>
 
                       <p>
@@ -1597,7 +1597,7 @@ const CreatedCar = () => {
                       <p>
                         :{" "}
                         <span className="dynamicDataTwo">{data?.cdwDaily}</span>{" "}
-                        AED
+                        D
                       </p>
                     </Grid>
                     <Grid item xs={6} sm={6} md={6} lg={6}>
@@ -1609,7 +1609,7 @@ const CreatedCar = () => {
                         <span className="dynamicDataTwo">
                           {data?.cdwWeekly}
                         </span>{" "}
-                        AED
+                        D
                       </p>
                     </Grid>
                     <Grid item xs={6} sm={6} md={6} lg={6}>
@@ -1621,7 +1621,7 @@ const CreatedCar = () => {
                         <span className="dynamicDataTwo">
                           {data?.cdwMonthly}
                         </span>{" "}
-                        AED
+                        D
                       </p>
                     </Grid>
                     <Grid item xs={6} sm={6} md={6} lg={6}>
@@ -1633,7 +1633,7 @@ const CreatedCar = () => {
                         <span className="dynamicDataTwo">
                           {data?.paiInsuranceDaily}
                         </span>{" "}
-                        AED
+                        D
                       </p>
                     </Grid>
                     <Grid item xs={6} sm={6} md={6} lg={6}>
@@ -1645,7 +1645,7 @@ const CreatedCar = () => {
                         <span className="dynamicDataTwo">
                           {data?.paiInsuranceWeekly}
                         </span>{" "}
-                        AED
+                        D
                       </p>
                     </Grid>
                     <Grid item xs={6} sm={6} md={6} lg={6}>
@@ -1657,7 +1657,7 @@ const CreatedCar = () => {
                         <span className="dynamicDataTwo">
                           {data?.paiInsuranceMonthly}
                         </span>{" "}
-                        AED
+                        D
                       </p>
                     </Grid>
                     <Grid item xs={6} sm={6} md={6} lg={6}>
@@ -1669,7 +1669,7 @@ const CreatedCar = () => {
                         <span className="dynamicDataTwo">
                           {data?.babySeatChargeDaily}
                         </span>{" "}
-                        AED
+                        D
                       </p>
                     </Grid>
                     <Grid item xs={6} sm={6} md={6} lg={6}>
@@ -1681,7 +1681,7 @@ const CreatedCar = () => {
                         <span className="dynamicDataTwo">
                           {data?.babySeatChargeWeekly}
                         </span>{" "}
-                        AED
+                        D
                       </p>
                     </Grid>
                     <Grid item xs={6} sm={6} md={6} lg={6}>
@@ -1693,7 +1693,7 @@ const CreatedCar = () => {
                         <span className="dynamicDataTwo">
                           {data?.babySeatChargeMonthly}
                         </span>{" "}
-                        AED
+                        D
                       </p>
                     </Grid>
                     <Grid item xs={6} sm={6} md={6} lg={6}>
@@ -1705,7 +1705,7 @@ const CreatedCar = () => {
                         <span className="dynamicDataTwo">
                           {data?.deliveryChargeDaily}
                         </span>{" "}
-                        AED
+                        D
                       </p>
                     </Grid>
                     <Grid item xs={6} sm={6} md={6} lg={6}>
@@ -1717,7 +1717,7 @@ const CreatedCar = () => {
                         <span className="dynamicDataTwo">
                           {data?.deliveryChargeWeekly}
                         </span>{" "}
-                        AED
+                        D
                       </p>
                     </Grid>
                     <Grid item xs={6} sm={6} md={6} lg={6}>
@@ -1729,7 +1729,7 @@ const CreatedCar = () => {
                         <span className="dynamicDataTwo">
                           {data?.deliveryChargeMonthly}
                         </span>{" "}
-                        AED
+                        D
                       </p>
                     </Grid>
                     <Grid item xs={6} sm={6} md={6} lg={6}>
@@ -1741,7 +1741,7 @@ const CreatedCar = () => {
                         <span className="dynamicDataTwo">
                           {data?.securityDeposit}
                         </span>{" "}
-                        AED
+                        D
                       </p>
                     </Grid>
                     <Grid item xs={6} sm={6} md={6} lg={6}>

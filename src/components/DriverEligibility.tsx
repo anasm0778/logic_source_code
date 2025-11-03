@@ -42,13 +42,13 @@ const DriverEligibility: React.FC<DriverEligibilityProps> = ({
   const getExcessAmount = (category: string) => {
     switch (category.toUpperCase()) {
       case 'ECONOMY':
-        return 'AED 1,500 + 10% of repair cost';
+        return 'D 1,500 + 10% of repair cost';
       case 'SUV':
-        return 'AED 2,000 + 10% of repair cost';
+        return 'D 2,000 + 10% of repair cost';
       case 'LUXURY':
-        return 'AED 3,000 + 10% of repair cost';
+        return 'D 3,000 + 10% of repair cost';
       default:
-        return 'AED 1,500 + 10% of repair cost';
+        return 'D 1,500 + 10% of repair cost';
     }
   };
 
@@ -193,13 +193,13 @@ const DriverEligibility: React.FC<DriverEligibilityProps> = ({
             </Box>
             <Box sx={{ marginLeft: "20px" }}>
               <Typography sx={{ fontSize: "0.9rem", color: "#666", marginBottom: "5px" }}>
-                Daily: <strong>AED {cdwDaily}</strong>
+                Daily: <strong>D {cdwDaily}</strong>
               </Typography>
               <Typography sx={{ fontSize: "0.9rem", color: "#666", marginBottom: "5px" }}>
-                Weekly: <strong>AED {cdwWeekly}</strong>
+                Weekly: <strong>D {cdwWeekly}</strong>
               </Typography>
               <Typography sx={{ fontSize: "0.9rem", color: "#666" }}>
-                Monthly: <strong>AED {cdwMonthly}</strong>
+                Monthly: <strong>D {cdwMonthly}</strong>
               </Typography>
             </Box>
           </Box>
@@ -254,7 +254,7 @@ const DriverEligibility: React.FC<DriverEligibilityProps> = ({
               />
             ) : (
               <Typography sx={{ fontSize: "0.9rem", color: "#666", marginLeft: "20px" }}>
-                Credit Card: <strong>AED {securityDeposit}</strong> (Refundable upon return)
+                Credit Card: <strong>D {securityDeposit}</strong> (Refundable upon return)
               </Typography>
             )}
           </Box>

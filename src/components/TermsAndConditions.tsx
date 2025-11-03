@@ -54,13 +54,13 @@ const TermsAndConditions: React.FC<TermsAndConditionsProps> = ({
   const getExcessAmount = (category: string) => {
     switch (category.toUpperCase()) {
       case 'ECONOMY':
-        return 'AED 1,500 + 10% of repair cost';
+        return 'D 1,500 + 10% of repair cost';
       case 'SUV':
-        return 'AED 2,000 + 10% of repair cost';
+        return 'D 2,000 + 10% of repair cost';
       case 'LUXURY':
-        return 'AED 3,000 + 10% of repair cost';
+        return 'D 3,000 + 10% of repair cost';
       default:
-        return 'AED 1,500 + 10% of repair cost';
+        return 'D 1,500 + 10% of repair cost';
     }
   };
 
@@ -150,7 +150,7 @@ const TermsAndConditions: React.FC<TermsAndConditionsProps> = ({
               Full Insurance (CDW) - Optional:
             </Typography>
             <Typography sx={{ fontSize: "0.9rem", color: "#666", marginLeft: "20px" }}>
-              Daily: AED {cdwDaily} | Weekly: AED {cdwWeekly} | Monthly: AED {cdwMonthly}
+              Daily: D {cdwDaily} | Weekly: D {cdwWeekly} | Monthly: D {cdwMonthly}
             </Typography>
           </Box>
         </CardContent>
@@ -202,7 +202,7 @@ const TermsAndConditions: React.FC<TermsAndConditionsProps> = ({
               </Typography>
             ) : (
               <Typography sx={{ fontSize: "0.9rem", color: "#666", marginLeft: "20px" }}>
-                Credit Card: AED {securityDeposit} (Refundable upon return)
+                Credit Card: D {securityDeposit} (Refundable upon return)
               </Typography>
             )}
           </Box>

@@ -77,7 +77,7 @@ const HatchbackCars: React.FC<HatchbackCars> = ({ data, phoneData }) => {
     const baseUrl =
       "https://logicrent.ae/user/landing_page/get_car_details?verify=";
     const url = `${baseUrl}${_id}`;
-    const whatsappMessage = `Hi, \nI’m contacting you through Injazrent.ae. \nI’d like to rent the discounted ${brand} ${model} ${year} \n${url} \nfor ${discountedPriceDaily} AED ${packageDetails}. \nIs it available?`;
+    const whatsappMessage = `Hi, \nI’m contacting you through Injazrent.ae. \nI’d like to rent the discounted ${brand} ${model} ${year} \n${url} \nfor ${discountedPriceDaily} D ${packageDetails}. \nIs it available?`;
     const whatsappLink = `https://wa.me/${
       phoneData?.phoneNumber
     }?text=${encodeURIComponent(whatsappMessage)}`;
@@ -167,24 +167,24 @@ const HatchbackCars: React.FC<HatchbackCars> = ({ data, phoneData }) => {
                               </Typography>
                               <div className="actualPrice">
                                 <div className="actualPriceChild">
-                                  AED {car.actualPriceDaily} / Day
+                                  D {car.actualPriceDaily} / Day
                                 </div>
                                 <div className="actualPriceChild">
-                                  AED {car.actualPriceWeekly} / Week
+                                  D {car.actualPriceWeekly} / Week
                                 </div>
                                 <div className="actualPriceChild">
-                                  AED {car.actualPriceMonthly} / Month
+                                  D {car.actualPriceMonthly} / Month
                                 </div>
                               </div>
                               <div className="car_prices">
                                 <div className="car_prices_child">
-                                  AED {car.discountedPriceDaily} / Day
+                                  D {car.discountedPriceDaily} / Day
                                 </div>
                                 <div className="car_prices_child">
-                                  AED {car.discountedPriceWeekly} / Week
+                                  D {car.discountedPriceWeekly} / Week
                                 </div>
                                 <div className="car_prices_child">
-                                  AED {car.discountedPriceMonthly} / Month
+                                  D {car.discountedPriceMonthly} / Month
                                 </div>
                               </div>
                               <div className="car_KM">
@@ -280,7 +280,7 @@ const HatchbackCars: React.FC<HatchbackCars> = ({ data, phoneData }) => {
                                     />
                                     <p className="carInfoPara">
                                       {" "}
-                                      Deposit: AED {car.securityDeposit}
+                                      Deposit: D {car.securityDeposit}
                                     </p>
                                   </div>
                                 </CustomizedTooltips>
@@ -306,7 +306,7 @@ const HatchbackCars: React.FC<HatchbackCars> = ({ data, phoneData }) => {
                               </div>
                             </div>
                             <CustomizedTooltips
-                              title={`Basic insurance is comperehensive will cover non fautly accident only, there is excess charges for faulty accident AED ${car.securityDeposit}, We recommend you to buy a full insurance CDW to avoid this faulty axcess charges to zero amount`}
+                              title={`Basic insurance is comperehensive will cover non fautly accident only, there is excess charges for faulty accident D ${car.securityDeposit}, We recommend you to buy a full insurance CDW to avoid this faulty axcess charges to zero amount`}
                             >
                               <div className="int_icon">
                                 <CheckIcon
@@ -324,10 +324,10 @@ const HatchbackCars: React.FC<HatchbackCars> = ({ data, phoneData }) => {
                                 >
                                   {" "}
                                   Full Insurrance: {car.cdwDaily}
-                                  AED/Daily, {car.cdwWeekly}
-                                  AED/Weekly, {car.cdwMonthly}
+                                  D/Daily, {car.cdwWeekly}
+                                  D/Weekly, {car.cdwMonthly}
                                   {""}
-                                  AED/Monthly
+                                  D/Monthly
                                 </p>
                               </div>
                             </CustomizedTooltips>

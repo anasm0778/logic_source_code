@@ -76,13 +76,13 @@ const CarOffers: React.FC<CarOffers> = ({ data }) => {
                           </Typography>
                           <div className="car_prices">
                             <div className="car_prices_child">
-                              AED {car.discountedPriceDaily} / D
+                              D {car.discountedPriceDaily} / D
                             </div>
                             <div className="car_prices_child">
-                              AED {car.actualPriceWeekly} / W
+                              D {car.actualPriceWeekly} / W
                             </div>
                             <div className="car_prices_child">
-                              AED {car.discountedPriceMonthly} / M
+                              D {car.discountedPriceMonthly} / M
                             </div>
                           </div>
                           <div className="car_KM">
@@ -149,7 +149,7 @@ const CarOffers: React.FC<CarOffers> = ({ data }) => {
                                 />
                                 <p className="carInfoPara">
                                   {" "}
-                                  Deposit: AED {car.securityDeposit}
+                                  Deposit: D {car.securityDeposit}
                                 </p>
                               </div>
                               <div className="int_icon">

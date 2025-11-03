@@ -250,6 +250,8 @@ const CreatedCar = () => {
   const [userCity, setUserCity] = useState("");
   const [userStartDate, setUserStartDate] = useState("");
   const [userCarDeliveryTime, setUserCarDeliveryTime] = useState("");
+  const [userEndDate, setUserEndDate] = useState("");
+  const [userDropTime, setUserDropTime] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [daysWeeks, setDaysWeeks] = useState("");
@@ -531,7 +533,7 @@ const CreatedCar = () => {
     },
     {
       monthText: "Full Cover",
-      savingAmount: `+ AED ${
+      savingAmount: `+ D ${
         dailyWeekly === "monthly"
           ? parseFloat(data?.cdwMonthly || 0)
           : dailyWeekly === "dailyAndWeekly"
@@ -664,14 +666,75 @@ const CreatedCar = () => {
   const totalAmountDailyWeekly =
     vatFivePercentDailyWeekly + vatAmountDailyWeekly;
 
-  const handleMonthlyWhatsappClick = (
+  // Calculate estimated rent based on package
+  const calculatePriceBreakdown = (packageType: string, carData: any, insuranceType: string = "") => {
+    try {
+      if (!carData) return null;
+      
+      const dailyPrice = parseFloat(carData.discountedPriceDaily || carData.actualPriceDaily || 0);
+      const weeklyPrice = parseFloat(carData.discountedPriceWeekly || carData.actualPriceWeekly || 0);
+      const monthlyPrice = parseFloat(carData.discountedPriceMonthly || carData.actualPriceMonthly || 0);
+      
+      // Only apply insurance if "Full Cover" is selected
+      const dailyInsurance = insuranceType === "Full Cover" ? parseFloat(carData.cdwDaily || 0) : 0;
+      const weeklyInsurance = insuranceType === "Full Cover" ? parseFloat(carData.cdwWeekly || 0) : 0;
+      const monthlyInsurance = insuranceType === "Full Cover" ? parseFloat(carData.cdwMonthly || 0) : 0;
+      
+      const dailyKm = carData.freeDailyKM || "250";
+      const weeklyKm = carData.freeWeeklyKM || "1750";
+      const monthlyKm = carData.freeMonthlyKM || "7500";
+      
+      let bookingDays = 0;
+      let freeKm = dailyKm;
+      let rentalCharges = 0;
+      let insuranceCharges = 0;
+      
+      if (packageType?.toLowerCase().includes('month')) {
+        const months = parseInt(packageType.match(/\d+/)?.[0] || '1');
+        bookingDays = months * 30;
+        freeKm = monthlyKm;
+        rentalCharges = monthlyPrice * months;
+        insuranceCharges = monthlyInsurance * months;
+      } else if (packageType?.toLowerCase().includes('week')) {
+        const weeks = parseInt(packageType.match(/\d+/)?.[0] || '1');
+        bookingDays = weeks * 7;
+        freeKm = weeklyKm;
+        rentalCharges = weeklyPrice * weeks;
+        insuranceCharges = weeklyInsurance * weeks;
+      } else if (packageType?.toLowerCase().includes('day')) {
+        const days = parseInt(packageType.match(/\d+/)?.[0] || '1');
+        bookingDays = days;
+        freeKm = dailyKm;
+        rentalCharges = dailyPrice * days;
+        insuranceCharges = dailyInsurance * days;
+      }
+      
+      const vatCharges = (rentalCharges + insuranceCharges) * 0.05;
+      const totalAmount = rentalCharges + insuranceCharges + vatCharges;
+      
+      return {
+        bookingDays,
+        freeKm,
+        rentalCharges: rentalCharges.toFixed(2),
+        insuranceCharges: insuranceCharges.toFixed(2),
+        vatCharges: vatCharges.toFixed(2),
+        totalAmount: totalAmount.toFixed(2)
+      };
+    } catch (error) {
+      return null;
+    }
+  };
+
+  const handleMonthlyWhatsappClick = async (
     carDetails: any,
     userphoneNumber: any,
     userfullName: any,
     userEmail: any,
     userCity: any,
     userStartDate: any,
-    userCarDeliveryTime: any
+    userCarDeliveryTime: any,
+    userEndDate: any,
+    userDropTime: any
   ) => {
     if (
       !userfullName ||
@@ -679,7 +742,9 @@ const CreatedCar = () => {
       !userEmail ||
       !userCity ||
       !userStartDate ||
-      !userCarDeliveryTime
+      !userCarDeliveryTime ||
+      !userEndDate ||
+      !userDropTime
     ) {
       setError("Please enter all fields.");
       return;
@@ -691,11 +756,11 @@ const CreatedCar = () => {
     // const url = `${baseUrl}${_id}`;
     // const whatsappMessage = `Hi, \nI’m ${userfullName} contacting you through Injazrent.ae. \nI’d like to rent the INJAZ Car. \nFull Name :- ${userfullName}. \nPhone No :- ${userphoneNumber}. \nEmail :-${userEmail}. \nCity :- ${userCity}. \nStart Date :- ${userStartDate}. \nCar Delivery Time :- ${userCarDeliveryTime}. \nCar :- ${brand} ${model} ${year}. \nBooking ${bookingMonth
     //   .replace(/\d+/, "")
-    //   .trim()} :- ${bookingMonth}. \nCar Rental Charges in AED :- ${
+    //   .trim()} :- ${bookingMonth}. \nCar Rental Charges in D :- ${
     //   selectedPrice > 0 ? selectedPrice : 0
-    // }. \nInsuarance Charges in AED :- ${
+    // }. \nInsuarance Charges in D :- ${
     //   selectedInsuarance > 0 ? selectedInsuarance : 0
-    // }. \nMileage Charges in AED :- ${mileage}. \nVAT Charges (5%) in AED :- ${vatFivePercent}. \nTotal Amount :- ${totalAmountmonthly}. \n${url}. \nIs it available?`;
+    // }. \nMileage Charges in D :- ${mileage}. \nVAT Charges (5%) in D :- ${vatFivePercent}. \nTotal Amount :- ${totalAmountmonthly}. \n${url}. \nIs it available?`;
     // const whatsappLink = `https://wa.me/${
     //   phoneData?.phoneNumber ? phoneData?.phoneNumber : "+971529487046"
     // }?text=${encodeURIComponent(whatsappMessage)}`;
@@ -703,25 +768,109 @@ const CreatedCar = () => {
     try {
       setLoading(true); // Start loading
 
-      const response: any = axios.post(
-        "https://logicrent.ae/api/user/createInquiry",
+      const response: any = await axios.post(
+        serverUrl + "/user/createInquiry",
         {
           carName: brand + " " + model + " " + year,
           startDate: userStartDate,
+          endDate: userEndDate,
+          pickUpLoc: userCity,
+          dropLocation: userCity,
           phoneNumber: userphoneNumber,
           message: userCity,
           name: userfullName,
           email: userEmail,
           packages: bookingMonth,
           pickupTime: userCarDeliveryTime,
+          dropTime: userDropTime,
         }
       );
       setLoading(false); // End loading
+      console.log("Booking response:", response.data); // Debug log
+      const priceBreakdown = calculatePriceBreakdown(bookingMonth, data, insuranceBoxColor);
       Swal.fire({
         icon: "success",
-        title: "!! Success !!",
-        text: `Your Booking has been Sent Successfully.Here is your BookingId: ${response?.data?.result?.bookingId} 
-              You will get the confirmation on your email: ${response?.data?.result?.email} and your number: ${response?.data?.result?.phoneNumber}.`,
+        title: "✅ Booking inquiry Successfully Created",
+        html: `
+          <div style="text-align: left; padding: 20px; font-family: 'Segoe UI', Arial, sans-serif;">
+            <p style="font-size: 17px; margin-bottom: 25px; text-align: center; color: #2c3e50; font-weight: 500;">Thank you for choosing <strong style="color: #28a745;">Logic Rent A Car</strong>!</p>
+            
+            <div style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); padding: 25px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 5px solid #28a745;">
+              <h3 style="margin-top: 0; color: #2c3e50; font-size: 19px; margin-bottom: 15px; font-weight: 600;">Inquiry Details:</h3>
+              <div style="background: white; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                <p style="margin: 0; font-size: 18px; color: #28a745; font-weight: bold;">Booking Reference: #${response?.data?.result?.bookingId}</p>
+              </div>
+              
+              <p style="margin: 12px 0; font-size: 15px; color: #495057;"><strong>🚗 Car Type:</strong> <span style="color: #2c3e50;">${response?.data?.result?.carName || brand + " " + model}</span></p>
+              
+              <p style="margin: 12px 0; font-size: 15px; color: #495057;"><strong>📅 Pickup Date & Time:</strong> <span style="color: #2c3e50;">${response?.data?.result?.startDate || userStartDate} - ${response?.data?.result?.pickupTime || userCarDeliveryTime}</span></p>
+              
+              <p style="margin: 12px 0; font-size: 15px; color: #495057;"><strong>📍 Pickup Location:</strong> <span style="color: #2c3e50;">${response?.data?.result?.pickUpLoc || userCity}</span></p>
+              
+              <p style="margin: 12px 0; font-size: 15px; color: #495057;"><strong>📅 Drop-off Date & Time:</strong> <span style="color: #2c3e50;">${response?.data?.result?.endDate || userEndDate} - ${response?.data?.result?.dropTime || userDropTime}</span></p>
+              
+              <p style="margin: 12px 0; font-size: 15px; color: #495057;"><strong>📍 Drop-off Location:</strong> <span style="color: #2c3e50;">${response?.data?.result?.dropLocation || userCity}</span></p>
+              
+              <hr style="margin: 20px 0; border: none; border-top: 2px solid #dee2e6;" />
+              
+              ${priceBreakdown ? `
+                <div style="background: linear-gradient(135deg, #01437D 0%, #025fa0 100%); padding: 20px; border-radius: 10px; margin: 20px 0; color: white;">
+                  <h4 style="margin: 0 0 15px 0; font-size: 18px; font-weight: 600; text-align: center; border-bottom: 2px solid rgba(255,255,255,0.3); padding-bottom: 10px;">Car Charges & Other Details</h4>
+                  
+                  <table style="width: 100%; border-collapse: collapse;">
+                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.2);">
+                      <td style="padding: 10px 0; font-size: 15px;">Booking Days</td>
+                      <td style="padding: 10px 0; text-align: right; font-weight: 600; font-size: 15px;">${priceBreakdown.bookingDays} Days</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.2);">
+                      <td style="padding: 10px 0; font-size: 15px;">Car Free KM</td>
+                      <td style="padding: 10px 0; text-align: right; font-weight: 600; font-size: 15px;">${priceBreakdown.freeKm}</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.2);">
+                      <td style="padding: 10px 0; font-size: 15px;">Car Rental Charges in D</td>
+                      <td style="padding: 10px 0; text-align: right; font-weight: 600; font-size: 15px;">D ${priceBreakdown.rentalCharges}</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.2);">
+                      <td style="padding: 10px 0; font-size: 15px;">Car Insurance Charges in D</td>
+                      <td style="padding: 10px 0; text-align: right; font-weight: 600; font-size: 15px;">D ${priceBreakdown.insuranceCharges}</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.2);">
+                      <td style="padding: 10px 0; font-size: 15px;">VAT Charges (5%) in D</td>
+                      <td style="padding: 10px 0; text-align: right; font-weight: 600; font-size: 15px;">D ${priceBreakdown.vatCharges}</td>
+                    </tr>
+                    <tr style="border-top: 2px solid rgba(255,255,255,0.4);">
+                      <td style="padding: 15px 0 5px 0; font-size: 17px; font-weight: 700;">Total Amount</td>
+                      <td style="padding: 15px 0 5px 0; text-align: right; font-weight: 700; font-size: 19px; color: #ffd700;">D ${priceBreakdown.totalAmount}</td>
+                    </tr>
+                  </table>
+                </div>
+              ` : ''}
+              
+              <p style="margin: 10px 0; font-size: 15px; color: #495057;"><strong>📧 Email:</strong> <span style="color: #2c3e50;">${response?.data?.result?.email}</span></p>
+              
+              <p style="margin: 10px 0; font-size: 15px; color: #495057;"><strong>📞 Phone Number:</strong> <span style="color: #2c3e50;">${response?.data?.result?.phoneNumber}</span></p>
+            </div>
+            
+            <div style="background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%); border-left: 5px solid #ff9800; padding: 20px; border-radius: 10px; margin-top: 25px; box-shadow: 0 2px 6px rgba(255,152,0,0.2);">
+              <p style="margin: 0 0 12px 0; font-size: 16px; color: #e65100; font-weight: 700; display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 20px;">ℹ️</span> Important Notice
+              </p>
+              <p style="margin: 0 0 8px 0; font-size: 14px; color: #f57c00; line-height: 1.6; font-weight: 600;">
+                📋 This is only a <strong>booking inquiry</strong>, not a confirmed booking.
+              </p>
+              <p style="margin: 0; font-size: 14px; color: #f57c00; line-height: 1.6;">
+                💡 Prices may change based on the rental period and additional services requested.
+              </p>
+            </div>
+            
+            <p style="font-size: 14px; margin-top: 20px; color: #6c757d; text-align: center; font-style: italic; line-height: 1.5;">
+              Our team will review your inquiry and contact you shortly with the final price and confirmation details.
+            </p>
+          </div>
+        `,
+        confirmButtonText: "OK",
+        confirmButtonColor: "#28a745",
+        width: "700px",
       });
       router.push("/");
     } catch (err) {
@@ -735,14 +884,16 @@ const CreatedCar = () => {
     // console.log(whatsappMessage);
     debugger;
   };
-  const handleDailyAndWeeklyWhatsappClick = (
+  const handleDailyAndWeeklyWhatsappClick = async (
     carDetails: any,
     userphoneNumber: any,
     userfullName: any,
     userEmail: any,
     userCity: any,
     userStartDate: any,
-    userCarDeliveryTime: any
+    userCarDeliveryTime: any,
+    userEndDate: any,
+    userDropTime: any
   ) => {
     if (
       !userfullName ||
@@ -750,7 +901,9 @@ const CreatedCar = () => {
       !userEmail ||
       !userCity ||
       !userStartDate ||
-      !userCarDeliveryTime
+      !userCarDeliveryTime ||
+      !userEndDate ||
+      !userDropTime
     ) {
       setError("Please enter all fields.");
       return;
@@ -768,7 +921,7 @@ const CreatedCar = () => {
     //     : "0" && daysWeeks === "weeks"
     //     ? parseFloat(data?.freeWeeklyKM) * selectedCount
     //     : "0"
-    // }. \nCar Rental Charges in AED :- ${selectedDaysPrice}. \nCar Insurance Charges in AED :- ${insuDailyWeekly}. \nVAT Charges (5%) in AED :- ${vatAmountDailyWeekly}. \nTotal Amount :- ${totalAmountDailyWeekly}. \n${url} \nIs it available?`;
+    // }. \nCar Rental Charges in D :- ${selectedDaysPrice}. \nCar Insurance Charges in D :- ${insuDailyWeekly}. \nVAT Charges (5%) in D :- ${vatAmountDailyWeekly}. \nTotal Amount :- ${totalAmountDailyWeekly}. \n${url} \nIs it available?`;
     // const whatsappLink = `https://wa.me/${
     //   phoneData?.phoneNumber ? phoneData?.phoneNumber : "+971529487046"
     // }?text=${encodeURIComponent(whatsappMessage)}`;
@@ -776,25 +929,109 @@ const CreatedCar = () => {
     try {
       setLoading(true); // Start loading
 
-      const response: any = axios.post(
-        "https://logicrent.ae/api/user/createInquiry",
+      const response: any = await axios.post(
+        serverUrl + "/user/createInquiry",
         {
           carName: brand + " " + model + " " + year,
           startDate: userStartDate,
+          endDate: userEndDate,
+          pickUpLoc: userCity,
+          dropLocation: userCity,
           phoneNumber: userphoneNumber,
           message: userCity,
           name: userfullName,
           email: userEmail,
           packages: bookingDaysWeeks,
           pickupTime: userCarDeliveryTime,
+          dropTime: userDropTime,
         }
       );
       setLoading(false); // End loading
+      console.log("Booking response:", response.data); // Debug log
+      const priceBreakdown = calculatePriceBreakdown(bookingDaysWeeks, data, insuranceBoxColor);
       Swal.fire({
         icon: "success",
-        title: "!! Success !!",
-        text: `Your Booking has been Sent Successfully.Here is your BookingId: ${response?.data?.result?.bookingId} 
-              You will get the confirmation on your email: ${response?.data?.result?.email} and your number: ${response?.data?.result?.phoneNumber}.`,
+        title: "✅ Booking inquiry Successfully Created",
+        html: `
+          <div style="text-align: left; padding: 20px; font-family: 'Segoe UI', Arial, sans-serif;">
+            <p style="font-size: 17px; margin-bottom: 25px; text-align: center; color: #2c3e50; font-weight: 500;">Thank you for choosing <strong style="color: #28a745;">Logic Rent A Car</strong>!</p>
+            
+            <div style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); padding: 25px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 5px solid #28a745;">
+              <h3 style="margin-top: 0; color: #2c3e50; font-size: 19px; margin-bottom: 15px; font-weight: 600;">Inquiry Details:</h3>
+              <div style="background: white; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                <p style="margin: 0; font-size: 18px; color: #28a745; font-weight: bold;">Booking Reference: #${response?.data?.result?.bookingId}</p>
+              </div>
+              
+              <p style="margin: 12px 0; font-size: 15px; color: #495057;"><strong>🚗 Car Type:</strong> <span style="color: #2c3e50;">${response?.data?.result?.carName || brand + " " + model}</span></p>
+              
+              <p style="margin: 12px 0; font-size: 15px; color: #495057;"><strong>📅 Pickup Date & Time:</strong> <span style="color: #2c3e50;">${response?.data?.result?.startDate || userStartDate} - ${response?.data?.result?.pickupTime || userCarDeliveryTime}</span></p>
+              
+              <p style="margin: 12px 0; font-size: 15px; color: #495057;"><strong>📍 Pickup Location:</strong> <span style="color: #2c3e50;">${response?.data?.result?.pickUpLoc || userCity}</span></p>
+              
+              <p style="margin: 12px 0; font-size: 15px; color: #495057;"><strong>📅 Drop-off Date & Time:</strong> <span style="color: #2c3e50;">${response?.data?.result?.endDate || userEndDate} - ${response?.data?.result?.dropTime || userDropTime}</span></p>
+              
+              <p style="margin: 12px 0; font-size: 15px; color: #495057;"><strong>📍 Drop-off Location:</strong> <span style="color: #2c3e50;">${response?.data?.result?.dropLocation || userCity}</span></p>
+              
+              <hr style="margin: 20px 0; border: none; border-top: 2px solid #dee2e6;" />
+              
+              ${priceBreakdown ? `
+                <div style="background: linear-gradient(135deg, #01437D 0%, #025fa0 100%); padding: 20px; border-radius: 10px; margin: 20px 0; color: white;">
+                  <h4 style="margin: 0 0 15px 0; font-size: 18px; font-weight: 600; text-align: center; border-bottom: 2px solid rgba(255,255,255,0.3); padding-bottom: 10px;">Car Charges & Other Details</h4>
+                  
+                  <table style="width: 100%; border-collapse: collapse;">
+                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.2);">
+                      <td style="padding: 10px 0; font-size: 15px;">Booking Days</td>
+                      <td style="padding: 10px 0; text-align: right; font-weight: 600; font-size: 15px;">${priceBreakdown.bookingDays} Days</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.2);">
+                      <td style="padding: 10px 0; font-size: 15px;">Car Free KM</td>
+                      <td style="padding: 10px 0; text-align: right; font-weight: 600; font-size: 15px;">${priceBreakdown.freeKm}</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.2);">
+                      <td style="padding: 10px 0; font-size: 15px;">Car Rental Charges in D</td>
+                      <td style="padding: 10px 0; text-align: right; font-weight: 600; font-size: 15px;">D ${priceBreakdown.rentalCharges}</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.2);">
+                      <td style="padding: 10px 0; font-size: 15px;">Car Insurance Charges in D</td>
+                      <td style="padding: 10px 0; text-align: right; font-weight: 600; font-size: 15px;">D ${priceBreakdown.insuranceCharges}</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.2);">
+                      <td style="padding: 10px 0; font-size: 15px;">VAT Charges (5%) in D</td>
+                      <td style="padding: 10px 0; text-align: right; font-weight: 600; font-size: 15px;">D ${priceBreakdown.vatCharges}</td>
+                    </tr>
+                    <tr style="border-top: 2px solid rgba(255,255,255,0.4);">
+                      <td style="padding: 15px 0 5px 0; font-size: 17px; font-weight: 700;">Total Amount</td>
+                      <td style="padding: 15px 0 5px 0; text-align: right; font-weight: 700; font-size: 19px; color: #ffd700;">D ${priceBreakdown.totalAmount}</td>
+                    </tr>
+                  </table>
+                </div>
+              ` : ''}
+              
+              <p style="margin: 10px 0; font-size: 15px; color: #495057;"><strong>📧 Email:</strong> <span style="color: #2c3e50;">${response?.data?.result?.email}</span></p>
+              
+              <p style="margin: 10px 0; font-size: 15px; color: #495057;"><strong>📞 Phone Number:</strong> <span style="color: #2c3e50;">${response?.data?.result?.phoneNumber}</span></p>
+            </div>
+            
+            <div style="background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%); border-left: 5px solid #ff9800; padding: 20px; border-radius: 10px; margin-top: 25px; box-shadow: 0 2px 6px rgba(255,152,0,0.2);">
+              <p style="margin: 0 0 12px 0; font-size: 16px; color: #e65100; font-weight: 700; display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 20px;">ℹ️</span> Important Notice
+              </p>
+              <p style="margin: 0 0 8px 0; font-size: 14px; color: #f57c00; line-height: 1.6; font-weight: 600;">
+                📋 This is only a <strong>booking inquiry</strong>, not a confirmed booking.
+              </p>
+              <p style="margin: 0; font-size: 14px; color: #f57c00; line-height: 1.6;">
+                💡 Prices may change based on the rental period and additional services requested.
+              </p>
+            </div>
+            
+            <p style="font-size: 14px; margin-top: 20px; color: #6c757d; text-align: center; font-style: italic; line-height: 1.5;">
+              Our team will review your inquiry and contact you shortly with the final price and confirmation details.
+            </p>
+          </div>
+        `,
+        confirmButtonText: "OK",
+        confirmButtonColor: "#28a745",
+        width: "700px",
       });
       router.push("/");
     } catch (err) {
@@ -844,7 +1081,7 @@ const CreatedCar = () => {
       value: userStartDate,
       onChange: (e: any) => setUserStartDate(e.target.value),
       errors: !userStartDate && error !== "",
-      placeholder: "Start Date",
+      placeholder: "dd-mm-yyyy",
       type: "date",
       variant: "outlined",
     },
@@ -852,7 +1089,23 @@ const CreatedCar = () => {
       value: userCarDeliveryTime,
       onChange: (e: any) => setUserCarDeliveryTime(e.target.value),
       errors: !userCarDeliveryTime && error !== "",
-      placeholder: "Car Delivery Time",
+      placeholder: "--:--",
+      type: "time",
+      variant: "outlined",
+    },
+    {
+      value: userEndDate,
+      onChange: (e: any) => setUserEndDate(e.target.value),
+      errors: !userEndDate && error !== "",
+      placeholder: "dd-mm-yyyy",
+      type: "date",
+      variant: "outlined",
+    },
+    {
+      value: userDropTime,
+      onChange: (e: any) => setUserDropTime(e.target.value),
+      errors: !userDropTime && error !== "",
+      placeholder: "--:--",
       type: "time",
       variant: "outlined",
     },
@@ -1039,7 +1292,7 @@ const CreatedCar = () => {
                                   marginBottom: "5px",
                                 }}
                               >
-                                AED {data?.actualPriceDaily || "341"}
+                                D {data?.actualPriceDaily || "341"}
                               </Typography>
                               <Typography
                                 sx={{
@@ -1049,7 +1302,7 @@ const CreatedCar = () => {
                                   marginBottom: "5px",
                                 }}
                               >
-                                AED {data?.discountedPriceDaily ? 
+                                D {data?.discountedPriceDaily ? 
                                   (parseInt(data.discountedPriceDaily) > 10000 ? 
                                     Math.round(parseInt(data.discountedPriceDaily) / 1000) : 
                                     data.discountedPriceDaily) : 
@@ -1093,7 +1346,7 @@ const CreatedCar = () => {
                                   marginBottom: "5px",
                                 }}
                               >
-                                AED {data?.actualPriceWeekly || "2100"}
+                                D {data?.actualPriceWeekly || "2100"}
                               </Typography>
                               <Typography
                                 sx={{
@@ -1103,7 +1356,7 @@ const CreatedCar = () => {
                                   marginBottom: "5px",
                                 }}
                               >
-                                AED {data?.discountedPriceWeekly ? 
+                                D {data?.discountedPriceWeekly ? 
                                   (parseInt(data.discountedPriceWeekly) > 10000 ? 
                                     Math.round(parseInt(data.discountedPriceWeekly) / 1000) : 
                                     data.discountedPriceWeekly) : 
@@ -1147,7 +1400,7 @@ const CreatedCar = () => {
                                   marginBottom: "5px",
                                 }}
                               >
-                                AED {data?.actualPriceMonthly || "5000"}
+                                D {data?.actualPriceMonthly || "5000"}
                               </Typography>
                               <Typography
                                 sx={{
@@ -1157,7 +1410,7 @@ const CreatedCar = () => {
                                   marginBottom: "5px",
                                 }}
                               >
-                                AED {data?.discountedPriceMonthly ? 
+                                D {data?.discountedPriceMonthly ? 
                                   (parseInt(data.discountedPriceMonthly) > 10000 ? 
                                     Math.round(parseInt(data.discountedPriceMonthly) / 1000) : 
                                     data.discountedPriceMonthly) : 
@@ -1367,16 +1620,16 @@ const CreatedCar = () => {
                               Additional Charges
                             </Typography>
                             <Typography sx={{ fontSize: "1rem", color: "#666", marginBottom: "5px" }}>
-                              Extra Mileage: AED {data?.additionalMileageCharge || "1"} per KM
+                              Extra Mileage: D {data?.additionalMileageCharge || "1"} per KM
                             </Typography>
                             <Typography sx={{ fontSize: "1rem", color: "#666", marginBottom: "5px" }}>
-                              Salik Toll: AED {data?.salikTollCharge || "5"} per toll
+                              Salik Toll: D {data?.salikTollCharge || "5"} per toll
                             </Typography>
                             <Typography sx={{ fontSize: "1rem", color: "#666", marginBottom: "5px" }}>
-                              Delivery Charge: AED {data?.deliveryChargeDaily || "50"} per day
+                              Delivery Charge: D {data?.deliveryChargeDaily || "50"} per day
                             </Typography>
                             <Typography sx={{ fontSize: "1rem", color: "#666", marginBottom: "15px" }}>
-                              Airport Pickup: AED {data?.airportPickupCharge || "100"}
+                              Airport Pickup: D {data?.airportPickupCharge || "100"}
                             </Typography>
                           </Box>
                         </Box>
@@ -1600,7 +1853,7 @@ const CreatedCar = () => {
                               {item.monthText}
                             </MonthlyTypo1>
                             <MonthlyTypo2 variant="subtitle2">
-                              Save AED {item.savingAmount}
+                              Save D {item.savingAmount}
                             </MonthlyTypo2>
                           </DailyWeeklyBox1>
                         </Grid>
@@ -1709,23 +1962,23 @@ const CreatedCar = () => {
                       </PriceBrakeBox2>
                       <PriceBrakeBox2>
                         <PriceBrakeTypo2 variant="subtitle2">
-                          Monthly Fee in AED
+                          Monthly Fee in D
                         </PriceBrakeTypo2>
                         <PriceBrakeTypo2 variant="subtitle2">
-                          {selectedPrice > 0 ? `AED ${selectedPrice}` : "AED 0"}
+                          {selectedPrice > 0 ? `D ${selectedPrice}` : "D 0"}
                         </PriceBrakeTypo2>
                       </PriceBrakeBox2>
                       <PriceBrakeBox2>
                         <PriceBrakeTypo2 variant="subtitle2">
-                          Insuarance Charges in AED
+                          Insuarance Charges in D
                         </PriceBrakeTypo2>
                         <PriceBrakeTypo2 variant="subtitle2">
-                          {selectedInsuarance > 0 ? `AED ${selectedInsuarance}` : "AED 0"}
+                          {selectedInsuarance > 0 ? `D ${selectedInsuarance}` : "D 0"}
                         </PriceBrakeTypo2>
                       </PriceBrakeBox2>
                       {/* <PriceBrakeBox2>
                         <PriceBrakeTypo2 variant="subtitle2">
-                          Mileage Charges in AED
+                          Mileage Charges in D
                         </PriceBrakeTypo2>
                         <PriceBrakeTypo2 variant="subtitle2">
                           {mileage}
@@ -1733,7 +1986,7 @@ const CreatedCar = () => {
                       </PriceBrakeBox2> */}
                       {/* <PriceBrakeBox2>
                         <PriceBrakeTypo2 variant="subtitle2">
-                          Discount in AED
+                          Discount in D
                         </PriceBrakeTypo2>
                         <PriceBrakeTypo2 variant="subtitle2">
                           -60
@@ -1741,10 +1994,10 @@ const CreatedCar = () => {
                       </PriceBrakeBox2> */}
                       <PriceBrakeBox2>
                         <PriceBrakeTypo2 variant="subtitle2">
-                          VAT Charges (5%) in AED
+                          VAT Charges (5%) in D
                         </PriceBrakeTypo2>
                         <PriceBrakeTypo2 variant="subtitle2">
-                          AED {vatFivePercent}
+                          D {vatFivePercent}
                         </PriceBrakeTypo2>
                       </PriceBrakeBox2>
                     </PriceBrakeBox1>
@@ -1778,26 +2031,26 @@ const CreatedCar = () => {
                       </PriceBrakeBox2>
                       <PriceBrakeBox2>
                         <PriceBrakeTypo2 variant="subtitle2">
-                          Car Rental Charges in AED
+                          Car Rental Charges in D
                         </PriceBrakeTypo2>
                         <PriceBrakeTypo2 variant="subtitle2">
-                          AED {selectedDaysPrice}
-                        </PriceBrakeTypo2>
-                      </PriceBrakeBox2>
-                      <PriceBrakeBox2>
-                        <PriceBrakeTypo2 variant="subtitle2">
-                          Car Insurance Charges in AED
-                        </PriceBrakeTypo2>
-                        <PriceBrakeTypo2 variant="subtitle2">
-                          AED {insuDailyWeekly}
+                          D {selectedDaysPrice}
                         </PriceBrakeTypo2>
                       </PriceBrakeBox2>
                       <PriceBrakeBox2>
                         <PriceBrakeTypo2 variant="subtitle2">
-                          VAT Charges (5%) in AED
+                          Car Insurance Charges in D
                         </PriceBrakeTypo2>
                         <PriceBrakeTypo2 variant="subtitle2">
-                          AED {vatAmountDailyWeekly}
+                          D {insuDailyWeekly}
+                        </PriceBrakeTypo2>
+                      </PriceBrakeBox2>
+                      <PriceBrakeBox2>
+                        <PriceBrakeTypo2 variant="subtitle2">
+                          VAT Charges (5%) in D
+                        </PriceBrakeTypo2>
+                        <PriceBrakeTypo2 variant="subtitle2">
+                          D {vatAmountDailyWeekly}
                         </PriceBrakeTypo2>
                       </PriceBrakeBox2>
                     </CarChargeBox1>
@@ -1809,7 +2062,7 @@ const CreatedCar = () => {
                       Total Amount
                     </PriceBrakeTypo2>
                     <PriceBrakeTypo2 variant="subtitle2">
-                      AED {totalAmountDailyWeekly}
+                      D {totalAmountDailyWeekly}
                     </PriceBrakeTypo2>
                   </PriceBrakeBox2>
                 )}
@@ -1819,7 +2072,7 @@ const CreatedCar = () => {
                       Total Amount
                     </PriceBrakeTypo2>
                     <PriceBrakeTypo2 variant="subtitle2">
-                      AED {totalAmountmonthly}
+                      D {totalAmountmonthly}
                     </PriceBrakeTypo2>
                   </PriceBrakeBox2>
                 )}
@@ -1862,7 +2115,9 @@ const CreatedCar = () => {
                           userEmail,
                           userCity,
                           userStartDate,
-                          userCarDeliveryTime
+                          userCarDeliveryTime,
+                          userEndDate,
+                          userDropTime
                         )
                       }
                     >
@@ -1882,7 +2137,9 @@ const CreatedCar = () => {
                           userEmail,
                           userCity,
                           userStartDate,
-                          userCarDeliveryTime
+                          userCarDeliveryTime,
+                          userEndDate,
+                          userDropTime
                         )
                       }
                     >

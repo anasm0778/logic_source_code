@@ -125,10 +125,10 @@ const CarWithLocation = () => {
     const url = `${baseUrl}${_id}`;
     const whatsappMessage = `Hi, \nI'm contacting you through Injazrent.ae. \nI'd like to rent the discounted ${brand} ${model} ${year} \nfor ${
       !monthly
-        ? `AED ${discountedPriceDaily} Daily & AED ${discountedPriceWeekly} Weekly`
+        ? `D ${discountedPriceDaily} Daily & D ${discountedPriceWeekly} Weekly`
         : ""
     }  ${
-      !weekly ? `AED ${discountedPriceMonthly} Monthly` : ""
+      !weekly ? `D ${discountedPriceMonthly} Monthly` : ""
     } . \n${url}  \nIs it available?`;
     // Remove spaces and special characters from phone number for WhatsApp URL
     const formattedPhoneNumber = phoneData?.phoneNumber?.replace(/\s+/g, '').replace(/[^\d+]/g, '') || '+971509960498';
@@ -198,20 +198,20 @@ const CarWithLocation = () => {
                           <div className="car_prices">
                             {daily && (
                               <div className="car_prices_child">
-                                AED {car.discountedPriceDaily} / Day
+                                D {car.discountedPriceDaily} / Day
                               </div>
                             )}
                             {daily || weekly || monthly ? (
                               ""
                             ) : (
                               <div className="car_prices_child">
-                                AED {car.discountedPriceDaily} / Day
+                                D {car.discountedPriceDaily} / Day
                               </div>
                             )}
                             {weekly && (
                               <>
                                 <div className="car_prices_child">
-                                  AED {car.discountedPriceWeekly} / Week
+                                  D {car.discountedPriceWeekly} / Week
                                 </div>{" "}
                               </>
                             )}
@@ -219,12 +219,12 @@ const CarWithLocation = () => {
                               ""
                             ) : (
                               <div className="car_prices_child">
-                                AED {car.discountedPriceWeekly} / Week
+                                D {car.discountedPriceWeekly} / Week
                               </div>
                             )}
                             {monthly && (
                               <div className="car_prices_child">
-                                AED{" "}
+                                D{" "}
                                 {car.nineMonthPriceOf2500Km
                                   ? car.nineMonthPriceOf2500Km
                                   : car.discountedPriceMonthly}{" "}
@@ -235,7 +235,7 @@ const CarWithLocation = () => {
                               ""
                             ) : (
                               <div className="car_prices_child">
-                                AED {car.discountedPriceMonthly} / Month
+                                D {car.discountedPriceMonthly} / Month
                               </div>
                             )}
                           </div>
@@ -364,7 +364,7 @@ const CarWithLocation = () => {
                                   <p className="carInfoPara">
                                     {car.securityDeposit === 0 || car.securityDeposit === "0" 
                                       ? "No deposit required" 
-                                      : `Deposit: AED ${car.securityDeposit}`}
+                                      : `Deposit: D ${car.securityDeposit}`}
                                   </p>
                                 </div>
                               </CustomizedTooltips>
@@ -390,7 +390,7 @@ const CarWithLocation = () => {
                             </div>
                           </div>
                           <CustomizedTooltips
-                            title={`Basic insurance is comprehensive and will cover non-fault accidents only. There are excess charges for fault accidents of AED ${car.securityDeposit}. We recommend you buy full insurance (CDW) to avoid these charges.`}
+                            title={`Basic insurance is comprehensive and will cover non-fault accidents only. There are excess charges for fault accidents of D ${car.securityDeposit}. We recommend you buy full insurance (CDW) to avoid these charges.`}
                           >
                             <div
                               className="int_icon"
@@ -404,18 +404,18 @@ const CarWithLocation = () => {
                               />
                               <p className="carInfoPara">
                                 {(daily &&
-                                  `Full Insurrance: AED ${car.cdwDaily} /
+                                  `Full Insurrance: D ${car.cdwDaily} /
                               Day`) ||
                                   (weekly &&
-                                    `Full Insurrance: AED ${car.cdwWeekly} /
+                                    `Full Insurrance: D ${car.cdwWeekly} /
                               Week`) ||
                                   (monthly &&
-                                    `Full Insurrance: AED ${car.cdwMonthly} /
+                                    `Full Insurrance: D ${car.cdwMonthly} /
                               Month`)}
                                 {daily || weekly || monthly
                                   ? ""
-                                  : `Full Insurrance: AED ${car.cdwDaily} /
-                                  Day, AED ${car.cdwWeekly} / Week, AED ${car.cdwMonthly} / Month`}
+                                  : `Full Insurrance: D ${car.cdwDaily} /
+                                  Day, D ${car.cdwWeekly} / Week, D ${car.cdwMonthly} / Month`}
                               </p>
                             </div>
                           </CustomizedTooltips>

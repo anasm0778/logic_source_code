@@ -47,7 +47,7 @@ export default async function Home({ params: { locale } }: any) {
             foundingDate: "2020",
             numberOfEmployees: "50-100",
             priceRange: "$$",
-            currenciesAccepted: "AED",
+            currenciesAccepted: "D",
             paymentAccepted: ["Cash", "Credit Card", "Debit Card", "Bank Transfer"],
             areaServed: [
               {
@@ -166,14 +166,14 @@ export default async function Home({ params: { locale } }: any) {
                 name: "No Deposit Car Rental",
                 description: "Rent a car Dubai without deposit - Zero deposit car rental",
                 price: "0",
-                priceCurrency: "AED"
+                priceCurrency: "D"
               },
               {
                 "@type": "Offer", 
                 name: "Monthly Car Rental Special",
-                description: "Cheapest monthly car rental Dubai starting from AED 500",
+                description: "Cheapest monthly car rental Dubai starting from D 500",
                 price: "500",
-                priceCurrency: "AED"
+                priceCurrency: "D"
               }
             ],
             sameAs: [

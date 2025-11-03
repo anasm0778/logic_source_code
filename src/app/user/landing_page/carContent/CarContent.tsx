@@ -181,7 +181,7 @@ const CarContent: React.FC<CarContentType> = ({ data = [], phoneData }) => {
     } = carDetails;
     const baseUrl = "https://logicrent.ae/pages/getCarDetails?verify=";
     const url = `${baseUrl}${_id}`;
-    const whatsappMessage = `Hi, \nI'm contacting you through Injazrent.ae. \nI'd like to rent the discounted ${brand} ${model} ${year} \n${url} \nfor ${discountedPriceDaily} AED ${packageDetails}. \nIs it available?`;
+    const whatsappMessage = `Hi, \nI'm contacting you through Injazrent.ae. \nI'd like to rent the discounted ${brand} ${model} ${year} \n${url} \nfor ${discountedPriceDaily} D ${packageDetails}. \nIs it available?`;
     // Remove spaces and special characters from phone number for WhatsApp URL
     const formattedPhoneNumber = phoneData?.phoneNumber?.replace(/\s+/g, '').replace(/[^\d+]/g, '') || '+971509961569';
     const whatsappLink = `https://wa.me/${formattedPhoneNumber}?text=${encodeURIComponent(whatsappMessage)}`;
@@ -424,7 +424,7 @@ const CarContent: React.FC<CarContentType> = ({ data = [], phoneData }) => {
               </Grid>
               <Grid item xs={12} sm={3}>
                 <TextField
-                  label="Min Price (AED)"
+                  label="Min Price (D)"
                   type="number"
                   value={minPrice}
                   onChange={(e) => setMinPrice(Number(e.target.value))}
@@ -450,7 +450,7 @@ const CarContent: React.FC<CarContentType> = ({ data = [], phoneData }) => {
               </Grid>
               <Grid item xs={12} sm={3}>
                 <TextField
-                  label="Max Price (AED)"
+                  label="Max Price (D)"
                   type="number"
                   value={maxPrice}
                   onChange={(e) => setMaxPrice(Number(e.target.value))}
@@ -620,18 +620,18 @@ const CarContent: React.FC<CarContentType> = ({ data = [], phoneData }) => {
                       </Typography>
                       <div className="car_prices">
                         <div className="car_prices_child_combined">
-                          <span className="actual_price">AED {car.actualPriceDaily}</span>
-                          <span className="discounted_price">AED {car.discountedPriceDaily}</span>
+                          <span className="actual_price">D {car.actualPriceDaily}</span>
+                          <span className="discounted_price">D {car.discountedPriceDaily}</span>
                           <span className="price_period">/ Day</span>
                         </div>
                         <div className="car_prices_child_combined">
-                          <span className="actual_price">AED {car.actualPriceWeekly}</span>
-                          <span className="discounted_price">AED {car.discountedPriceWeekly}</span>
+                          <span className="actual_price">D {car.actualPriceWeekly}</span>
+                          <span className="discounted_price">D {car.discountedPriceWeekly}</span>
                           <span className="price_period">/ Week</span>
                         </div>
                         <div className="car_prices_child_combined">
-                          <span className="actual_price">AED {car.actualPriceMonthly}</span>
-                          <span className="discounted_price">AED {car.discountedPriceMonthly}</span>
+                          <span className="actual_price">D {car.actualPriceMonthly}</span>
+                          <span className="discounted_price">D {car.discountedPriceMonthly}</span>
                           <span className="price_period">/ Month</span>
                         </div>
                       </div>
@@ -708,7 +708,7 @@ const CarContent: React.FC<CarContentType> = ({ data = [], phoneData }) => {
                             <p className="carInfoPara">
                               {car.securityDeposit === 0 || car.securityDeposit === "0" 
                                 ? "No deposit required" 
-                                : `Deposit: AED ${car.securityDeposit}`}
+                                : `Deposit: D ${car.securityDeposit}`}
                             </p>
                           </div>
                         </CustomizedTooltips>
@@ -729,7 +729,7 @@ const CarContent: React.FC<CarContentType> = ({ data = [], phoneData }) => {
                       </div>
                     </div>
                     <CustomizedTooltips
-                      title={`Basic insurance is comprehensive and will cover non-fault accidents only. There are excess charges for fault accidents of AED ${car.securityDeposit}. We recommend you buy full insurance (CDW) to avoid these charges.`}
+                      title={`Basic insurance is comprehensive and will cover non-fault accidents only. There are excess charges for fault accidents of D ${car.securityDeposit}. We recommend you buy full insurance (CDW) to avoid these charges.`}
                     >
                       <div className="int_icon" style={{ padding: "0px 13px" }}>
                         <CheckIcon
@@ -739,9 +739,9 @@ const CarContent: React.FC<CarContentType> = ({ data = [], phoneData }) => {
                           }}
                         />
                         <p className="carInfoPara">
-                          Full Insurrance: AED {car.cdwDaily}
-                          /Day, AED {car.cdwWeekly}
-                          /Week, AED {car.cdwMonthly}
+                          Full Insurrance: D {car.cdwDaily}
+                          /Day, D {car.cdwWeekly}
+                          /Week, D {car.cdwMonthly}
                           /Month
                         </p>
                       </div>
