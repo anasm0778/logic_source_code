@@ -86,7 +86,7 @@ const ReusableDiscountedCars: React.FC<ReusableDiscountedCarsInterface> = ({
     const whatsappMessage = `Hi, \nI'm contacting you through Logicrent.ae. \nI'd like to rent the ${calculateDiscount(
       discountedPriceMonthly,
       twelveMonthPriceOf2500Km
-    )} discounted ${brand} ${model} ${year} In ${offerType} \n${url}  \nfor ${twelveMonthPriceOf2500Km} AED Per 12 Month. \nIs it available?`;
+    )} discounted ${brand} ${model} ${year} In ${offerType} \n${url}  \nfor ${twelveMonthPriceOf2500Km} D Per 12 Month. \nIs it available?`;
     const whatsappLink = `https://wa.me/${
       phoneData?.phoneNumber
     }?text=${encodeURIComponent(whatsappMessage)}`;
@@ -203,7 +203,7 @@ const ReusableDiscountedCars: React.FC<ReusableDiscountedCarsInterface> = ({
                             color="initial"
                             gutterBottom
                           >
-                            {car.twelveMonthPriceOf2500Km} AED / Month
+                            {car.twelveMonthPriceOf2500Km} D / Month
                           </Typography>
                         </Box>
                         <div className="car_interior">
@@ -290,7 +290,7 @@ const ReusableDiscountedCars: React.FC<ReusableDiscountedCarsInterface> = ({
                                 />
                                 <p className="carInfoPara">
                                   {" "}
-                                  Deposit: AED {car.securityDeposit}
+                                  Deposit: D {car.securityDeposit}
                                 </p>
                               </div>
                             </CustomizedTooltips>
@@ -314,7 +314,7 @@ const ReusableDiscountedCars: React.FC<ReusableDiscountedCarsInterface> = ({
                           </div>
                         </div>
                         <CustomizedTooltips
-                          title={`Basic insurance is comprehensive and will cover non-fault accidents only. There are excess charges for fault accidents of AED ${car.securityDeposit}. We recommend you buy full insurance (CDW) to avoid these charges.`}
+                          title={`Basic insurance is comprehensive and will cover non-fault accidents only. There are excess charges for fault accidents of D ${car.securityDeposit}. We recommend you buy full insurance (CDW) to avoid these charges.`}
                         >
                           <div className="int_icon">
                             <CheckIcon
@@ -332,10 +332,10 @@ const ReusableDiscountedCars: React.FC<ReusableDiscountedCarsInterface> = ({
                             >
                               {" "}
                               Full Insurrance: {car.cdwDaily}
-                              AED/Daily, {car.cdwWeekly}
-                              AED/Weekly, {car.cdwMonthly}
+                              D/Daily, {car.cdwWeekly}
+                              D/Weekly, {car.cdwMonthly}
                               {""}
-                              AED/Monthly
+                              D/Monthly
                             </p>
                           </div>
                         </CustomizedTooltips>

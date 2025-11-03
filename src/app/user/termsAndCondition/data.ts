@@ -2,7 +2,7 @@ export const data = [
   {
     heading: "1. Insurance:",
     text: [
-      "Full Comprehensive insurance is provided subject to current U.A.E Law. The Hirer is liable for the first AED [1200-3500] varies per car category - against claims resulting from each and every accident including (hit-and-run) reporting you at fault (as evidenced by a Police report). This can be waived by buying the super collision damage waiver (SCDW).",
+      "Full Comprehensive insurance is provided subject to current U.A.E Law. The Hirer is liable for the first D [1200-3500] varies per car category - against claims resulting from each and every accident including (hit-and-run) reporting you at fault (as evidenced by a Police report). This can be waived by buying the super collision damage waiver (SCDW).",
     ],
   },
   {
@@ -35,7 +35,7 @@ export const data = [
     text: [
       "All costs incurred as a result of fines or other penalties (imposed by traffic police or any other legal authorities) taking place during the rental will be the client’s responsibility and would be recovered accordingly.",
       "Additional charges are applicable for Salik (Dubai Tollgate pass) at Dhs.5/pass.",
-      "There will be an AED42 additional service charge on top of traffic fine charges and AED1/- on top of each Salik charge.",
+      "There will be an D42 additional service charge on top of traffic fine charges and D1/- on top of each Salik charge.",
     ],
   },
   {
@@ -73,7 +73,7 @@ export const data = [
     text: [
       "Cash or Debit cards are not accepted by Europcar as a mean of payment.",
       "Credit cards are required for payment settlement; where Client will be asked to provide us with 1 Credit Card physically on his name for Normal Vehicles & 2 Credit Cards under his name for Luxury Vehicles. Any credit card without customer name or digital copies will not be accepted.",
-      "At the time of vehicle’s check-out, Rental charges will be collected and a pre-authorization Deposit amount of the Estimated Rental Charges plus [AED1500/- for Normal Vehicle or AED3500/- For Luxury Vehicle], will be blocked on client’s credit card in order to cover the Rent as well as the possible traffic fines & dues.",
+      "At the time of vehicle’s check-out, Rental charges will be collected and a pre-authorization Deposit amount of the Estimated Rental Charges plus [D1500/- for Normal Vehicle or D3500/- For Luxury Vehicle], will be blocked on client’s credit card in order to cover the Rent as well as the possible traffic fines & dues.",
       "After deducting all the dues of client’s rental, the excess blocked amount will be released automatically in [3 – 4] weeks’ time. (Europcar is not responsible for any difference between the amount blocked & the amount released resulting from the fluctuation of foreign exchange rates and/or other possible banking charges).",
     ],
   },
@@ -117,7 +117,7 @@ export const data = [
   {
     heading: "17. Driving Outside UAE & Off-Road Driving",
     text: [
-      "Our vehicles are not permitted to be driven outside UAE, excluding to Oman, where the same can’t happen without our consent & permission; as we will provide client/s with needed documents after paying Oman insurance coverage Fee of AED750/- for a period of (1-7) days then AED100/- per each additional day with a maximum amount of AED1500/- .",
+      "Our vehicles are not permitted to be driven outside UAE, excluding to Oman, where the same can’t happen without our consent & permission; as we will provide client/s with needed documents after paying Oman insurance coverage Fee of D750/- for a period of (1-7) days then D100/- per each additional day with a maximum amount of D1500/- .",
       "In the event of a breakdown/accident, client is responsible to bring the vehicle to Oman - UAE Borders.",
       "Our vehicles are not permitted to be used for Safari/Fun-drive, where client will be held liable to pay all damage, necessary repairs & towing charges if he failed to adhere with the same.",
     ],
@@ -177,7 +177,7 @@ export const wordsToHighlight = [
   "UAE Driving License",
   "Note:-",
   "International Driving licence",
-  "AED1500/- for Normal Vehicle or AED3500/- For Luxury Vehicle",
+  "D1500/- for Normal Vehicle or D3500/- For Luxury Vehicle",
   "Dhs.40",
   "Dhs.100",
   "050-2378558",
@@ -185,9 +185,9 @@ export const wordsToHighlight = [
   "5%",
   "not permitted",
   "without our consent & permission",
-  "AED750",
-  "AED100",
-  "AED1500",
+  "D750",
+  "D100",
+  "D1500",
   "Dhs300",
   "Early Returns:-",
   "Rental Day",

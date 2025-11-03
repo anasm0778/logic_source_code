@@ -741,7 +741,7 @@ const NewFaq = () => {
                         <RadioButtonCheckedIcon
                           sx={{ fontSize: "10px", marginRight: "10px" }}
                         />
-                        Daily: AED 20
+                        Daily: D 20
                       </>
                     }
                   />
@@ -753,7 +753,7 @@ const NewFaq = () => {
                         <RadioButtonCheckedIcon
                           sx={{ fontSize: "10px", marginRight: "10px" }}
                         />
-                        Weekly: AED 120
+                        Weekly: D 120
                       </>
                     }
                   />
@@ -765,7 +765,7 @@ const NewFaq = () => {
                         <RadioButtonCheckedIcon
                           sx={{ fontSize: "10px", marginRight: "10px" }}
                         />
-                        Monthly: AED 150
+                        Monthly: D 150
                       </>
                     }
                   />
@@ -856,7 +856,7 @@ const NewFaq = () => {
                         <RadioButtonCheckedIcon
                           sx={{ fontSize: "10px", marginRight: "10px" }}
                         />
-                        Delivery to the airport: AED 105
+                        Delivery to the airport: D 105
                       </>
                     }
                   />
@@ -868,7 +868,7 @@ const NewFaq = () => {
                         <RadioButtonCheckedIcon
                           sx={{ fontSize: "10px", marginRight: "10px" }}
                         />
-                        Pickup from the airport: AED 105
+                        Pickup from the airport: D 105
                       </>
                     }
                   />
@@ -978,8 +978,8 @@ const NewFaq = () => {
                         How it works: When a vehicle passes through a Salik toll
                         gate, the system automatically detects the tag and
                         deducts the toll fee from the linked account or wallet.
-                        The current toll rate is 5 AED per crossing and rush
-                        hours is 7 AED per crossing.
+                        The current toll rate is 5 D per crossing and rush
+                        hours is 7 D per crossing.
                       </>
                     }
                   />
@@ -1029,7 +1029,7 @@ const NewFaq = () => {
                         />
                         How it works: Like Salik, vehicles in Abu Dhabi are
                         equipped with a Darb tag, which is linked to a Darb
-                        wallet for payment. The toll system charges 5 AED every
+                        wallet for payment. The toll system charges 5 D every
                         time a vehicle crosses a toll point.
                       </>
                     }
@@ -1091,7 +1091,7 @@ const NewFaq = () => {
                         <RadioButtonCheckedIcon
                           sx={{ fontSize: "10px", marginRight: "10px" }}
                         />
-                        A toll fee of 5 or 7 AED is deducted for each crossing.
+                        A toll fee of 5 or 7 D is deducted for each crossing.
                       </>
                     }
                   />

@@ -167,21 +167,21 @@ const CreatedCar = () => {
                       <span className="dynamicData">
                         {data?.actualPriceMonthly}
                       </span>{" "}
-                      AED
+                      D
                     </p>
                     <p>
                       Actual Price (Weekly) :{" "}
                       <span className="dynamicData">
                         {data?.actualPriceWeekly}
                       </span>{" "}
-                      AED
+                      D
                     </p>
                     <p>
                       Actual Price (Daily) :{" "}
                       <span className="dynamicData">
                         {data?.actualPriceDaily}
                       </span>{" "}
-                      AED
+                      D
                     </p>
                     <p>
                       Vehicle Type :{" "}
@@ -216,21 +216,21 @@ const CreatedCar = () => {
                       <span className="dynamicData">
                         {data?.discountedPriceMonthly}
                       </span>{" "}
-                      AED
+                      D
                     </p>
                     <p>
                       Discounted Price (Weekly) :{" "}
                       <span className="dynamicData">
                         {data?.discountedPriceWeekly}
                       </span>{" "}
-                      AED
+                      D
                     </p>
                     <p>
                       Discounted Price (Daily) :{" "}
                       <span className="dynamicData">
                         {data?.discountedPriceDaily}
                       </span>{" "}
-                      AED
+                      D
                     </p>
                     <p>
                       Brand : <span className="dynamicData">{data?.brand}</span>
@@ -254,21 +254,21 @@ const CreatedCar = () => {
                       <span className="dynamicData">
                         {data?.additionalMileageCharge}
                       </span>{" "}
-                      AED
+                      D
                     </p>
                     <p>
                       Excess Claim Charge :{" "}
                       <span className="dynamicData">
                         {data?.excessClaimCharge}
                       </span>{" "}
-                      AED
+                      D
                     </p>
                     <p>
                       Salik/Toll Charge :{" "}
                       <span className="dynamicData">
                         {data?.salikTollCharge}
                       </span>{" "}
-                      AED
+                      D
                     </p>
                   </div>
                 </Grid>
@@ -334,7 +334,7 @@ const CreatedCar = () => {
                   <Grid item xs={6} sm={6} md={6} lg={6}>
                     <p>
                       : <span className="dynamicDataTwo">{data?.cdwDaily}</span>{" "}
-                      AED
+                      D
                     </p>
                   </Grid>
                   <Grid item xs={6} sm={6} md={6} lg={6}>
@@ -344,7 +344,7 @@ const CreatedCar = () => {
                     <p>
                       :{" "}
                       <span className="dynamicDataTwo">{data?.cdwWeekly}</span>{" "}
-                      AED
+                      D
                     </p>
                   </Grid>
                   <Grid item xs={6} sm={6} md={6} lg={6}>
@@ -354,7 +354,7 @@ const CreatedCar = () => {
                     <p>
                       :{" "}
                       <span className="dynamicDataTwo">{data?.cdwMonthly}</span>{" "}
-                      AED
+                      D
                     </p>
                   </Grid>
                   <Grid item xs={6} sm={6} md={6} lg={6}>
@@ -366,7 +366,7 @@ const CreatedCar = () => {
                       <span className="dynamicDataTwo">
                         {data?.paiInsuranceDaily}
                       </span>{" "}
-                      AED
+                      D
                     </p>
                   </Grid>
                   <Grid item xs={6} sm={6} md={6} lg={6}>
@@ -378,7 +378,7 @@ const CreatedCar = () => {
                       <span className="dynamicDataTwo">
                         {data?.paiInsuranceWeekly}
                       </span>{" "}
-                      AED
+                      D
                     </p>
                   </Grid>
                   <Grid item xs={6} sm={6} md={6} lg={6}>
@@ -390,7 +390,7 @@ const CreatedCar = () => {
                       <span className="dynamicDataTwo">
                         {data?.paiInsuranceMonthly}
                       </span>{" "}
-                      AED
+                      D
                     </p>
                   </Grid>
                   <Grid item xs={6} sm={6} md={6} lg={6}>
@@ -402,7 +402,7 @@ const CreatedCar = () => {
                       <span className="dynamicDataTwo">
                         {data?.babySeatChargeDaily}
                       </span>{" "}
-                      AED
+                      D
                     </p>
                   </Grid>
                   <Grid item xs={6} sm={6} md={6} lg={6}>
@@ -414,7 +414,7 @@ const CreatedCar = () => {
                       <span className="dynamicDataTwo">
                         {data?.babySeatChargeWeekly}
                       </span>{" "}
-                      AED
+                      D
                     </p>
                   </Grid>
                   <Grid item xs={6} sm={6} md={6} lg={6}>
@@ -426,7 +426,7 @@ const CreatedCar = () => {
                       <span className="dynamicDataTwo">
                         {data?.babySeatChargeMonthly}
                       </span>{" "}
-                      AED
+                      D
                     </p>
                   </Grid>
                   <Grid item xs={6} sm={6} md={6} lg={6}>
@@ -438,7 +438,7 @@ const CreatedCar = () => {
                       <span className="dynamicDataTwo">
                         {data?.deliveryChargeDaily}
                       </span>{" "}
-                      AED
+                      D
                     </p>
                   </Grid>
                   <Grid item xs={6} sm={6} md={6} lg={6}>
@@ -450,7 +450,7 @@ const CreatedCar = () => {
                       <span className="dynamicDataTwo">
                         {data?.deliveryChargeWeekly}
                       </span>{" "}
-                      AED
+                      D
                     </p>
                   </Grid>
                   <Grid item xs={6} sm={6} md={6} lg={6}>
@@ -462,7 +462,7 @@ const CreatedCar = () => {
                       <span className="dynamicDataTwo">
                         {data?.deliveryChargeMonthly}
                       </span>{" "}
-                      AED
+                      D
                     </p>
                   </Grid>
                   <Grid item xs={6} sm={6} md={6} lg={6}>
@@ -474,7 +474,7 @@ const CreatedCar = () => {
                       <span className="dynamicDataTwo">
                         {data?.securityDeposit}
                       </span>{" "}
-                      AED
+                      D
                     </p>
                   </Grid>
                   <Grid item xs={6} sm={6} md={6} lg={6}>

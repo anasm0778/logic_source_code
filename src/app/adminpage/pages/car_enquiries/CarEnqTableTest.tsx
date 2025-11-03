@@ -10,7 +10,7 @@ import TableRow from "@mui/material/TableRow";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import Paper from "@mui/material/Paper";
 import { visuallyHidden } from "@mui/utils";
-import { Button, TextField } from "@mui/material";
+import { Button, TextField, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from "@mui/material";
 import { useRouter } from "next/navigation";
 import "../car_models/ModelsDataTable.css";
 import React, { useState, useEffect } from "react";
@@ -18,11 +18,13 @@ import axios from "axios";
 import * as XLSX from "xlsx";
 import { serverUrl } from "@/utils/helper";
 import PublishIcon from "@mui/icons-material/Publish";
+import DeleteIcon from "@mui/icons-material/Delete";
 import EnquiryModelComponent from "./EnquiryModelComponent";
 import DeleteEnquiry from "./DeleteEnquiry";
 import ReactDOM from "react-dom";
 
 interface Data {
+  bookingId: string;
   carName: string;
   startDate: string;
   endDate: string;
@@ -39,6 +41,7 @@ interface Data {
 }
 
 function createData(
+  bookingId: string,
   carName: string,
   startDate: string,
   endDate: string,
@@ -54,6 +57,7 @@ function createData(
   action: string
 ): Data {
   return {
+    bookingId,
     carName,
     startDate,
     endDate,
@@ -117,6 +121,12 @@ interface HeadCell {
 }
 
 const headCells: readonly HeadCell[] = [
+  {
+    id: "bookingId",
+    numeric: false,
+    disablePadding: false,
+    label: "Booking ID",
+  },
   {
     id: "carName",
     numeric: false,
@@ -228,8 +238,8 @@ const serverAPI = "https://logicrent.ae/api";
 const localAPI = "http://localhost:4000";
 
 export default function CarEnqTableTest() {
-  const [order, setOrder] = React.useState<Order>("desc");
-  const [orderBy, setOrderBy] = React.useState<keyof Data>("carName");
+  const [order, setOrder] = React.useState<Order>("asc");
+  const [orderBy, setOrderBy] = React.useState<keyof Data>("bookingId");
   const [selected, setSelected] = React.useState<readonly string[]>([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
@@ -237,6 +247,8 @@ export default function CarEnqTableTest() {
   const [rows, setRows] = React.useState([]);
   const [searched, setSearched] = React.useState<string>("");
   const [open, setOpen] = React.useState<boolean>(false);
+  const [deleteDialogOpen, setDeleteDialogOpen] = React.useState<boolean>(false);
+  const [isDeleting, setIsDeleting] = React.useState<boolean>(false);
 
   const [Rows, setrows] = useState([]);
   const [singleData, setSingleData] = useState({});
@@ -250,56 +262,59 @@ export default function CarEnqTableTest() {
       .get(serverUrl + "/user/getInquirys")
       .then((res) => {
         console.log(res.data.data, "dataaaaaaaaaaaaaaaaaaaaa");
-        // Reverse the order of the data before setting it
-        const reversedData = res.data.data.reverse();
-        // Filter out enquiries with status 'new', 'accepted', or 'rejected'
-        // const remainingEnquiries = reversedData.filter(
-        //   (enquiries:any) =>
-        //     enquiries.status !== "New" &&
-        //     enquiries.status !== "accepeted" &&
-        //     enquiries.status !== "rejected"
-        // );
-        setrows(reversedData);
-        setRows(reversedData);
-        console.log(reversedData, "/user/getInquirys");
+        // Sort by bookingId in ascending order (oldest/lowest first)
+        const sortedData = res.data.data.sort((a: any, b: any) => {
+          const bookingIdA = parseInt(a.bookingId) || 0;
+          const bookingIdB = parseInt(b.bookingId) || 0;
+          return bookingIdA - bookingIdB; // Ascending order
+        });
+        setrows(sortedData);
+        setRows(sortedData);
+        console.log(sortedData, "/user/getInquirys");
       })
       .catch((err) => {
-        console.log("ddddddddddddd");
+        console.log("Error fetching inquiries:", err);
       });
   }, []);
 
   const exportToExcel = () => {
     const dataForExcel = Rows.map((row: any) => [
+      row.bookingId ? row.bookingId : "N/A",
       row.bookingCreated ? row.bookingCreated : row.startDate,
-      row.bookingId ? row.bookingId : "NA",
       row._id,
       row.carName ? row.carName : row.brand + " " + row.model,
-      row.startDate,
-      row.endDate,
-      row.pickUpLoc,
-      row.dropLocation,
+      row.startDate || "N/A",
+      row.endDate || "N/A",
+      row.pickupTime || "N/A",
+      row.dropTime || "N/A",
+      row.pickUpLoc || "N/A",
+      row.dropLocation || "N/A",
       row.name,
       row.phoneNumber,
       row.email,
-      row.message,
-      row.status ? row.status : "NA",
-      row.statusChangedBy ? row.statusChangedBy : "NA",
-      row.statusMessage ? row.statusMessage : "NA",
+      row.packages || "N/A",
+      row.message || "N/A",
+      row.status ? row.status : "New",
+      row.statusChangedBy ? row.statusChangedBy : "N/A",
+      row.statusMessage ? row.statusMessage : "N/A",
     ]);
 
     const ws = XLSX.utils.aoa_to_sheet([
       [
+        "Booking ID",
         "Booking Date",
-        "Booking ID",
-        "Booking ID",
+        "Database ID",
         "Car",
-        "From",
-        "To",
+        "From Date",
+        "To Date",
+        "From Time",
+        "To Time",
         "Pickup Location",
         "Drop Location",
         "Name",
         "Phone Number",
         "Email",
+        "Package",
         "Message",
         "Status",
         "Status Changed By",
@@ -310,6 +325,43 @@ export default function CarEnqTableTest() {
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "Car Enquiries");
     XLSX.writeFile(wb, "car_enquiries.xlsx");
+  };
+
+  const handleDeleteAll = () => {
+    setDeleteDialogOpen(true);
+  };
+
+  const confirmDeleteAll = async () => {
+    setIsDeleting(true);
+    try {
+      const url = serverUrl + "/user/deleteAllInquirys";
+      console.log("Deleting all inquiries from:", url);
+      const response = await axios.delete(url, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      console.log("Delete response:", response.data);
+      if (response.data.status === 200) {
+        // Clear the local state
+        setrows([]);
+        setRows([]);
+        setDeleteDialogOpen(false);
+        alert(`Successfully deleted ${response.data.deletedCount} inquiries`);
+        // Refresh the data
+        window.location.reload();
+      } else {
+        alert("Failed to delete inquiries. Please try again.");
+      }
+    } catch (error: any) {
+      console.error("Error deleting inquiries:", error);
+      console.error("Error response:", error.response?.data);
+      console.error("Error status:", error.response?.status);
+      const errorMessage = error.response?.data?.message || error.message || "An error occurred while deleting inquiries. Please try again.";
+      alert(errorMessage);
+    } finally {
+      setIsDeleting(false);
+    }
   };
 
   const requestSearch = (searchedVal: any) => {
@@ -429,7 +481,17 @@ export default function CarEnqTableTest() {
             value={searched}
             onChange={(e: any) => requestSearch(e.target.value)}
           />
-          <div style={{ textAlign: "end" }}>
+          <div style={{ textAlign: "end", display: "flex", gap: "10px" }}>
+            <Button
+              startIcon={<DeleteIcon />}
+              variant="contained"
+              color="error"
+              sx={{ textTransform: "capitalize" }}
+              onClick={handleDeleteAll}
+              disabled={isDeleting || Rows.length === 0}
+            >
+              {isDeleting ? "Deleting..." : "Delete All"}
+            </Button>
             <Button
               startIcon={<PublishIcon />}
               variant="contained"
@@ -476,6 +538,9 @@ export default function CarEnqTableTest() {
                         }
                       >
                         <TableCell align="left">
+                          <strong>{row.bookingId || "N/A"}</strong>
+                        </TableCell>
+                        <TableCell align="left">
                           {row.carName
                             ? row.carName
                             : row.brand && row.model
@@ -485,8 +550,8 @@ export default function CarEnqTableTest() {
                         <TableCell align="left">{row.name}</TableCell>
                         <TableCell align="left">{row.phoneNumber}</TableCell>
                         <TableCell align="left">{row.email}</TableCell>
-                        <TableCell align="left">{row.startDate}</TableCell>
-                        <TableCell align="left">{row.endDate}</TableCell>
+                        <TableCell align="left">{row.startDate || "N/A"}</TableCell>
+                        <TableCell align="left">{row.endDate || "N/A"}</TableCell>
                         <TableCell
                           component="th"
                           id={labelId}
@@ -532,6 +597,41 @@ export default function CarEnqTableTest() {
           />
         </Paper>
       </Box>
+      
+      {/* Delete Confirmation Dialog */}
+      <Dialog
+        open={deleteDialogOpen}
+        onClose={() => !isDeleting && setDeleteDialogOpen(false)}
+        aria-labelledby="delete-dialog-title"
+        aria-describedby="delete-dialog-description"
+      >
+        <DialogTitle id="delete-dialog-title">
+          {"Delete All Inquiries?"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="delete-dialog-description">
+            Are you sure you want to delete all {Rows.length} inquiries? This action cannot be undone.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button 
+            onClick={() => setDeleteDialogOpen(false)} 
+            disabled={isDeleting}
+            color="primary"
+          >
+            Cancel
+          </Button>
+          <Button 
+            onClick={confirmDeleteAll} 
+            color="error" 
+            variant="contained"
+            disabled={isDeleting}
+            startIcon={<DeleteIcon />}
+          >
+            {isDeleting ? "Deleting..." : "Delete All"}
+          </Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 }
