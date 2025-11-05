@@ -269,6 +269,38 @@
     background: #f8fafc !important;
 }
 
+.car_insurance {
+    display: flex !important;
+    justify-content: space-around !important;
+    margin: 8px 0px !important;
+}
+
+.car_insurance_child {
+    font-weight: 600 !important;
+    color: #1e40af !important;
+    font-size: 11px !important;
+    font-family: system-ui !important;
+    padding: 6px 8px !important;
+    background: #ffffff !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 15px rgba(30, 64, 175, 0.2) !important;
+    border: 2px solid #3b82f6 !important;
+    transition: all 0.3s ease !important;
+    text-align: center !important;
+    min-width: 85px !important;
+    max-width: 100px !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    white-space: normal !important;
+    line-height: 1.2 !important;
+}
+
+.car_insurance_child:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(30, 64, 175, 0.3) !important;
+    background: #f8fafc !important;
+}
+
 .car_info_sec6 {
     display: flex;
     align-items: center;

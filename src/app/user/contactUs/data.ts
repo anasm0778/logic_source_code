@@ -1,21 +1,24 @@
 export const data = [
     {
-      address1: "Office No 552",
-      address2: "Dubai Business Bay",
-      address3: "Tamani Arts offices",
-      address4: "Tel: (04) 422 5301",
+      address1: "Dubai Office",
+      address2: "Office No # 554, Tamani Arts Building",
+      address3: "Business Bay, Dubai, UAE",
+      address4: "Mobile : +971 50 996 0498",
+      address5: "+971 50 996 1569",
     },
     {
-      address1: "Abu Dhabi Musaffah",
-      address2: "Shabiya",
-      address3: "ME10",
-      address4: "Tel: 025552719",
+      address1: "Abu Dhabi Office",
+      address2: "Office No # 3, Musaffah Shabiya ME12",
+      address3: "C246, UAE",
+      address4: "Mobile : +971 52 948 7046",
+      address5: "",
     },
     {
       address1: "Info@logicrent.ae",
-      address2: "+971 50 996 0498",
+      address2: "",
       address3: "",
       address4: "",
+      address5: "",
     },
   ];
   

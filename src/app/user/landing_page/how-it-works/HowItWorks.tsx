@@ -13,7 +13,7 @@ const HowItWorks = () => {
           <h3>
             How It{" "}
             <Link
-              href="https://www.szgmc.gov.ae/"
+              href=""
               target="_blank"
               rel="noopener noreferrer"
               style={{ color: "#01437d", textDecoration: "none" }}

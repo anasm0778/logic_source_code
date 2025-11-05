@@ -23,6 +23,7 @@ import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import CloseIcon from "@mui/icons-material/Close";
 import CustomizedTooltips from "@/utils/reusableTooltip";
 import Image from "next/image";
+import { getValidImageUrl } from "@/utils/helper";
 
 interface SuvCars {
   data: any;
@@ -153,8 +154,8 @@ const SuvCars: React.FC<SuvCars> = ({ data, phoneData }) => {
                                 </Typography>
                               )}
                               <Image
-                                alt={car.brand}
-                                src={car.externalImage?.[0] || car.image}
+                                alt={car.brand || "Car image"}
+                                src={getValidImageUrl(car.externalImage?.[0] || car.image, "/placeholder-car.png")}
                                 height={200}
                                 width={200}
                               />

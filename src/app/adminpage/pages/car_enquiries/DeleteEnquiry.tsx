@@ -14,14 +14,16 @@ const DeleteEnquiry: React.FC<{ details: any }> = (props) => {
         .delete(serverUrl + `/user/deleteInquiry/${details._id}`)
         .then((res) => {
           console.log(res, "delete enquiry successfully");
-          debugger
-          Swal.fire("Deleted!", "Enquiry has been deleted.", "success");
+          Swal.fire("Deleted!", "Enquiry has been deleted.", "success").then(() => {
+            // Refresh the page after successful deletion
+            window.location.reload();
+          });
           setDeleting(false);
         })
         .catch((err) => {
           console.log("Error deleting row:", err);
+          Swal.fire("Error!", "Failed to delete enquiry. Please try again.", "error");
           setDeleting(false);
-          debugger
         });
     }
   }, [deleting, details._id]);
@@ -46,7 +48,11 @@ const DeleteEnquiry: React.FC<{ details: any }> = (props) => {
     <>
       <DeleteIcon
         color="error"
-        onClick={handleDelete}
+        onClick={(e) => {
+          e.stopPropagation();
+          handleDelete();
+        }}
+        sx={{ cursor: "pointer" }}
       />
     </>
   );

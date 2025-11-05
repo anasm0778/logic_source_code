@@ -71,6 +71,9 @@ const Footer: React.FC<FooterProps> = ({ data }) => {
                       }
                       if (item.label === "FAQs") {
                         router.push("/pages/newFaq");
+                      }
+                      if (item.label === "Service") {
+                        router.push("/pages/services");
                       } else if (item.sectionId) {
                         scrollToSection(item.sectionId);
                       }
@@ -126,11 +129,24 @@ const Footer: React.FC<FooterProps> = ({ data }) => {
             <div className="link_two">
               <h4>CONTACT</h4>
               <ul>
-                <li>
-                  Al Mihad St, Mohamed Bin Zayed City, ME-10, Abu Dhabi, UAE
+                <li style={{ fontWeight: "bold", marginBottom: "8px" }}>Dubai Office</li>
+                <li style={{ marginBottom: "4px" }}>
+                  Office No # 554, Tamani Arts Building, Business Bay, Dubai, UAE
                 </li>
-                <li onClick={() => window.open('mailto:Info@logicrent.ae', '_blank')}>Info@logicrent.ae</li>
-                <li onClick={() => window.open('tel:+971509960498', '_blank')}>+971 50 996 0498</li>
+                <li onClick={() => window.open('tel:+971509960498', '_blank')} style={{ cursor: "pointer", marginBottom: "4px" }}>
+                  Mobile : +971 50 996 0498
+                </li>
+                <li onClick={() => window.open('tel:+971509961569', '_blank')} style={{ cursor: "pointer", marginBottom: "12px" }}>
+                  +971 50 996 1569
+                </li>
+                <li style={{ fontWeight: "bold", marginBottom: "8px" }}>Abu Dhabi Office</li>
+                <li style={{ marginBottom: "4px" }}>
+                  Office No # 3, Musaffah Shabiya ME12, C246, UAE
+                </li>
+                <li onClick={() => window.open('tel:+971529487046', '_blank')} style={{ cursor: "pointer", marginBottom: "8px" }}>
+                  Mobile : +971 52 948 7046
+                </li>
+                <li onClick={() => window.open('mailto:Info@logicrent.ae', '_blank')} style={{ cursor: "pointer" }}>Info@logicrent.ae</li>
               </ul>
             </div>
           </Grid>
