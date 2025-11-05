@@ -23,6 +23,7 @@ import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import { styled } from "@mui/material/styles";
 import Tooltip, { TooltipProps, tooltipClasses } from "@mui/material/Tooltip";
 import Image from "next/image";
+import { getValidImageUrl } from "@/utils/helper";
 import SwipeableViews from "react-swipeable-views";
 
 interface TabPanelProps {
@@ -471,7 +472,7 @@ const CreatedCar = () => {
                           }}
                         >
                           <Image
-                            src={item.image}
+                            src={getValidImageUrl(item.image, "/placeholder-icon.png")}
                             alt={item.title}
                             width={25}
                             height={25}

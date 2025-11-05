@@ -12,6 +12,10 @@ import {
   Tooltip,
   Typography,
   useTheme,
+  FormControl,
+  Select,
+  MenuItem,
+  InputLabel,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import "../../../adminpage/pages/createdCars/CreatedCars.css";
@@ -20,6 +24,7 @@ import axios from "axios";
 import { serverUrl } from "@/utils/helper";
 import NavFooter from "@/utils/Na_Fo";
 import Image from "next/image";
+import { getValidImageUrl } from "@/utils/helper";
 import SwipeableViews from "react-swipeable-views";
 import DriverEligibility from "@/components/DriverEligibility";
 import {
@@ -232,6 +237,35 @@ const CreatedCar = () => {
     nineMonthPriceOf5000Km: 0,
   });
 
+  // Country codes mapping for display with flags
+  const countryCodesMap: { [key: string]: { code: string; flag: string; name: string } } = {
+    "+971": { code: "+971", flag: "🇦🇪", name: "UAE" },
+    "+91": { code: "+91", flag: "🇮🇳", name: "India" },
+    "+1": { code: "+1", flag: "🇺🇸", name: "USA" },
+    "+44": { code: "+44", flag: "🇬🇧", name: "UK" },
+    "+966": { code: "+966", flag: "🇸🇦", name: "Saudi Arabia" },
+    "+92": { code: "+92", flag: "🇵🇰", name: "Pakistan" },
+    "+880": { code: "+880", flag: "🇧🇩", name: "Bangladesh" },
+    "+973": { code: "+973", flag: "🇧🇭", name: "Bahrain" },
+    "+974": { code: "+974", flag: "🇶🇦", name: "Qatar" },
+    "+968": { code: "+968", flag: "🇴🇲", name: "Oman" },
+    "+965": { code: "+965", flag: "🇰🇼", name: "Kuwait" },
+    "+20": { code: "+20", flag: "🇪🇬", name: "Egypt" },
+    "+234": { code: "+234", flag: "🇳🇬", name: "Nigeria" },
+    "+27": { code: "+27", flag: "🇿🇦", name: "South Africa" },
+    "+33": { code: "+33", flag: "🇫🇷", name: "France" },
+    "+49": { code: "+49", flag: "🇩🇪", name: "Germany" },
+    "+61": { code: "+61", flag: "🇦🇺", name: "Australia" },
+    "+86": { code: "+86", flag: "🇨🇳", name: "China" },
+    "+81": { code: "+81", flag: "🇯🇵", name: "Japan" },
+    "+82": { code: "+82", flag: "🇰🇷", name: "South Korea" },
+    "+65": { code: "+65", flag: "🇸🇬", name: "Singapore" },
+    "+60": { code: "+60", flag: "🇲🇾", name: "Malaysia" },
+    "+66": { code: "+66", flag: "🇹🇭", name: "Thailand" },
+    "+62": { code: "+62", flag: "🇮🇩", name: "Indonesia" },
+    "+63": { code: "+63", flag: "🇵🇭", name: "Philippines" },
+  };
+
   const [selectedPrice, setSelectedPrice] = useState(0); // state for selected price
   const [selectedInsuarance, setSelectedInsuarance] = useState(0); // state for selected insuarance
   const [insuranceBoxColor, setInsuranceBoxColor] = useState(""); // state for insuarance box color
@@ -245,6 +279,7 @@ const CreatedCar = () => {
     typeof window !== "undefined" ? sessionStorage.getItem("subscription") ?? "" : ""
   ); // state for daily weekly box
   const [userfullName, setUserFullName] = useState("");
+  const [countryCode, setCountryCode] = useState("+971"); // Default to UAE
   const [userphoneNumber, setUserPhoneNumber] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [userCity, setUserCity] = useState("");
@@ -776,7 +811,7 @@ const CreatedCar = () => {
           endDate: userEndDate,
           pickUpLoc: userCity,
           dropLocation: userCity,
-          phoneNumber: userphoneNumber,
+          phoneNumber: `${countryCode}${userphoneNumber}`,
           message: userCity,
           name: userfullName,
           email: userEmail,
@@ -937,7 +972,7 @@ const CreatedCar = () => {
           endDate: userEndDate,
           pickUpLoc: userCity,
           dropLocation: userCity,
-          phoneNumber: userphoneNumber,
+          phoneNumber: `${countryCode}${userphoneNumber}`,
           message: userCity,
           name: userfullName,
           email: userEmail,
@@ -1057,7 +1092,7 @@ const CreatedCar = () => {
       value: userphoneNumber,
       onChange: (e: any) => setUserPhoneNumber(e.target.value),
       errors: !userphoneNumber && error !== "",
-      placeholder: "No +9710000000000",
+      placeholder: "Phone Number",
       type: "text",
       variant: "outlined",
     },
@@ -1208,7 +1243,7 @@ const CreatedCar = () => {
                         <Grid key={item.title} item xs={6} sm={2}>
                           <CarDetailscontentBox>
                             <Image
-                              src={item.image}
+                              src={getValidImageUrl(item.image, "/placeholder-icon.png")}
                               alt={item.title}
                               width={25}
                               height={25}
@@ -2078,18 +2113,297 @@ const CreatedCar = () => {
                 )}
                 <Box sx={{ marginTop: "1rem" }}>
                   <Grid container spacing={1}>
-                    {textFieldData.map((item, index) => (
-                      <Grid item xs={6} sm={6} key={index}>
-                        <TextFieldComp
-                          placeholder={item.placeholder}
-                          value={item.value}
-                          onChange={item.onChange}
-                          errors={item.errors}
-                          type={item.type}
-                          variant={item.variant}
-                        />
-                      </Grid>
-                    ))}
+                    {textFieldData.map((item, index) => {
+                      // Render separate country code and phone number fields
+                      if (item.placeholder === "Phone Number") {
+                        return (
+                          <Grid item xs={6} sm={6} key={`phone-${index}`}>
+                            <Grid container spacing={0}>
+                              {/* Country Code Selector */}
+                              <Grid item xs={6} sm={6}>
+                                <FormControl fullWidth size="small" variant="outlined" key={`country-code-${countryCode}`}>
+                                  <Select
+                                    value={countryCode}
+                                    onChange={(e) => {
+                                      const value = e.target.value as string;
+                                      setCountryCode(value);
+                                      console.log("Country code selected:", value); // Debug log
+                                    }}
+                                    renderValue={(selected) => {
+                                      // Find the matching MenuItem label with flag
+                                      const countryInfo = countryCodesMap[selected as string];
+                                      if (countryInfo) {
+                                        return (
+                                          <Box sx={{ display: "flex", alignItems: "center", gap: 0.5, minWidth: 0 }}>
+                                            <span style={{ fontSize: "18px", flexShrink: 0 }}>{countryInfo.flag}</span>
+                                            <span style={{ whiteSpace: "nowrap", overflow: "visible", textOverflow: "clip" }}>{countryInfo.code}</span>
+                                          </Box>
+                                        );
+                                      }
+                                      return <span>{selected}</span>;
+                                    }}
+                                    MenuProps={{
+                                      PaperProps: {
+                                        style: {
+                                          maxHeight: 300,
+                                        },
+                                      },
+                                    }}
+                                    sx={{
+                                      backgroundColor: "#f8f9fa",
+                                      borderRadius: "8px 0 0 8px",
+                                      fontSize: "14px",
+                                      fontWeight: 500,
+                                      color: "#01437D",
+                                      width: "100%",
+                                      minWidth: "120px",
+                                      height: "40px",
+                                      '& .MuiOutlinedInput-notchedOutline': {
+                                        borderColor: "#e0e0e0",
+                                        borderRight: "none",
+                                      },
+                                      '&:hover .MuiOutlinedInput-notchedOutline': {
+                                        borderColor: "#01437D",
+                                        borderRight: "none",
+                                      },
+                                      '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                                        borderColor: "#01437D",
+                                        borderRight: "none",
+                                      },
+                                      '& .MuiSelect-select': {
+                                        padding: "8px 50px 8px 14px !important",
+                                        display: "flex",
+                                        alignItems: "center",
+                                        color: "#01437D !important",
+                                        opacity: "1 !important",
+                                        paddingRight: "50px !important",
+                                        overflow: "visible !important",
+                                        textOverflow: "clip",
+                                        whiteSpace: "nowrap",
+                                        minWidth: 0,
+                                        height: "40px",
+                                        boxSizing: "border-box",
+                                      },
+                                      '& .MuiSelect-icon': {
+                                        color: "#01437D",
+                                        right: "12px !important",
+                                        position: "absolute",
+                                      },
+                                      '& .MuiOutlinedInput-root': {
+                                        paddingRight: "0px !important",
+                                        borderRadius: "8px 0 0 8px",
+                                        height: "40px",
+                                        backgroundColor: "#f8f9fa",
+                                      },
+                                    }}
+                                  >
+                                    <MenuItem value="+971">
+                                      <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                                        <span style={{ fontSize: "18px" }}>🇦🇪</span>
+                                        <span>+971 (UAE)</span>
+                                      </Box>
+                                    </MenuItem>
+                                    <MenuItem value="+91">
+                                      <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                                        <span style={{ fontSize: "18px" }}>🇮🇳</span>
+                                        <span>+91 (India)</span>
+                                      </Box>
+                                    </MenuItem>
+                                    <MenuItem value="+1">
+                                      <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                                        <span style={{ fontSize: "18px" }}>🇺🇸</span>
+                                        <span>+1 (USA)</span>
+                                      </Box>
+                                    </MenuItem>
+                                    <MenuItem value="+44">
+                                      <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                                        <span style={{ fontSize: "18px" }}>🇬🇧</span>
+                                        <span>+44 (UK)</span>
+                                      </Box>
+                                    </MenuItem>
+                                    <MenuItem value="+966">
+                                      <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                                        <span style={{ fontSize: "18px" }}>🇸🇦</span>
+                                        <span>+966 (Saudi Arabia)</span>
+                                      </Box>
+                                    </MenuItem>
+                                    <MenuItem value="+92">
+                                      <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                                        <span style={{ fontSize: "18px" }}>🇵🇰</span>
+                                        <span>+92 (Pakistan)</span>
+                                      </Box>
+                                    </MenuItem>
+                                    <MenuItem value="+880">
+                                      <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                                        <span style={{ fontSize: "18px" }}>🇧🇩</span>
+                                        <span>+880 (Bangladesh)</span>
+                                      </Box>
+                                    </MenuItem>
+                                    <MenuItem value="+973">
+                                      <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                                        <span style={{ fontSize: "18px" }}>🇧🇭</span>
+                                        <span>+973 (Bahrain)</span>
+                                      </Box>
+                                    </MenuItem>
+                                    <MenuItem value="+974">
+                                      <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                                        <span style={{ fontSize: "18px" }}>🇶🇦</span>
+                                        <span>+974 (Qatar)</span>
+                                      </Box>
+                                    </MenuItem>
+                                    <MenuItem value="+968">
+                                      <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                                        <span style={{ fontSize: "18px" }}>🇴🇲</span>
+                                        <span>+968 (Oman)</span>
+                                      </Box>
+                                    </MenuItem>
+                                    <MenuItem value="+965">
+                                      <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                                        <span style={{ fontSize: "18px" }}>🇰🇼</span>
+                                        <span>+965 (Kuwait)</span>
+                                      </Box>
+                                    </MenuItem>
+                                    <MenuItem value="+20">
+                                      <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                                        <span style={{ fontSize: "18px" }}>🇪🇬</span>
+                                        <span>+20 (Egypt)</span>
+                                      </Box>
+                                    </MenuItem>
+                                    <MenuItem value="+234">
+                                      <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                                        <span style={{ fontSize: "18px" }}>🇳🇬</span>
+                                        <span>+234 (Nigeria)</span>
+                                      </Box>
+                                    </MenuItem>
+                                    <MenuItem value="+27">
+                                      <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                                        <span style={{ fontSize: "18px" }}>🇿🇦</span>
+                                        <span>+27 (South Africa)</span>
+                                      </Box>
+                                    </MenuItem>
+                                    <MenuItem value="+33">
+                                      <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                                        <span style={{ fontSize: "18px" }}>🇫🇷</span>
+                                        <span>+33 (France)</span>
+                                      </Box>
+                                    </MenuItem>
+                                    <MenuItem value="+49">
+                                      <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                                        <span style={{ fontSize: "18px" }}>🇩🇪</span>
+                                        <span>+49 (Germany)</span>
+                                      </Box>
+                                    </MenuItem>
+                                    <MenuItem value="+61">
+                                      <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                                        <span style={{ fontSize: "18px" }}>🇦🇺</span>
+                                        <span>+61 (Australia)</span>
+                                      </Box>
+                                    </MenuItem>
+                                    <MenuItem value="+86">
+                                      <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                                        <span style={{ fontSize: "18px" }}>🇨🇳</span>
+                                        <span>+86 (China)</span>
+                                      </Box>
+                                    </MenuItem>
+                                    <MenuItem value="+81">
+                                      <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                                        <span style={{ fontSize: "18px" }}>🇯🇵</span>
+                                        <span>+81 (Japan)</span>
+                                      </Box>
+                                    </MenuItem>
+                                    <MenuItem value="+82">
+                                      <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                                        <span style={{ fontSize: "18px" }}>🇰🇷</span>
+                                        <span>+82 (South Korea)</span>
+                                      </Box>
+                                    </MenuItem>
+                                    <MenuItem value="+65">
+                                      <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                                        <span style={{ fontSize: "18px" }}>🇸🇬</span>
+                                        <span>+65 (Singapore)</span>
+                                      </Box>
+                                    </MenuItem>
+                                    <MenuItem value="+60">
+                                      <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                                        <span style={{ fontSize: "18px" }}>🇲🇾</span>
+                                        <span>+60 (Malaysia)</span>
+                                      </Box>
+                                    </MenuItem>
+                                    <MenuItem value="+66">
+                                      <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                                        <span style={{ fontSize: "18px" }}>🇹🇭</span>
+                                        <span>+66 (Thailand)</span>
+                                      </Box>
+                                    </MenuItem>
+                                    <MenuItem value="+62">
+                                      <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                                        <span style={{ fontSize: "18px" }}>🇮🇩</span>
+                                        <span>+62 (Indonesia)</span>
+                                      </Box>
+                                    </MenuItem>
+                                    <MenuItem value="+63">
+                                      <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                                        <span style={{ fontSize: "18px" }}>🇵🇭</span>
+                                        <span>+63 (Philippines)</span>
+                                      </Box>
+                                    </MenuItem>
+                                  </Select>
+                                </FormControl>
+                              </Grid>
+                              {/* Phone Number Input */}
+                              <Grid item xs={6} sm={6}>
+                                <Box
+                                  sx={{
+                                    '& .MuiOutlinedInput-root': {
+                                      borderRadius: "0 8px 8px 0",
+                                      backgroundColor: "#f8f9fa",
+                                      height: "40px",
+                                      '& fieldset': {
+                                        borderLeft: "none",
+                                        borderColor: "#e0e0e0",
+                                      },
+                                      '&:hover fieldset': {
+                                        borderLeft: "none",
+                                        borderColor: "#01437D",
+                                      },
+                                      '&.Mui-focused fieldset': {
+                                        borderLeft: "none",
+                                        borderColor: "#01437D",
+                                      },
+                                    },
+                                    '& .MuiInputBase-input': {
+                                      height: "40px",
+                                      boxSizing: "border-box",
+                                    },
+                                  }}
+                                >
+                                  <TextFieldComp
+                                    placeholder="Phone Number"
+                                    value={userphoneNumber}
+                                    onChange={(e: any) => setUserPhoneNumber(e.target.value)}
+                                    errors={!userphoneNumber && error !== ""}
+                                    type="text"
+                                    variant="outlined"
+                                  />
+                                </Box>
+                              </Grid>
+                            </Grid>
+                          </Grid>
+                        );
+                      }
+                      return (
+                        <Grid item xs={6} sm={6} key={index}>
+                          <TextFieldComp
+                            placeholder={item.placeholder}
+                            value={item.value}
+                            onChange={item.onChange}
+                            errors={item.errors}
+                            type={item.type}
+                            variant={item.variant}
+                          />
+                        </Grid>
+                      );
+                    })}
                   </Grid>
                 </Box>
                 {error && (

@@ -45,24 +45,47 @@ const CarContent: React.FC<CarContentType> = ({ data = [], phoneData }) => {
   const [carNameSearch, setCarNameSearch] = useState<string>('');
   const router = useRouter();
 
+  // Function to calculate max price based on selected period
+  const calculateMaxPrice = (period: string) => {
+    if (!data || data.length === 0) return 1000;
+    
+    const prices: number[] = [];
+    data.forEach((car: any) => {
+      let price = 0;
+      switch (period) {
+        case 'daily':
+          price = Number(car.discountedPriceDaily) || 0;
+          break;
+        case 'weekly':
+          price = Number(car.discountedPriceWeekly) || 0;
+          break;
+        case 'monthly':
+          price = Number(car.discountedPriceMonthly) || 0;
+          break;
+      }
+      if (price > 0) prices.push(price);
+    });
+    
+    return prices.length > 0 ? Math.max(...prices) : 1000;
+  };
+
   useEffect(() => {
     if (data && data.length > 0) {
       setLoader(false);
       setFilteredData(data);
-      
-      // Calculate max price for input field
-      const calculatedMaxPrice = Math.max(
-        ...data.map((car: any) => 
-          Math.max(
-            car.discountedPriceDaily || 0,
-            car.discountedPriceWeekly || 0,
-            car.discountedPriceMonthly || 0
-          )
-        )
-      );
-      setMaxPrice(Math.ceil(calculatedMaxPrice / 100) * 100); // Round up to nearest 100
+      // Initialize max price on first load
+      const calculatedMaxPrice = calculateMaxPrice(selectedPeriod);
+      setMaxPrice(calculatedMaxPrice);
     }
   }, [data]);
+
+  // Update max price when period changes
+  useEffect(() => {
+    if (data && data.length > 0) {
+      const calculatedMaxPrice = calculateMaxPrice(selectedPeriod);
+      setMaxPrice(calculatedMaxPrice);
+    }
+  }, [selectedPeriod, data]);
 
   // Search function to filter cars based on all criteria
   const handleSearch = () => {
@@ -113,13 +136,9 @@ const CarContent: React.FC<CarContentType> = ({ data = [], phoneData }) => {
   // Clear filters function
   const handleClearFilters = () => {
     setMinPrice(0);
-    setMaxPrice(Math.ceil(Math.max(...data.map((car: any) => 
-      Math.max(
-        car.discountedPriceDaily || 0,
-        car.discountedPriceWeekly || 0,
-        car.discountedPriceMonthly || 0
-      )
-    )) / 100) * 100);
+    // Calculate max price dynamically based on selected period
+    const calculatedMaxPrice = calculateMaxPrice(selectedPeriod);
+    setMaxPrice(calculatedMaxPrice);
     setSelectedPeriod('daily');
     setSelectedBrand('');
     setSelectedCategory('');
@@ -425,12 +444,45 @@ const CarContent: React.FC<CarContentType> = ({ data = [], phoneData }) => {
               <Grid item xs={12} sm={3}>
                 <TextField
                   label="Min Price (D)"
-                  type="number"
-                  value={minPrice}
-                  onChange={(e) => setMinPrice(Number(e.target.value))}
+                  type="text"
+                  value={minPrice === 0 ? '' : minPrice.toString()}
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    // Handle empty input
+                    if (value === '' || value === null || value === undefined) {
+                      setMinPrice(0);
+                      return;
+                    }
+                    
+                    // Remove leading zeros by converting to number and back to string
+                    // This ensures "033" becomes "33" immediately
+                    const trimmedValue = value.replace(/^0+/, '') || '0';
+                    const numValue = parseInt(trimmedValue, 10);
+                    
+                    // Only update if it's a valid number and non-negative
+                    if (!isNaN(numValue) && numValue >= 0) {
+                      setMinPrice(numValue);
+                    }
+                  }}
+                  onBlur={(e) => {
+                    // Ensure we don't have leading zeros on blur
+                    const value = e.target.value;
+                    if (value && value !== '') {
+                      const numValue = parseInt(value.replace(/^0+/, '') || '0', 10);
+                      if (!isNaN(numValue) && numValue >= 0) {
+                        setMinPrice(numValue);
+                      }
+                    } else {
+                      setMinPrice(0);
+                    }
+                  }}
                   variant="outlined"
                   size="small"
                   fullWidth
+                  inputProps={{
+                    inputMode: 'numeric',
+                    pattern: '[0-9]*',
+                  }}
                   sx={{
                     '& .MuiOutlinedInput-root': {
                       borderRadius: 2,
@@ -450,13 +502,30 @@ const CarContent: React.FC<CarContentType> = ({ data = [], phoneData }) => {
               </Grid>
               <Grid item xs={12} sm={3}>
                 <TextField
-                  label="Max Price (D)"
+                  label={`Max Price (D) - Max: ${calculateMaxPrice(selectedPeriod)}`}
                   type="number"
                   value={maxPrice}
-                  onChange={(e) => setMaxPrice(Number(e.target.value))}
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    const numValue = Number(value);
+                    const maxAllowed = calculateMaxPrice(selectedPeriod);
+                    
+                    // Only update if it's a valid number and within bounds
+                    if (!isNaN(numValue) && numValue >= 0 && numValue <= maxAllowed) {
+                      setMaxPrice(numValue);
+                    } else if (numValue > maxAllowed) {
+                      // If user enters value greater than max, set to max
+                      setMaxPrice(maxAllowed);
+                    }
+                  }}
                   variant="outlined"
                   size="small"
                   fullWidth
+                  inputProps={{
+                    min: 0,
+                    max: calculateMaxPrice(selectedPeriod),
+                    step: 1,
+                  }}
                   sx={{
                     '& .MuiOutlinedInput-root': {
                       borderRadius: 2,
@@ -684,6 +753,20 @@ const CarContent: React.FC<CarContentType> = ({ data = [], phoneData }) => {
                           <h5>{car.transmission}</h5>
                         </div>
                       </div>
+                      <div className="car_insurance">
+                        <div className="car_insurance_child">
+                          <div style={{ fontSize: '9px', color: '#666', marginBottom: '2px' }}>Insurance for Day</div>
+                          <div style={{ fontWeight: 'bold', fontSize: '11px' }}>D {car.cdwDaily || 0}</div>
+                        </div>
+                        <div className="car_insurance_child">
+                          <div style={{ fontSize: '9px', color: '#666', marginBottom: '2px' }}>Insurance for Week</div>
+                          <div style={{ fontWeight: 'bold', fontSize: '11px' }}>D {car.cdwWeekly || 0}</div>
+                        </div>
+                        <div className="car_insurance_child">
+                          <div style={{ fontSize: '9px', color: '#666', marginBottom: '2px' }}>Insurance for Month</div>
+                          <div style={{ fontWeight: 'bold', fontSize: '11px' }}>D {car.cdwMonthly || 0}</div>
+                        </div>
+                      </div>
                     </CardContent>
 
                     <div className="car_info_sec6">
@@ -728,24 +811,6 @@ const CarContent: React.FC<CarContentType> = ({ data = [], phoneData }) => {
                         </Button>
                       </div>
                     </div>
-                    <CustomizedTooltips
-                      title={`Basic insurance is comprehensive and will cover non-fault accidents only. There are excess charges for fault accidents of D ${car.securityDeposit}. We recommend you buy full insurance (CDW) to avoid these charges.`}
-                    >
-                      <div className="int_icon" style={{ padding: "0px 13px" }}>
-                        <CheckIcon
-                          sx={{
-                            color: "green",
-                            marginRight: "5px",
-                          }}
-                        />
-                        <p className="carInfoPara">
-                          Full Insurrance: D {car.cdwDaily}
-                          /Day, D {car.cdwWeekly}
-                          /Week, D {car.cdwMonthly}
-                          /Month
-                        </p>
-                      </div>
-                    </CustomizedTooltips>
                   </CardActionArea>
                 </Card>
               </Grid>

@@ -118,7 +118,8 @@ const ReqDocs = () => {
                     spacing={2}
                     sx={{
                       alignItems: "center",
-                      height: { xs: "22rem", md: "20rem" },
+                      height: { xs: "auto", md: "auto" },
+                      minHeight: { xs: "22rem", md: "20rem" },
                     }}
                   >
                     <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
@@ -165,19 +166,7 @@ const ReqDocs = () => {
                           }}
                         />
                         <p className="int_text_para">
-                          Home Country Driving License
-                        </p>
-                      </div>
-                      <div className="int_icon_two">
-                        <CheckCircleIcon
-                          sx={{
-                            color: "#10b981",
-                            fontSize: "1.2rem",
-                            marginRight: "12px",
-                          }}
-                        />
-                        <p className="int_text_para">
-                          International Driving Permit (IDP)
+                          Home Driving license / International Driving license
                         </p>
                       </div>
                     </Grid>

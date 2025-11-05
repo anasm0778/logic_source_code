@@ -54,6 +54,11 @@ const ContactUs = () => {
                     <Typography variant="subtitle1" sx={styles.typography3}>
                       {item.address4}
                     </Typography>
+                    {item.address5 && (
+                      <Typography variant="subtitle1" sx={styles.typography3}>
+                        {item.address5}
+                      </Typography>
+                    )}
                   </Box>
                 </Box>
               </Box>

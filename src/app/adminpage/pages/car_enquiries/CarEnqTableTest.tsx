@@ -169,12 +169,12 @@ const headCells: readonly HeadCell[] = [
     disablePadding: true,
     label: "Enquiry Date",
   },
-  // {
-  //   id: "action",
-  //   numeric: false,
-  //   disablePadding: false,
-  //   label: "Action",
-  // },
+  {
+    id: "action",
+    numeric: false,
+    disablePadding: false,
+    label: "Action",
+  },
 ];
 
 interface EnhancedTableProps {
@@ -562,9 +562,9 @@ export default function CarEnqTableTest() {
                             ? extractDate(row.bookingCreated)
                             : "02-03-2024"}
                         </TableCell>
-                        {/* <TableCell align="left">
+                        <TableCell align="left" onClick={(e) => e.stopPropagation()}>
                           <DeleteEnquiry details={row} />
-                        </TableCell> */}
+                        </TableCell>
                       </TableRow>
                     );
                   })}

@@ -5,7 +5,7 @@ import Image from "next/image";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import axios from "axios";
-import { serverUrl } from "@/utils/helper";
+import { serverUrl, getImageUrl } from "@/utils/helper";
 
 const BANNER_HEIGHT = "70vh";    // 70% of viewport height
 const ARROW_COLOR  = "#ffffff";  // <- white arrows
@@ -164,8 +164,8 @@ const CarouselComponent: React.FC = () => {
               }}
             >
               <Image
-                src={`${serverUrl}${banner.imageUrl}`}
-                alt={`${banner.altText} - Logic Rent A Car Dubai - Affordable Car Rental No Deposit - ${banner.name}`}
+                src={getImageUrl(banner.imageUrl, "/banner-injaz-1.jpg")}
+                alt={`${banner.altText || banner.name} - Logic Rent A Car Dubai - Affordable Car Rental No Deposit`}
                 title={`${banner.name} - Best Car Rental Dubai - No Deposit Required`}
                 fill
                 priority

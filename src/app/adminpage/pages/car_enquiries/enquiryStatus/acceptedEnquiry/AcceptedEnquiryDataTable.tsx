@@ -11,7 +11,8 @@ import TableRow from "@mui/material/TableRow";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import Paper from "@mui/material/Paper";
 import { visuallyHidden } from "@mui/utils";
-import { Button, TextField, Typography } from "@mui/material";
+import { Button, TextField, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Typography } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { useRouter } from "next/navigation";
 import "../../../car_models/ModelsDataTable.css";
 import { useState, useEffect } from "react";
@@ -23,6 +24,7 @@ import EnquiryModelComponent from "../../EnquiryModelComponent";
 import DeleteEnquiry from "../../DeleteEnquiry";
 
 interface Data {
+  bookingId: string;
   carName: string;
   startDate: string;
   endDate: string;
@@ -121,6 +123,12 @@ interface HeadCell {
 
 const headCells: readonly HeadCell[] = [
   {
+    id: "bookingId",
+    numeric: false,
+    disablePadding: false,
+    label: "Booking ID",
+  },
+  {
     id: "carName",
     numeric: false,
     disablePadding: false,
@@ -161,6 +169,12 @@ const headCells: readonly HeadCell[] = [
     numeric: false,
     disablePadding: true,
     label: "Enquiry Date",
+  },
+  {
+    id: "action",
+    numeric: false,
+    disablePadding: false,
+    label: "Action",
   },
 ];
 
@@ -230,9 +244,11 @@ export default function AcceptedEnquiryDataTable() {
   const [selected, setSelected] = React.useState<readonly string[]>([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [rows, setRows] = React.useState([]);
   const [searched, setSearched] = React.useState<string>("");
+  const [deleteDialogOpen, setDeleteDialogOpen] = React.useState<boolean>(false);
+  const [isDeleting, setIsDeleting] = React.useState<boolean>(false);
 
   const [Rows, setrows] = useState([]);
 
@@ -305,6 +321,37 @@ export default function AcceptedEnquiryDataTable() {
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "Car Enquiries");
     XLSX.writeFile(wb, "accepted_enquiries.xlsx");
+  };
+
+  const handleDeleteAll = () => {
+    setDeleteDialogOpen(true);
+  };
+
+  const confirmDeleteAll = async () => {
+    setIsDeleting(true);
+    try {
+      const url = serverUrl + "/user/deleteAllInquirys";
+      const response = await axios.delete(url, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      if (response.data.status === 200) {
+        setrows([]);
+        setRows([]);
+        setDeleteDialogOpen(false);
+        alert(`Successfully deleted ${response.data.deletedCount} enquiries`);
+        window.location.reload();
+      } else {
+        alert("Failed to delete enquiries. Please try again.");
+      }
+    } catch (error: any) {
+      console.error("Error deleting enquiries:", error);
+      const errorMessage = error.response?.data?.message || error.message || "An error occurred while deleting enquiries. Please try again.";
+      alert(errorMessage);
+    } finally {
+      setIsDeleting(false);
+    }
   };
 
   const requestSearch = (searchedVal: any) => {
@@ -424,7 +471,17 @@ export default function AcceptedEnquiryDataTable() {
             value={searched}
             onChange={(e: any) => requestSearch(e.target.value)}
           />
-          <div style={{ textAlign: "end" }}>
+          <div style={{ textAlign: "end", display: "flex", gap: "10px" }}>
+            <Button
+              startIcon={<DeleteIcon />}
+              variant="contained"
+              color="error"
+              sx={{ textTransform: "capitalize" }}
+              onClick={handleDeleteAll}
+              disabled={isDeleting || Rows.length === 0}
+            >
+              {isDeleting ? "Deleting..." : "Delete All"}
+            </Button>
             <Button
               startIcon={<PublishIcon />}
               variant="contained"
@@ -466,6 +523,9 @@ export default function AcceptedEnquiryDataTable() {
                         sx={{ cursor: "pointer" }}
                       >
                         <TableCell align="left">
+                          <strong>{row.bookingId || "N/A"}</strong>
+                        </TableCell>
+                        <TableCell align="left">
                           {row.carName
                             ? row.carName
                             : row.brand && row.model
@@ -477,8 +537,8 @@ export default function AcceptedEnquiryDataTable() {
                         <TableCell size="small" align="left">
                           {row.email}
                         </TableCell>
-                        <TableCell align="left">{row.startDate}</TableCell>
-                        <TableCell align="left">{row.endDate}</TableCell>
+                        <TableCell align="left">{row.startDate || "N/A"}</TableCell>
+                        <TableCell align="left">{row.endDate || "N/A"}</TableCell>
                         <TableCell
                           component="th"
                           id={labelId}
@@ -489,10 +549,9 @@ export default function AcceptedEnquiryDataTable() {
                             ? extractDate(row.bookingCreated)
                             : "02-03-2024"}
                         </TableCell>
-                        {/* <TableCell align="left">
-                          <EnquiryModelComponent details={row} />{" "}
+                        <TableCell align="left" onClick={(e) => e.stopPropagation()}>
                           <DeleteEnquiry details={row} />
-                        </TableCell> */}
+                        </TableCell>
                       </TableRow>
                     );
                   })}
@@ -507,7 +566,7 @@ export default function AcceptedEnquiryDataTable() {
                         height: (dense ? 33 : 53) * emptyRows,
                       }}
                     >
-                      <TableCell colSpan={6} />
+                      <TableCell colSpan={9} />
                     </TableRow>
                   )}
                 </TableBody>
@@ -515,7 +574,7 @@ export default function AcceptedEnquiryDataTable() {
             </div>
           </TableContainer>
           <TablePagination
-            rowsPerPageOptions={[5, 10, 25]}
+            rowsPerPageOptions={[10, 25]}
             component="div"
             count={Rows.length}
             rowsPerPage={rowsPerPage}
@@ -525,6 +584,41 @@ export default function AcceptedEnquiryDataTable() {
           />
         </Paper>
       </Box>
+      
+      {/* Delete Confirmation Dialog */}
+      <Dialog
+        open={deleteDialogOpen}
+        onClose={() => !isDeleting && setDeleteDialogOpen(false)}
+        aria-labelledby="delete-dialog-title"
+        aria-describedby="delete-dialog-description"
+      >
+        <DialogTitle id="delete-dialog-title">
+          {"Delete All Inquiries?"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="delete-dialog-description">
+            Are you sure you want to delete all {Rows.length} inquiries? This action cannot be undone.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button 
+            onClick={() => setDeleteDialogOpen(false)} 
+            disabled={isDeleting}
+            color="primary"
+          >
+            Cancel
+          </Button>
+          <Button 
+            onClick={confirmDeleteAll} 
+            color="error" 
+            variant="contained"
+            disabled={isDeleting}
+            startIcon={<DeleteIcon />}
+          >
+            {isDeleting ? "Deleting..." : "Delete All"}
+          </Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 }
