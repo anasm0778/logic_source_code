@@ -110,9 +110,9 @@ const AboutUs = () => {
 
   const ourVision = [
     "To be the go-to car rental service in the UAE by delivering trust, quality, and flexibility, backed by a diverse fleet and exceptional customer care.",
-    "Whether you're seeking a budget-friendly ride for personal use or a luxury vehicle for business needs, LOGIC Rental Cars guarantees a seamless and reliable experience.",
+    "Whether you're seeking a budget-friendly ride for personal use or a luxury vehicle for business needs, INJAZ Rental Cars guarantees a seamless and reliable experience.",
     <>
-      Drive with Confidence. Rent with <Link href="/">LOGIC</Link> Website!
+      Drive with Confidence. Rent with <Link href="/">INJAZ</Link> Website!
     </>,
   ];
 
@@ -137,13 +137,13 @@ const AboutUs = () => {
   ];
 
   const whyChoosePara = [
-    "Whether you need a dependable car for a day, a month, or longer, or you're seeking premium vehicles for your business operations, LOGIC Rental Cars is your trusted partner.",
-    "Experience convenience, quality, and value with LOGIC—your ultimate car rental solution in the UAE!",
+    "Whether you need a dependable car for a day, a month, or longer, or you're seeking premium vehicles for your business operations, INJAZ Rental Cars is your trusted partner.",
+    "Experience convenience, quality, and value with INJAZ—your ultimate car rental solution in the UAE!",
   ];
 
   const mobility = [
-    "At LOGIC Rental Cars, your peace of mind is our priority. With a focus on delivering exceptional value, quality service, and unmatched flexibility, we strive to be your trusted partner in car rentals, whether for personal use or business operations.",
-    "Let LOGIC Rental Cars take the wheel—experience reliable, affordable, and customer-focused car rental services today!",
+    "At INJAZ Rental Cars, your peace of mind is our priority. With a focus on delivering exceptional value, quality service, and unmatched flexibility, we strive to be your trusted partner in car rentals, whether for personal use or business operations.",
+    "Let INJAZ Rental Cars take the wheel—experience reliable, affordable, and customer-focused car rental services today!",
   ];
 
   return (
@@ -153,7 +153,7 @@ const AboutUs = () => {
           <Container maxWidth="lg">
             <Box>
               <Typography variant="h4" gutterBottom sx={styles.typography}>
-                About LOGIC RENT A CAR
+                About INJAZ RENT A CAR
               </Typography>
               <Typography
                 variant="subtitle1"
@@ -161,7 +161,7 @@ const AboutUs = () => {
                 sx={styles.typography2}
               >
                 <Link href="/" style={{ color: "#01437d" }}>
-                  LOGIC RENTAL CARS
+                  INJAZ RENTAL CARS
                 </Link>{" "}
                 premier car rental service in united Arab Emirates Started Rent
                 A Car business in 2016 based in Abu Dhbai , catering to both{" "}
@@ -327,14 +327,14 @@ const AboutUs = () => {
                 Our goal is to create a customer-centric environment where
                 clients feel comfortable and valued. Whether you need a compact
                 hatchback for daily commutes, a stylish sedan for business
-                travel, or a robust SUV for off-road adventures, LOGIC Rental
+                travel, or a robust SUV for off-road adventures, INJAZ Rental
                 Cars ensures you get a vehicle that matches your needs while
                 prioritizing safety and regular maintenance.
               </Typography>
             </Box>
             <Box sx={styles.box}>
               <Typography variant="h5" color="initial" sx={styles.typography5}>
-                Why Choose LOGIC Rental Cars?
+                Why Choose INJAZ Rental Cars?
               </Typography>
               {whyChoose.map((item, index) => (
                 <Typography

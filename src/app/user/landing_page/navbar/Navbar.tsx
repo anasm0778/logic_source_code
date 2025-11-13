@@ -143,11 +143,11 @@ function Navbar(props: Props) {
         id="mainNavbar"
         sx={{
           display: "flex",
-          backgroundColor: "#0A2E47",
+          backgroundColor: "#01437d",
         }}
       >
         <CssBaseline />
-        <AppBar component="nav" sx={{ backgroundColor: "#0A2E47" }}>
+        <AppBar component="nav" sx={{ backgroundColor: "#01437d" }}>
           <Toolbar>
             <Typography
               component="div"
@@ -159,7 +159,7 @@ function Navbar(props: Props) {
               onClick={() => router.push("/")}
             >
               <Image
-                src="/final_logo.png"
+                src="/injaz white colour logo.png"
                 alt="appbar-logo"
                 height={56}
                 width={180}

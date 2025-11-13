@@ -165,7 +165,7 @@ const CarouselComponent: React.FC = () => {
             >
               <Image
                 src={getImageUrl(banner.imageUrl, "/banner-injaz-1.jpg")}
-                alt={`${banner.altText || banner.name} - Logic Rent A Car Dubai - Affordable Car Rental No Deposit`}
+                alt={`${banner.altText || banner.name} - Injaz Rent A Car Dubai - Affordable Car Rental No Deposit`}
                 title={`${banner.name} - Best Car Rental Dubai - No Deposit Required`}
                 fill
                 priority

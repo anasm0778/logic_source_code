@@ -27,7 +27,7 @@ export const DrawerBox = styled(Box)(({ theme }) => ({
   }));
   export const DrawerTypography: any = styled(Typography)(({ theme }) => ({
     flexGrow: 1,
-    backgroundColor: "#0A2E47",
+    backgroundColor: "#01437d",
     cursor: "pointer",
   }));
   

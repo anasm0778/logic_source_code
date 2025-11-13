@@ -9,8 +9,8 @@ export const box1 = [
   export const box2 = [
     {
       head:
-        "Who can rent a car from LOGIC RENT A CAR, and is there a minimum rental period?",
-      subHead: "LOGIC Car Rental offers services to:",
+        "Who can rent a car from INJAZ RENT A CAR, and is there a minimum rental period?",
+      subHead: "INJAZ Car Rental offers services to:",
       list: ["Tourists", "UAE residents", "UAE nationals"],
       subHead2:
         "To rent a car, individuals must provide the required documentation.",
@@ -26,7 +26,7 @@ export const box1 = [
   ];
   export const box4 = [
     {
-      head: "What are the requirements to hire a car from LOGIC Car Rental?",
+      head: "What are the requirements to hire a car from INJAZ Car Rental?",
       subHead:
         "To use our rent a car in Abu Dhabi or Dubai service, the requirements are as follows:",
       listOneHead: "For UAE Residents:",
@@ -43,7 +43,7 @@ export const box1 = [
         "A copy of your Passport.",
       ],
       subHeadTwo:
-        " If you have further questions or require assistance, please contact your local LOGIC Reservations Office for support or send mail to info@logicrent.ae",
+        " If you have further questions or require assistance, please contact your local INJAZ Reservations Office for support or send mail to info@logicrent.ae",
     },
   ];
   export const box5 = [
@@ -83,7 +83,7 @@ export const box1 = [
       head: "In Case of a Breakdown:",
       list: [
         {
-          s1: "Do not panic; LOGIC Car Rental provides",
+          s1: "Do not panic; INJAZ Car Rental provides",
           s2: "24/7 roadside assistance",
           s3: "anywhere in the UAE.",
         },

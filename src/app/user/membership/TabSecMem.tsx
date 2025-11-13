@@ -91,7 +91,7 @@ export default function FullWidthTabs() {
                 />
                 <Tab
                   sx={{ fontSize: "1.2rem" }}
-                  label="UPGRADING LOGIC MEMBERSHIP"
+                  label="UPGRADING INJAZ MEMBERSHIP"
                   {...a11yProps(2)}
                 />
               </Tabs>
