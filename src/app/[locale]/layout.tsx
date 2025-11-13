@@ -70,9 +70,9 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: '/injaz white colour logo.png',
-    shortcut: '/injaz white colour logo.png',
-    apple: '/injaz white colour logo.png',
+    icon: '/faviicon.png',
+    shortcut: '/faviicon.png',
+    apple: '/faviicon.png',
   },
   alternates: {
     canonical: '/',
