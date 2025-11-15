@@ -197,6 +197,24 @@ p.foot_text {
     margin-right: 8px !important;
 }
 
+/* Phone Numbers - Yellow Color */
+.link_two li.phone-number {
+    color: #ffd700 !important;
+}
+
+.link_two li.phone-number:hover {
+    color: #ffed4e !important;
+}
+
+/* Alternative selector for phone numbers */
+.link_two li[onclick*="tel:"] {
+    color: #ffd700 !important;
+}
+
+.link_two li[onclick*="tel:"]:hover {
+    color: #ffed4e !important;
+}
+
 @media (max-width: 768px) {
     .footer {
         padding: 40px 0px 20px 0px !important;

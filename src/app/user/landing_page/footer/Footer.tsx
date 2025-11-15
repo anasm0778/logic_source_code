@@ -134,10 +134,10 @@ const Footer: React.FC<FooterProps> = ({ data }) => {
                   Office No # 3, Musaffah Shabiya ME12, C246, UAE
                 </li>
                 <li style={{ marginBottom: "4px" }}>Mobile :</li>
-                <li onClick={() => window.open('tel:+971529487046', '_blank')} style={{ cursor: "pointer", marginBottom: "4px" }}>
+                <li onClick={() => window.open('tel:+971529487046', '_blank')} className="phone-number" style={{ cursor: "pointer", marginBottom: "4px", color: "#ffd700" }}>
                   +971 52 948 7046
                 </li>
-                <li onClick={() => window.open('tel:+971509961569', '_blank')} style={{ cursor: "pointer", marginBottom: "8px" }}>
+                <li onClick={() => window.open('tel:+971509961569', '_blank')} className="phone-number" style={{ cursor: "pointer", marginBottom: "8px", color: "#ffd700" }}>
                   +971 50 996 1569
                 </li>
                 <li onClick={() => window.open('mailto:info@injazrent.ae', '_blank')} style={{ cursor: "pointer" }}>info@injazrent.ae</li>

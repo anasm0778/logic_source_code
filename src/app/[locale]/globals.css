@@ -363,3 +363,45 @@ section.bookingScreen {
     border: 0px;
     border-radius: 0px;
 }
+
+/* Replace currency "D" with đồng symbol image */
+.car_prices_child::before,
+.actualPriceChild::before,
+.actual_price::before,
+.discounted_price::before,
+.car_prices_child_combined .actual_price::before,
+.car_prices_child_combined .discounted_price::before {
+    content: '';
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-image: url('/dong-symbol.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    vertical-align: middle;
+    margin-right: 2px;
+}
+
+/* Hide the "D" character in price contexts */
+.car_prices_child,
+.actualPriceChild,
+.actual_price,
+.discounted_price {
+    position: relative;
+}
+
+.car_prices_child:has-text("D "),
+.actualPriceChild:has-text("D "),
+.actual_price:has-text("D "),
+.discounted_price:has-text("D ") {
+    text-indent: -9999px;
+}
+
+/* Alternative: Use CSS to replace "D " pattern */
+.car_prices_child,
+.actualPriceChild,
+.actual_price,
+.discounted_price {
+    font-variant-numeric: normal;
+}
