@@ -22,7 +22,7 @@ export default function RecipeReviewCard() {
     <div className="card_section" id="carWithCategoryID">
       <Container maxWidth="xl">
         <div className="card_heading">
-          <h1>LOGIC RENTAL CARS – Deposit Free</h1>
+          <h1>INJAZ RENTAL CARS – Deposit Free</h1>
         </div>
 
         <Grid

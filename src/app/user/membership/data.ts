@@ -5,15 +5,15 @@ export const imageSectionData = [
 ];
 
 export const familySectionData = [
-  "Because we are one family, as long as you are a LOGIC member, you can add your family members to your account and they will be able to enjoy all the benefits related to your membership. They will also be able to earn and redeem miles faster when renting a LOGIC car.",
-  "Each family member will be able to enjoy all beneﬁts offered based on the membership tier and will earn miles when renting from LOGIC allowing them to redeem rewards miles faster than before.",
+  "Because we are one family, as long as you are a INJAZ member, you can add your family members to your account and they will be able to enjoy all the benefits related to your membership. They will also be able to earn and redeem miles faster when renting a INJAZ car.",
+  "Each family member will be able to enjoy all beneﬁts offered based on the membership tier and will earn miles when renting from INJAZ allowing them to redeem rewards miles faster than before.",
 ];
 
 export const becomeMember = [
   {
     head: "How to become a member",
     para:
-      "Customers with LOGIC membership enjoy many benefits were they can earn and redeem miles. Once you close your first lease with us, you will be eligible to be part of the programs that gives you many privileges if you meet the terms and conditions of being a member.",
+      "Customers with INJAZ membership enjoy many benefits were they can earn and redeem miles. Once you close your first lease with us, you will be eligible to be part of the programs that gives you many privileges if you meet the terms and conditions of being a member.",
   },
   {
     head: "How to be eligible for silver membership:",
@@ -40,7 +40,7 @@ export const redeem = [
   {
     head: "Earn & Redeem Miles",
     para:
-      "As a member of LOGIC program, you will enjoy a lot of benefits. The more you rent and spend with LOGIC the more miles you earn, the more rewards you can enjoy. You will earn miles each time you open and close contract, weather it is (Daily, weekly, monthly or yearly) contract.",
+      "As a member of INJAZ program, you will enjoy a lot of benefits. The more you rent and spend with INJAZ the more miles you earn, the more rewards you can enjoy. You will earn miles each time you open and close contract, weather it is (Daily, weekly, monthly or yearly) contract.",
   },
   {
     head: "Redeem Miles",
@@ -74,18 +74,18 @@ export const redeem = [
 ];
 
 export const upgradeMembership = {
-  head: "Upgrading LOGIC membership",
+  head: "Upgrading INJAZ membership",
   para1:
-    "Logic membership offers four tiers of membership - Yellow, Silver, Gold and platinum.",
+    "Injaz membership offers four tiers of membership - Yellow, Silver, Gold and platinum.",
   para2:
-    "Each Tier offers different benefits advantages, the more you rent a Logic car, the more tier miles you will earn, bringing you closer to the next tier of membership. As a Logic Platinum, Gold or Silver member, you will enjoy additional privileges and benefits than yellow Logic member.",
+    "Each Tier offers different benefits advantages, the more you rent a Injaz car, the more tier miles you will earn, bringing you closer to the next tier of membership. As a Injaz Platinum, Gold or Silver member, you will enjoy additional privileges and benefits than yellow Injaz member.",
   para3: "How you will be eligible to upgrade Tier:",
   list: [
-    "If you are a silver member; and completed less than six contracts or earned less than 3000 Logic miles during one year 1st of January to 31st of December, you shall drop back to yellow tier.",
-    "If you are a silver member; and completed more than six contracts but less than ten contracts, or earned more than or equal to 3000 Logic miles but less than 15000 Logic miles during one year 1st of January to 31st of December,you shall remain in silver tier.",
-    "If you are a gold member; and completed less than 10 contracts or earned less than 15000 Logic miles during one year 1st of January to 31st of December,you shall drop back to silver tier.",
-    "If you are a gold member; and completed more than 10 contracts, or earned more than or equal to 15000 Logic miles during one year 1st of January to 31st of December,you shall remain in gold tier.",
-    "If you are a platinum member; and completed less than 75 contracts or earned less than 50,000 Logic miles during one year 1st of January to 31st of December, you shall drop back to gold tier.",
-    "If you are a platinum member; and completed more than 75 contracts, or earned more than or equal to 50,000 Logic miles during one year 1st of January to 31st of December, you shall remain in platinum tier.",
+    "If you are a silver member; and completed less than six contracts or earned less than 3000 Injaz miles during one year 1st of January to 31st of December, you shall drop back to yellow tier.",
+    "If you are a silver member; and completed more than six contracts but less than ten contracts, or earned more than or equal to 3000 Injaz miles but less than 15000 Injaz miles during one year 1st of January to 31st of December,you shall remain in silver tier.",
+    "If you are a gold member; and completed less than 10 contracts or earned less than 15000 Injaz miles during one year 1st of January to 31st of December,you shall drop back to silver tier.",
+    "If you are a gold member; and completed more than 10 contracts, or earned more than or equal to 15000 Injaz miles during one year 1st of January to 31st of December,you shall remain in gold tier.",
+    "If you are a platinum member; and completed less than 75 contracts or earned less than 50,000 Injaz miles during one year 1st of January to 31st of December, you shall drop back to gold tier.",
+    "If you are a platinum member; and completed more than 75 contracts, or earned more than or equal to 50,000 Injaz miles during one year 1st of January to 31st of December, you shall remain in platinum tier.",
   ],
 };

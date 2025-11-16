@@ -828,7 +828,7 @@ const CreatedCar = () => {
         title: "✅ Booking inquiry Successfully Created",
         html: `
           <div style="text-align: left; padding: 20px; font-family: 'Segoe UI', Arial, sans-serif;">
-            <p style="font-size: 17px; margin-bottom: 25px; text-align: center; color: #2c3e50; font-weight: 500;">Thank you for choosing <strong style="color: #28a745;">Logic Rent A Car</strong>!</p>
+            <p style="font-size: 17px; margin-bottom: 25px; text-align: center; color: #2c3e50; font-weight: 500;">Thank you for choosing <strong style="color: #28a745;">Injaz Rent A Car</strong>!</p>
             
             <div style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); padding: 25px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 5px solid #28a745;">
               <h3 style="margin-top: 0; color: #2c3e50; font-size: 19px; margin-bottom: 15px; font-weight: 600;">Inquiry Details:</h3>
@@ -989,7 +989,7 @@ const CreatedCar = () => {
         title: "✅ Booking inquiry Successfully Created",
         html: `
           <div style="text-align: left; padding: 20px; font-family: 'Segoe UI', Arial, sans-serif;">
-            <p style="font-size: 17px; margin-bottom: 25px; text-align: center; color: #2c3e50; font-weight: 500;">Thank you for choosing <strong style="color: #28a745;">Logic Rent A Car</strong>!</p>
+            <p style="font-size: 17px; margin-bottom: 25px; text-align: center; color: #2c3e50; font-weight: 500;">Thank you for choosing <strong style="color: #28a745;">Injaz Rent A Car</strong>!</p>
             
             <div style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); padding: 25px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 5px solid #28a745;">
               <h3 style="margin-top: 0; color: #2c3e50; font-size: 19px; margin-bottom: 15px; font-weight: 600;">Inquiry Details:</h3>

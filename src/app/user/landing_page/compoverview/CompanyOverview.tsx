@@ -21,7 +21,7 @@ const CompanyOverview = () => {
           <Grid item xs={12} sm={6} md={6} lg={6}>
             <div className="overview_text" style={{ padding: "0px 10px" }}>
               <p style={{ marginBottom: "1rem" }}>
-                <strong>LOGIC Rent A Car</strong> is the leading <strong>affordable car rental Dubai</strong> provider, 
+                <strong>INJAZ Rent A Car</strong> is the leading <strong>affordable car rental Dubai</strong> provider, 
                 offering <strong>car rental no deposit</strong> services across UAE. We specialize in 
                 <strong> cheapest monthly car rental Dubai</strong>, <strong>luxury car rental Dubai cheap</strong>, 
                 and <strong>rent car Dubai without deposit</strong> solutions. Whether you need 
@@ -55,7 +55,7 @@ const CompanyOverview = () => {
                 <strong> rent Nissan Patrol Dubai</strong>, and other premium vehicles at competitive rates.
               </p>
               <p style={{ marginBottom: "0.5rem" }}>
-                <strong>Why Choose Logic Rent A Car?</strong><br/>
+                <strong>Why Choose Injaz Rent A Car?</strong><br/>
                 ✓ <strong>No Deposit Required</strong> - Rent car Dubai without deposit<br/>
                 ✓ <strong>Lowest Car Rental Rates</strong> - Best car rental prices in UAE<br/>
                 ✓ <strong>24/7 Customer Support</strong> - Available round the clock<br/>
@@ -79,7 +79,7 @@ const CompanyOverview = () => {
             <div className="image_container">
               <Image
                 src={mainImage}
-                alt="Logic Rent A Car Dubai - Best Car Rental Company UAE - Affordable Car Rental No Deposit - Monthly Car Rental Dubai"
+                alt="Injaz Rent A Car Dubai - Best Car Rental Company UAE - Affordable Car Rental No Deposit - Monthly Car Rental Dubai"
                 loading="lazy"
                 width={400}
                 height={200}

@@ -14,20 +14,20 @@ export const boxData = [
   {
     heading: "QUALITY SERVICE",
     para:
-      "With a wide range of vehicles, optional extras – such as child seats – for your every convenience and knowledgeable staff, LOGIC is confident you'll have the best experience with us. If not, we'll do everything to ensure you're happy with your rental.",
+      "With a wide range of vehicles, optional extras – such as child seats – for your every convenience and knowledgeable staff, INJAZ is confident you'll have the best experience with us. If not, we'll do everything to ensure you're happy with your rental.",
     src: "/6-Qualitywebp.webp",
   },
   {
     heading: "SAFETY",
     para:
-      " LOGIC car Rental espouse the highest standards of safety and only purchase cars for rental that achieve high scores on the Euro NCAP test. We also offer standard safety accessories, some of which are mandatory for certain trips, such as children who legally require a child's seat. We rent these as part of our service.",
+      " INJAZ car Rental espouse the highest standards of safety and only purchase cars for rental that achieve high scores on the Euro NCAP test. We also offer standard safety accessories, some of which are mandatory for certain trips, such as children who legally require a child's seat. We rent these as part of our service.",
     src: "/7-Safetywebp.webp",
   },
 ];
 
 export const sectionData = [
   "Why Choose Us",
-  "At LOGIC Car Rental our expert staff offer a high quality service at a lower price than our competitors. That's because we're a dedicated rental service focusing solely on the area and we understand that after a long flight, you want to be on your way without delay.",
+  "At INJAZ Car Rental our expert staff offer a high quality service at a lower price than our competitors. That's because we're a dedicated rental service focusing solely on the area and we understand that after a long flight, you want to be on your way without delay.",
   "Choose us and you’ll receive a class-leading car rental services. Which guarantee your satisfaction with a unique package of benefits.",
 ];
 

@@ -113,7 +113,7 @@ function Navlinks(props: Props) {
     <>
       <div
         className="Navlink"
-        style={{ backgroundColor: "#0A2E47", padding: "10px 0px" }}
+        style={{ backgroundColor: "#01437d", padding: "10px 0px" }}
       >
         <Box>
           <Stack spacing={6} direction="row" sx={{ justifyContent: "center" }}>

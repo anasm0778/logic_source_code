@@ -5,10 +5,10 @@ import { GoogleTagManager } from '@next/third-parties/google'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://logicrent.ae/'),
-  title: 'Logic Rent A Car Dubai | Affordable Car Rental No Deposit | Monthly Car Rental Dubai',
-  description: 'Reliable & affordable car rental in Dubai & Abu Dhabi. Daily, weekly & monthly car hire. SUVs, sedans & luxury cars. Book online with Logic Rent a Car.',
-  applicationName: 'Logic Rent A Car',
+  metadataBase: new URL('https://injaz.ae/'),
+  title: 'Injaz Rent A Car Dubai | Affordable Car Rental No Deposit | Monthly Car Rental Dubai',
+  description: 'Reliable & affordable car rental in Dubai & Abu Dhabi. Daily, weekly & monthly car hire. SUVs, sedans & luxury cars. Book online with Injaz Rent a Car.',
+  applicationName: 'Injaz Rent A Car',
   keywords: [
     'affordable car rental', 'car rental no deposit', 'cheapest monthly car rental', 'luxury car rental dubai cheap',
     'rent car in dubai without deposit', 'near rent a car', 'rent a car international city', 'best rental car prices',
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     'one month car rental in dubai', 'monthly car rentals near me in dubai', '3 month car rental in dubai',
     'monthly car lease in dubai', 'car rental dubai no deposit in dubai', 'car rental in dubai',
     'carrentals in dubai', 'car rental companies in dubai', 'best car rental company in dubai',
-    'daily rent a car dubai', 'logic term rental car in dubai', 'rent a car uae', 'dubai rent a car',
+    'daily rent a car dubai', 'injaz term rental car in dubai', 'rent a car uae', 'dubai rent a car',
     'cheap car rental in dubai', 'cheap cars rental in dubai', 'cheap rent a car dubai',
     'rent a car for a month', 'rent a car for a month in dubai', 'rent a car in business bay',
     'rent a car in downtown', 'rent a car in jvc', 'rent a car in jlt', 'rent a car in jabal ali',
@@ -53,11 +53,11 @@ export const metadata: Metadata = {
     'rent a car in musaffah', 'musaffah rent a car', 'car rental in musaffah',
     'rent a car in shabiya', 'rent a car mussafah', 'mussafah car rentals',
     'car rentals in mussafah', 'cheap car rental in musaffah', 'best rent a car in musaffah',
-    'rent a car in mussafah without deposit', 'logic dubai rent a car'
+    'rent a car in mussafah without deposit', 'injaz dubai rent a car'
   ],
-  authors: [{name: 'Logic Rent A Car', url: 'https://logicrent.ae/'}],
-  creator: 'Logic Rent A Car',
-  publisher: 'Logic Rent A Car',
+  authors: [{name: 'Injaz Rent A Car', url: 'https://injaz.ae/'}],
+  creator: 'Injaz Rent A Car',
+  publisher: 'Injaz Rent A Car',
   robots: {
     index: true,
     follow: true,
@@ -70,9 +70,9 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon.ico',
-    apple: '/favicon.ico',
+    icon: '/faviicon.png',
+    shortcut: '/faviicon.png',
+    apple: '/faviicon.png',
   },
   alternates: {
     canonical: '/',
@@ -82,27 +82,27 @@ export const metadata: Metadata = {
     }
   },
   openGraph: {
-    title: 'Logic Rent A Car Dubai | Affordable Car Rental No Deposit | Monthly Car Rental Dubai',
-    description: 'Reliable & affordable car rental in Dubai & Abu Dhabi. Daily, weekly & monthly car hire. SUVs, sedans & luxury cars. Book online with Logic Rent a Car.',
-    url: 'https://logicrent.ae/',
-    siteName: 'Logic Rent A Car',
+    title: 'Injaz Rent A Car Dubai | Affordable Car Rental No Deposit | Monthly Car Rental Dubai',
+    description: 'Reliable & affordable car rental in Dubai & Abu Dhabi. Daily, weekly & monthly car hire. SUVs, sedans & luxury cars. Book online with Injaz Rent a Car.',
+    url: 'https://injaz.ae/',
+    siteName: 'Injaz Rent A Car',
     type: 'website',
     locale: 'en_US',
     images: [
       {
-        url: 'https://logicrent.ae/logic%20white%20colour%20logo.png',
+        url: 'https://injaz.ae/injaz%20white%20colour%20logo.png',
         width: 1200,
         height: 630,
-        alt: 'Logic Rent A Car Dubai - Best Car Rental Service',
+        alt: 'Injaz Rent A Car Dubai - Best Car Rental Service',
       },
     ],
   },
   twitter: {
-    title: 'Logic Rent A Car Dubai | Affordable Car Rental No Deposit',
-    description: 'Reliable & affordable car rental in Dubai & Abu Dhabi. Daily, weekly & monthly car hire. SUVs, sedans & luxury cars. Book online with Logic Rent a Car.',
-    site: '@logicrent',
+    title: 'Injaz Rent A Car Dubai | Affordable Car Rental No Deposit',
+    description: 'Reliable & affordable car rental in Dubai & Abu Dhabi. Daily, weekly & monthly car hire. SUVs, sedans & luxury cars. Book online with Injaz Rent a Car.',
+    site: '@injazrent',
     card: 'summary_large_image',
-    images: ['https://logicrent.ae/logic%20white%20colour%20logo.png'],
+    images: ['https://injaz.ae/injaz%20white%20colour%20logo.png'],
   },
   verification: {
     google: 'your-google-verification-code',

@@ -147,7 +147,7 @@ const Services = () => {
           </Typography>
 
           <Typography sx={styles.description}>
-            At Logic Rent a Car, we make car rental simple, affordable, and
+            At Injaz Rent a Car, we make car rental simple, affordable, and
             reliable for both individuals and corporate clients. Whether you need
             a vehicle for a day, a week, or a year, our flexible plans and
             professional service ensure you get the best experience at the best
@@ -171,7 +171,7 @@ const Services = () => {
               Support for Rent a Car Startups
             </Typography>
             <Typography sx={styles.description}>
-              Starting a car rental business in the UAE? Logic Rent a Car is
+              Starting a car rental business in the UAE? Injaz Rent a Car is
               here to help. Since 2019, we've been providing tailored support
               for new and growing rental companies — helping them launch, manage,
               and expand successfully.
@@ -189,14 +189,14 @@ const Services = () => {
               and booking platforms.
             </Typography>
             <Typography sx={styles.description}>
-              At Logic Rent a Car, we believe in growing together — empowering
+              At Injaz Rent a Car, we believe in growing together — empowering
               every partner to succeed in the competitive car rental market.
             </Typography>
           </Box>
 
           <Box sx={styles.whyChooseBox}>
             <Typography sx={styles.subHeading}>
-              🌟 Why Choose Logic Rent a Car?
+              🌟 Why Choose Injaz Rent a Car?
             </Typography>
             <Grid container spacing={2}>
               {whyChooseItems.map((item, index) => (

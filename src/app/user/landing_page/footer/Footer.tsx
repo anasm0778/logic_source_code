@@ -26,7 +26,7 @@ const Footer: React.FC<FooterProps> = ({ data }) => {
           <Grid item xs={12} sm={2.4} md={2.4} lg={2.4}>
             <CardActionArea>
               <Image
-                src="/final_logo.png"
+                src="/injaz white colour logo.png"
                 alt="footer logo"
                 height={65}
                 width={235}
@@ -129,24 +129,18 @@ const Footer: React.FC<FooterProps> = ({ data }) => {
             <div className="link_two">
               <h4>CONTACT</h4>
               <ul>
-                <li style={{ fontWeight: "bold", marginBottom: "8px" }}>Dubai Office</li>
-                <li style={{ marginBottom: "4px" }}>
-                  Office No # 554, Tamani Arts Building, Business Bay, Dubai, UAE
-                </li>
-                <li onClick={() => window.open('tel:+971509960498', '_blank')} style={{ cursor: "pointer", marginBottom: "4px" }}>
-                  Mobile : +971 50 996 0498
-                </li>
-                <li onClick={() => window.open('tel:+971509961569', '_blank')} style={{ cursor: "pointer", marginBottom: "12px" }}>
-                  +971 50 996 1569
-                </li>
                 <li style={{ fontWeight: "bold", marginBottom: "8px" }}>Abu Dhabi Office</li>
-                <li style={{ marginBottom: "4px" }}>
+                <li style={{ marginBottom: "8px" }}>
                   Office No # 3, Musaffah Shabiya ME12, C246, UAE
                 </li>
-                <li onClick={() => window.open('tel:+971529487046', '_blank')} style={{ cursor: "pointer", marginBottom: "8px" }}>
-                  Mobile : +971 52 948 7046
+                <li style={{ marginBottom: "4px" }}>Mobile :</li>
+                <li onClick={() => window.open('tel:+971529487046', '_blank')} className="phone-number" style={{ cursor: "pointer", marginBottom: "4px", color: "#ffd700" }}>
+                  +971 52 948 7046
                 </li>
-                <li onClick={() => window.open('mailto:Info@logicrent.ae', '_blank')} style={{ cursor: "pointer" }}>Info@logicrent.ae</li>
+                <li onClick={() => window.open('tel:+971509961569', '_blank')} className="phone-number" style={{ cursor: "pointer", marginBottom: "8px", color: "#ffd700" }}>
+                  +971 50 996 1569
+                </li>
+                <li onClick={() => window.open('mailto:info@injazrent.ae', '_blank')} style={{ cursor: "pointer" }}>info@injazrent.ae</li>
               </ul>
             </div>
           </Grid>
