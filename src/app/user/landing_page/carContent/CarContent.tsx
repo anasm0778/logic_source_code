@@ -200,7 +200,7 @@ const CarContent: React.FC<CarContentType> = ({ data = [], phoneData }) => {
     } = carDetails;
     const baseUrl = "https://logicrent.ae/pages/getCarDetails?verify=";
     const url = `${baseUrl}${_id}`;
-    const whatsappMessage = `Hi, \nI'm contacting you through Injazrent.ae. \nI'd like to rent the discounted ${brand} ${model} ${year} \n${url} \nfor ${discountedPriceDaily} D ${packageDetails}. \nIs it available?`;
+    const whatsappMessage = `Hi, \nI'm contacting you through Injazrent.ae. \nI'd like to rent the discounted ${brand} ${model} ${year} \n${url} \nfor ${discountedPriceDaily} Ɖ ${packageDetails}. \nIs it available?`;
     // Remove spaces and special characters from phone number for WhatsApp URL
     const formattedPhoneNumber = phoneData?.phoneNumber?.replace(/\s+/g, '').replace(/[^\d+]/g, '') || '+971509961569';
     const whatsappLink = `https://wa.me/${formattedPhoneNumber}?text=${encodeURIComponent(whatsappMessage)}`;
@@ -443,7 +443,7 @@ const CarContent: React.FC<CarContentType> = ({ data = [], phoneData }) => {
               </Grid>
               <Grid item xs={12} sm={3}>
                 <TextField
-                  label="Min Price (D)"
+                  label="Min Price (Ɖ)"
                   type="text"
                   value={minPrice === 0 ? '' : minPrice.toString()}
                   onChange={(e) => {
@@ -502,7 +502,7 @@ const CarContent: React.FC<CarContentType> = ({ data = [], phoneData }) => {
               </Grid>
               <Grid item xs={12} sm={3}>
                 <TextField
-                  label={`Max Price (D) - Max: ${calculateMaxPrice(selectedPeriod)}`}
+                  label={`Max Price (Ɖ) - Max: ${calculateMaxPrice(selectedPeriod)}`}
                   type="number"
                   value={maxPrice}
                   onChange={(e) => {
@@ -689,18 +689,18 @@ const CarContent: React.FC<CarContentType> = ({ data = [], phoneData }) => {
                       </Typography>
                       <div className="car_prices">
                         <div className="car_prices_child_combined">
-                          <span className="actual_price">D {car.actualPriceDaily}</span>
-                          <span className="discounted_price">D {car.discountedPriceDaily}</span>
+                          <span className="actual_price">Ɖ {car.actualPriceDaily}</span>
+                          <span className="discounted_price">Ɖ {car.discountedPriceDaily}</span>
                           <span className="price_period">/ Day</span>
                         </div>
                         <div className="car_prices_child_combined">
-                          <span className="actual_price">D {car.actualPriceWeekly}</span>
-                          <span className="discounted_price">D {car.discountedPriceWeekly}</span>
+                          <span className="actual_price">Ɖ {car.actualPriceWeekly}</span>
+                          <span className="discounted_price">Ɖ {car.discountedPriceWeekly}</span>
                           <span className="price_period">/ Week</span>
                         </div>
                         <div className="car_prices_child_combined">
-                          <span className="actual_price">D {car.actualPriceMonthly}</span>
-                          <span className="discounted_price">D {car.discountedPriceMonthly}</span>
+                          <span className="actual_price">Ɖ {car.actualPriceMonthly}</span>
+                          <span className="discounted_price">Ɖ {car.discountedPriceMonthly}</span>
                           <span className="price_period">/ Month</span>
                         </div>
                       </div>
@@ -756,15 +756,15 @@ const CarContent: React.FC<CarContentType> = ({ data = [], phoneData }) => {
                       <div className="car_insurance">
                         <div className="car_insurance_child">
                           <div style={{ fontSize: '9px', color: '#666', marginBottom: '2px' }}>Insurance for Day</div>
-                          <div style={{ fontWeight: 'bold', fontSize: '11px' }}>D {car.cdwDaily || 0}</div>
+                          <div style={{ fontWeight: 'bold', fontSize: '11px' }}>Ɖ {car.cdwDaily || 0}</div>
                         </div>
                         <div className="car_insurance_child">
                           <div style={{ fontSize: '9px', color: '#666', marginBottom: '2px' }}>Insurance for Week</div>
-                          <div style={{ fontWeight: 'bold', fontSize: '11px' }}>D {car.cdwWeekly || 0}</div>
+                          <div style={{ fontWeight: 'bold', fontSize: '11px' }}>Ɖ {car.cdwWeekly || 0}</div>
                         </div>
                         <div className="car_insurance_child">
                           <div style={{ fontSize: '9px', color: '#666', marginBottom: '2px' }}>Insurance for Month</div>
-                          <div style={{ fontWeight: 'bold', fontSize: '11px' }}>D {car.cdwMonthly || 0}</div>
+                          <div style={{ fontWeight: 'bold', fontSize: '11px' }}>Ɖ {car.cdwMonthly || 0}</div>
                         </div>
                       </div>
                     </CardContent>
@@ -791,7 +791,7 @@ const CarContent: React.FC<CarContentType> = ({ data = [], phoneData }) => {
                             <p className="carInfoPara">
                               {car.securityDeposit === 0 || car.securityDeposit === "0" 
                                 ? "No deposit required" 
-                                : `Deposit: D ${car.securityDeposit}`}
+                                : `Deposit: Ɖ ${car.securityDeposit}`}
                             </p>
                           </div>
                         </CustomizedTooltips>
