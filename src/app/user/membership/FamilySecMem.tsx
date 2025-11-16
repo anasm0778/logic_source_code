@@ -8,7 +8,7 @@ const FamilySecMem = () => {
     <section className="familySecMain">
       <Container maxWidth="lg">
         <div className="famSecMainhead">
-          <h1>LOGIC Family Membership</h1>
+          <h1>INJAZ Family Membership</h1>
           <Grid container spacing={2}>
             {familySectionData.map((item, index) => (
               <Grid key={index} item xs={12} sm={12} md={12} lg={12}>

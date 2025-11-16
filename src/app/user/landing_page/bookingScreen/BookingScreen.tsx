@@ -134,7 +134,7 @@ const BookingScreen = (props: any) => {
                       </div>
                       <div className="locInfoLeftPara">
                         <p>
-                          Logic Cars Rental Sole Proprietorship Llc Dubai Office
+                          Injaz Cars Rental Sole Proprietorship Llc Dubai Office
                           Office Number 554 Tamani Arts Offices Tower Fifth
                           Floor Al Alsayel Street Business Bay Dubai, uae.
                         </p>
@@ -148,7 +148,7 @@ const BookingScreen = (props: any) => {
                       </div>
                       <div className="locInfoRightPara">
                         <p>
-                          Logic Cars Rental Sole Proprietorship Llc Dubai Office
+                          Injaz Cars Rental Sole Proprietorship Llc Dubai Office
                           Office Number 554 Tamani Arts Offices Tower Fifth
                           Floor Al Alsayel Street Business Bay Dubai, uae.
                         </p>

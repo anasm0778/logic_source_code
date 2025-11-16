@@ -1,8 +1,8 @@
 export const onlinePrivacy = [
   {
-    heading: "Online Privacy Policy for Logicrent.ae",
+    heading: "Online Privacy Policy for Injazrent.ae",
     para:
-      "This Privacy Policy describes how Logicrent.ae collects, uses, and protects information obtained through its website ('logicrent.ae'). This Policy applies solely to activities conducted on the Logicrent.ae website and does not extend to any offline or unrelated activities.",
+      "This Privacy Policy describes how Injazrent.ae collects, uses, and protects information obtained through its website ('injazrent.ae'). This Policy applies solely to activities conducted on the Injazrent.ae website and does not extend to any offline or unrelated activities.",
   },
 
 ];
@@ -11,7 +11,7 @@ export const collection = [
   {
     heading: "Anonymous Data Collection",
     para:
-      "Logicrent.ae may collect certain anonymous data about your visit to the website. This information, which does not personally identify you, is gathered to improve the website's performance and user experience. Examples of anonymous data collected include, but are not limited to:",
+      "Injazrent.ae may collect certain anonymous data about your visit to the website. This information, which does not personally identify you, is gathered to improve the website's performance and user experience. Examples of anonymous data collected include, but are not limited to:",
     points: [
       "The type of browser you are using",
       "The duration of your visit to the website",
@@ -25,7 +25,7 @@ export const idInfo = [
   {
     heading: "Personally Identifiable Information",
     para:
-      "While using the Logicrent.ae website, you may be asked to voluntarily provide personally identifiable information.",
+      "While using the Injazrent.ae website, you may be asked to voluntarily provide personally identifiable information.",
     title1: "This information may include:",
     title2: "This data may be collected in situations such as:",
     points1: [
@@ -60,7 +60,7 @@ export const disclosureInfo = [
   {
     title: "Use and Disclosure of Information",
     details: [
-      "At Logicrent.ae, we are committed to protecting your privacy. The following outlines how we use and disclose the information collected on our site:",
+      "At Injazrent.ae, we are committed to protecting your privacy. The following outlines how we use and disclose the information collected on our site:",
     ],
   },
   {
@@ -83,21 +83,21 @@ export const disclosureInfo = [
       "Fulfilling and delivering your order",
       "Enhancing site functionality",
       "Conducting data analyses",
-      "Sending promotional emails directly from Logicrent.ae",
+      "Sending promotional emails directly from Injazrent.ae",
       "For example, your mailing address may be provided to the delivery service to ensure the fulfillment of your order.",
     ],
   },
   {
     title: "Credit/Debit Card Information",
     details: [
-      "Logicrent.ae ensures that all credit/debit card details and personally identifiable information are not stored, sold, shared, rented, or leased to any third parties.",
+      "Injazrent.ae ensures that all credit/debit card details and personally identifiable information are not stored, sold, shared, rented, or leased to any third parties.",
     ],
   },
   { title: "Cookies and Aggregated Data", details: [] },
   {
     title: "1.	Cookies:",
     details: [
-      "Logicrent.ae utilizes cookies, which are small bits of data stored in your browser, to determine whether you have visited the home page in the past.",
+      "Injazrent.ae utilizes cookies, which are small bits of data stored in your browser, to determine whether you have visited the home page in the past.",
       "No other user-specific information is gathered through cookies.",
     ],
   },
@@ -112,14 +112,14 @@ export const disclosureInfo = [
   {
     title: "Publishing and Feedback",
     details: [
-      "If you provide Logicrent.ae with content for publishing (e.g., feedback or testimonials), we may publish your username or other identifying information with your permission.",
+      "If you provide Injazrent.ae with content for publishing (e.g., feedback or testimonials), we may publish your username or other identifying information with your permission.",
     ],
   },
   { title: "Legal Disclosures", details: [] },
   {
     title: "Compliance with Legal Obligations:",
     details: [
-      "Logicrent.ae may disclose personally identifiable information in response to:",
+      "Injazrent.ae may disclose personally identifiable information in response to:",
       "A subpoena",
       "A court order",
       "A request from a law enforcement agency",
@@ -144,33 +144,33 @@ export const disclosureInfo = [
   {
     title: "Security",
     details: [
-      "Logicrent.ae takes appropriate measures to ensure the privacy and security of user data through various hardware and software methodologies. However, no method of data transmission or storage over the internet can be guaranteed as 100% secure. As such, Logicrent.ae cannot ensure or warrant the absolute security of any information disclosed online.",
+      "Injazrent.ae takes appropriate measures to ensure the privacy and security of user data through various hardware and software methodologies. However, no method of data transmission or storage over the internet can be guaranteed as 100% secure. As such, Injazrent.ae cannot ensure or warrant the absolute security of any information disclosed online.",
     ],
   },
   {
     title: "Third-Party Websites",
     details: [
-      "Logicrent.ae is not responsible for the privacy practices or policies of third-party websites to which it links. Please note:",
+      "Injazrent.ae is not responsible for the privacy practices or policies of third-party websites to which it links. Please note:",
       "Different rules regarding the collection and use of your personal information may apply if you interact with third-party websites.",
-      "Logicrent.ae strongly recommends that you review the privacy policies of these websites before providing any personal data.",
-      "Our site may contain links to third-party sites owned and operated independently. These sites may send their own cookies, collect data, or solicit personally identifiable information. Logicrent.ae has no control over these practices and cannot assume responsibility for how such third parties manage user information.",
+      "Injazrent.ae strongly recommends that you review the privacy policies of these websites before providing any personal data.",
+      "Our site may contain links to third-party sites owned and operated independently. These sites may send their own cookies, collect data, or solicit personally identifiable information. Injazrent.ae has no control over these practices and cannot assume responsibility for how such third parties manage user information.",
       "If you have concerns about the use of your data by third parties, you should contact them directly.",
     ],
   },
   {
     title: "Minors",
     details: [
-      "Logicrent.ae does not knowingly collect personal information from minors under the age of 18.",
-      "Minors are not permitted to use the Logicrent.ae website or its services.",
-      "Logicrent.ae requests that individuals under the age of 18 refrain from submitting any personal information to the website.",
-      "Since data from minors is not knowingly collected, Logicrent.ae does not knowingly distribute such information.",
+      "Injazrent.ae does not knowingly collect personal information from minors under the age of 18.",
+      "Minors are not permitted to use the Injazrent.ae website or its services.",
+      "Injazrent.ae requests that individuals under the age of 18 refrain from submitting any personal information to the website.",
+      "Since data from minors is not knowingly collected, Injazrent.ae does not knowingly distribute such information.",
       "If you believe that information regarding a minor under 18 has been inadvertently collected, please contact info@logicrent.ae for assistance with removal or correction.",
     ],
   },
   {
     title: "Modifications to the Privacy Policy",
     details: [
-      "Logicrent.ae reserves the right to update or modify its Website Policies and Terms & Conditions to align with evolving requirements and standards.",
+      "Injazrent.ae reserves the right to update or modify its Website Policies and Terms & Conditions to align with evolving requirements and standards.",
       "Customers are encouraged to review these sections regularly to stay informed about any changes.",
       "Modifications will take effect on the day they are posted.",
     ],

@@ -196,7 +196,7 @@ const AdminNavbar = () => {
           <CardMedia
             component="img"
             sx={{ width: "80%", cursor: "pointer" }}
-            image="/final_logo.png"
+            image="/injaz white colour logo.png"
             title="logo"
           />
           <IconButton onClick={handleDrawerClose}>

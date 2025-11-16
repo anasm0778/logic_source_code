@@ -341,7 +341,7 @@ const NewFaq = () => {
                 gutterBottom
                 sx={{ textAlign: "justify", fontSize: "16px" }}
               >
-                If necessary, LOGIC Car Rental will provide a replacement
+                If necessary, INJAZ Car Rental will provide a replacement
                 vehicle for the duration of the rental agreement.
               </Typography>
               <Typography
@@ -505,14 +505,14 @@ const NewFaq = () => {
                   color: "#01437d",
                 }}
               >
-                3. How can I locate the nearest LOGIC Car Rental location?
+                3. How can I locate the nearest INJAZ Car Rental location?
               </Typography>
               <Typography
                 variant="subtitle1"
                 gutterBottom
                 sx={{ textAlign: "justify", fontSize: "16px" }}
               >
-                LOGIC Car Rental operates in Musaffah{" "}
+                INJAZ Car Rental operates in Musaffah{" "}
                 <Box component="span" sx={{ fontWeight: "bold" }}>
                   Abu Dhabi operated in Musaffah
                 </Box>{" "}
@@ -614,7 +614,7 @@ const NewFaq = () => {
                   color: "#01437d",
                 }}
               >
-                Informing LOGIC Car Rental in Advance:
+                Informing INJAZ Car Rental in Advance:
               </Typography>
               <List>
                 <ListItem>
@@ -659,7 +659,7 @@ const NewFaq = () => {
                 gutterBottom
                 sx={{ textAlign: "justify", fontSize: "16px" }}
               >
-                No, all vehicles at LOGIC Car Rental, including 4-wheel drive
+                No, all vehicles at INJAZ Car Rental, including 4-wheel drive
                 vehicles, are intended for use on regularly maintained roads
                 only.
               </Typography>
@@ -730,7 +730,7 @@ const NewFaq = () => {
                 gutterBottom
                 sx={{ textAlign: "justify", fontSize: "16px" }}
               >
-                Yes, LOGIC Rent A Car offers baby seats based on your baby's
+                Yes, INJAZ Rent A Car offers baby seats based on your baby's
                 age. The following charges apply:
               </Typography>
               <List>
@@ -797,7 +797,7 @@ const NewFaq = () => {
                 gutterBottom
                 sx={{ textAlign: "justify", fontSize: "16px" }}
               >
-                LOGIC Rent A Car does not have an office at Abu Dhabi or Dubai
+                INJAZ Rent A Car does not have an office at Abu Dhabi or Dubai
                 Airports. However, customers can arrange for car delivery and
                 pickup from the airport by following these steps:
               </Typography>
@@ -896,7 +896,7 @@ const NewFaq = () => {
                 If you decided to drop off the vehicle at a location other than
                 what was initially agreed, then you might be required to pay a
                 minimal fee against it. Kindly get in touch with your local
-                LOGIC Rent A Car Reservation Office for more details.
+                INJAZ Rent A Car Reservation Office for more details.
               </Typography>
             </Box>
             <Box sx={{ marginBottom: "1rem" }}>
@@ -1125,7 +1125,7 @@ const NewFaq = () => {
                 gutterBottom
                 sx={{ textAlign: "justify", fontSize: "16px" }}
               >
-                LOGIC Car Rental&apos;s Fuel Policy ensures that customers
+                INJAZ Car Rental&apos;s Fuel Policy ensures that customers
                 return the rental vehicle with the same fuel level as when it
                 was provided to them. Here&apos;s a detailed explanation of the
                 policy:
@@ -1183,7 +1183,7 @@ const NewFaq = () => {
                           sx={{ fontSize: "10px", marginRight: "10px" }}
                         />
                         If the fuel level is considerably lower than when the
-                        vehicle was handed to you, LOGIC Car Rental will charge
+                        vehicle was handed to you, INJAZ Car Rental will charge
                         you to refill the fuel.
                       </>
                     }
@@ -1234,17 +1234,17 @@ const NewFaq = () => {
                   color: "#01437d",
                 }}
               >
-                What kinds of insurance LOGIC Rent A Car Provide?
+                What kinds of insurance INJAZ Rent A Car Provide?
               </Typography>
               <Typography
                 variant="subtitle1"
                 gutterBottom
                 sx={{ textAlign: "justify", fontSize: "16px" }}
               >
-                LOGIC Rent A Car provides several types of insurance coverage
+                INJAZ Rent A Car provides several types of insurance coverage
                 for their rental vehicles. These options are designed to offer
                 various levels of protection and cater to different needs of
-                renters. Below are the key types of insurance LOGIC Rent A Car
+                renters. Below are the key types of insurance INJAZ Rent A Car
                 typically provides:
               </Typography>
               <Typography
@@ -1263,7 +1263,7 @@ const NewFaq = () => {
                           sx={{ fontSize: "10px", marginRight: "10px" }}
                         />
                         What it covers: Comprehensive insurance is the standard
-                        coverage offered by LOGIC Rent A Car. It covers damages
+                        coverage offered by INJAZ Rent A Car. It covers damages
                         to the rental vehicle caused by accidents, both
                         non-fault and fault accidents.
                       </>

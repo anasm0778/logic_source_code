@@ -83,7 +83,7 @@ const ReusableDiscountedCars: React.FC<ReusableDiscountedCarsInterface> = ({
     const baseUrl =
       "https://logicrent.ae/user/landing_page/get_car_details?verify=";
     const url = `${baseUrl}${_id}`;
-    const whatsappMessage = `Hi, \nI'm contacting you through Logicrent.ae. \nI'd like to rent the ${calculateDiscount(
+    const whatsappMessage = `Hi, \nI'm contacting you through Injazrent.ae. \nI'd like to rent the ${calculateDiscount(
       discountedPriceMonthly,
       twelveMonthPriceOf2500Km
     )} discounted ${brand} ${model} ${year} In ${offerType} \n${url}  \nfor ${twelveMonthPriceOf2500Km} D Per 12 Month. \nIs it available?`;
