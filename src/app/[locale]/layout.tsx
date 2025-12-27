@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
-import {Inter} from 'next/font/google'
+import { Inter } from 'next/font/google'
 import "./globals.css"
-import { GoogleTagManager } from '@next/third-parties/google'
+import { GoogleTagManager, GoogleAnalytics } from '@next/third-parties/google'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     'car rentals in mussafah', 'cheap car rental in musaffah', 'best rent a car in musaffah',
     'rent a car in mussafah without deposit', 'logic dubai rent a car'
   ],
-  authors: [{name: 'Logic Rent A Car', url: 'https://logicrent.ae/'}],
+  authors: [{ name: 'Logic Rent A Car', url: 'https://logicrent.ae/' }],
   creator: 'Logic Rent A Car',
   publisher: 'Logic Rent A Car',
   robots: {
@@ -118,7 +118,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-       <GoogleTagManager gtmId="GTM-KBG7S42T" />
+
+      <GoogleTagManager gtmId="GTM-KBG7S42T" />
+
+      <GoogleAnalytics gaId="AW-17803172526" />
+
       <body className={inter.className}>{children}</body>
     </html>
   )
