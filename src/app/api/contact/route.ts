@@ -14,8 +14,8 @@ export async function POST(req: Request) {
 
     const transporter = nodemailer.createTransport({
       host: "smtp.hostinger.com",
-      port: 587,          // 👈 change
-      secure: false,      // 👈 change
+      port: 465,
+      secure: true,
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
@@ -24,8 +24,7 @@ export async function POST(req: Request) {
 
     await transporter.sendMail({
       from: `"LogicRent Website" <${process.env.EMAIL_USER}>`,
-      to: "yourgmail@gmail.com", // 👈 test ke liye
-      replyTo: email,
+      to: "info@logicrent.ae",
       subject: "New Contact Form Enquiry",
       html: `
         <h2>New Contact Enquiry</h2>
