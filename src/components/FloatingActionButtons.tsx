@@ -59,23 +59,26 @@ const FloatingActionButtons: React.FC<FloatingActionButtonsProps> = ({ phoneData
   };
 
   const handleWhatsappClick = () => {
-    const message = encodeURIComponent(
-      "Hi, \nI'm contacting you through Logicrent.ae. \nI'd like to rent the car on Daily, Weekly and Monthly packages. \nIs it available?"
+  const message = encodeURIComponent(
+   "Hi, \nI'm contacting you through Logicrent.ae. \nI'd like to rent the car on Daily, Weekly and Monthly packages. \nIs it available?"
     );
-    
-    // Remove spaces and special characters from phone number for WhatsApp URL
-    const formattedPhoneNumber = whatsappNumber?.replace(/\s+/g, '').replace(/[^\d+]/g, '') || '+971509960498';
-    
-    if (window.gtag) {
-      window.gtag("event", "whatsapp_click", {
-        event_category: "User Interaction",
-        event_label: "WhatsApp Contact",
-        value: phoneData?._id,
-      });
-    }
-    
-    window.open(`https://wa.me/${formattedPhoneNumber}?text=${message}`, "_blank");
-  };
+
+  const formattedPhoneNumber =
+    whatsappNumber?.replace(/\s+/g, "").replace(/[^\d+]/g, "") ||
+    "+971509960498";
+
+  if (typeof window !== "undefined" && window.gtag) {
+    window.gtag("event", "conversion", {
+      send_to: "AW-17882537140/7iJiCM7k_vYbELS5h89C",
+    });
+  }
+
+  window.open(
+    `https://wa.me/${formattedPhoneNumber}?text=${message}`,
+    "_blank"
+  );
+};
+
 
   if (loading) return null;
 
