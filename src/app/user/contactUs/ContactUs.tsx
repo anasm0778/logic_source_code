@@ -32,11 +32,12 @@ const ContactUs = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    console.log("🔥 FORM SUBMITTED 🔥"); // 👈 ADD THIS
     setLoading(true);
     setSuccess(false);
 
     try {
-      const res = await fetch("/api/contact", {
+      const res = await fetch("https://logicrent.ae:4000/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

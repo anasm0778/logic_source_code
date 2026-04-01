@@ -1,21 +1,21 @@
+import type { NextApiRequest, NextApiResponse } from "next";
 import nodemailer from "nodemailer";
-import { NextResponse } from "next/server";
 
-export const runtime = "nodejs";
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+  if (req.method !== "POST") {
+    return res.status(405).json({ success: false, message: "Method not allowed" });
+  }
 
-export async function POST(req: Request) {
+  const { name, email, phone, message } = req.body;
+
+  if (!name || !email || !message) {
+    return res.status(400).json({ success: false, message: "Missing fields" });
+  }
+
   try {
-    const body = await req.json();
-
-    const { name, email, phone, message } = body;
-
-    if (!name || !email || !message) {
-      return NextResponse.json(
-        { success: false, message: "Missing fields" },
-        { status: 400 }
-      );
-    }
-
     const transporter = nodemailer.createTransport({
       host: "smtp.hostinger.com",
       port: 465,
@@ -28,9 +28,6 @@ export async function POST(req: Request) {
         rejectUnauthorized: false,
       },
     });
-
-    // 🔍 SMTP CHECK
-    await transporter.verify();
 
     await transporter.sendMail({
       from: `"LogicRent Website" <${process.env.EMAIL_USER}>`,
@@ -45,12 +42,9 @@ export async function POST(req: Request) {
       `,
     });
 
-    return NextResponse.json({ success: true });
-  } catch (error: any) {
-    console.error("MAIL ERROR 👉", error);
-    return NextResponse.json(
-      { success: false, error: error.message },
-      { status: 500 }
-    );
+    return res.status(200).json({ success: true });
+  } catch (error) {
+    console.error("MAIL ERROR:", error);
+    return res.status(500).json({ success: false, message: "Mail failed" });
   }
 }
