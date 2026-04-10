@@ -30,14 +30,16 @@ const ContactUs = () => {
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  const contactApiUrl = process.env.NEXT_PUBLIC_CONTACT_API_BASE_URL || '/api/contact';
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("🔥 FORM SUBMITTED 🔥"); // 👈 ADD THIS
+    console.log("🔥 FORM SUBMITTED 🔥");
     setLoading(true);
     setSuccess(false);
 
     try {
-      const res = await fetch("https://logicrent.ae:4000/api/contact", {
+      const res = await fetch(contactApiUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
