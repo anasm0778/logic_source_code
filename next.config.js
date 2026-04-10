@@ -53,14 +53,4 @@ const nextConfig = {
     },
 };
 
-// ✅ Backend API rewrite
-nextConfig.rewrites = async () => {
-    return [
-        {
-            source: '/api/:path*',
-            destination: 'http://localhost:5000/:path*', // proxy to backend
-        },
-    ];
-};
-
 module.exports = nextConfig;
